@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Bachelorarbeit von Sepehr – Zeitachse</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <div class="top">
+        <h1 id="titleText">Bachelorarbeit von Sepehr</h1>
+
+        <div class="right">
+          <div class="pill" id="timePill">
+            <div class="label" id="timeLabel">Zeit seit Start · Restzeit (4 Monate)</div>
+            <div class="value" id="daysValue">–</div>
+            <div class="sub" id="rangeValue">–</div>
+          </div>
+
+          <div class="pill">
+            <div class="label" id="kwLabel">Projektwoche (KW) ab 12.01.2026</div>
+            <div class="value" id="kwValue">–</div>
+            <div class="sub" id="kwSub">–</div>
+          </div>
+
+          <div class="pill">
+            <div class="label" id="progressLabel">Fortschritt</div>
+            <div class="value" id="progressText">–</div>
+            <div class="progressBar" aria-label="Fortschrittsbalken">
+              <div class="progressFill" id="progressFill"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="controls">
+          <button class="btn" id="addWeekBtn">+ Woche hinzufügen</button>
+
+          <input class="field" id="globalTaskInput" placeholder="Neue Aufgabe (für aktuelle Woche) …" />
+          <button class="btn secondary" id="addTaskToCurrentBtn">Aufgabe zur aktuellen Woche</button>
+
+          <div class="divider"></div>
+
+          <button class="btn secondary" id="exportBtn">Export (JSON)</button>
+          <button class="btn secondary" id="importBtn">Import (JSON)</button>
+          <input type="file" id="importFile" accept="application/json,.json" style="display:none;" />
+
+          <div class="divider"></div>
+
+          <button class="btn secondary" id="langBtn">DE</button>
+          <button class="btn secondary" id="themeBtn">🌙 Dark</button>
+
+          <button class="btn danger" id="resetBtn">Alles zurücksetzen</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="card">
+      <div class="hint" id="hintText">
+        Tipp: Aufgaben kannst du pro Woche hinzufügen, Status ändern und löschen – es wird automatisch gespeichert.
+      </div>
+
+      <div class="tableWrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:140px;" id="thWeek">KW</th>
+              <th style="width:210px;" id="thRange">Zeitraum</th>
+              <th id="thTasks">Aufgaben</th>
+              <th style="width:180px;" id="thActions">Aktionen</th>
+            </tr>
+          </thead>
+          <tbody id="weeksTbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
