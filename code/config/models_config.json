@@ -2,9 +2,13 @@
   "api_url_base": "https://api-inference.huggingface.co/models/",
   "models_to_test": [
     {
-      "name": "Mistral-7B",
-      "id": "mistralai/Mistral-7B-Instruct-v0.3",
-      "params": { "max_new_tokens": 500, "temperature": 0.1 }
+      "name": "Qwen-2.5-7B",
+      "id": "Qwen/Qwen2.5-7B-Instruct",
+      "params": { 
+        "max_new_tokens": 500, 
+        "temperature": 0.1,
+        "top_p": 0.9
+      }
     }
   ]
 }

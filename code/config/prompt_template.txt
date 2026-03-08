@@ -847,5 +847,3 @@ The template has a nested structure with subtemplates. Properties belong to spec
 
 ## Input Research Question
 You will now be given the research question to process.
-
-**Research Question:** 
