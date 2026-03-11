@@ -5,7 +5,7 @@ from utils.file_utils import save_json
 class BenchmarkLogger:
     """Handles logging benchmark results to a JSON file."""
     
-    def __init__(self, model_name: str, log_dir: str = "../logs"):
+    def __init__(self, model_name: str, log_dir: str = "logs"):
         self.model_name = model_name.replace("/", "_")
         self.log_dir = log_dir
         self.entries = []

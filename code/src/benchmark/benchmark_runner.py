@@ -1,5 +1,5 @@
 from benchmark.benchmark_loader import load_benchmark
-from logging.logger import BenchmarkLogger
+from logging_system.logger import BenchmarkLogger
 from core.inference_engine import InferenceEngine
 from utils.timer import measure_time
 
@@ -8,7 +8,7 @@ def run_benchmark(engine: InferenceEngine, benchmark_path: str, model_name: str)
     dataset = load_benchmark(benchmark_path)
     logger = BenchmarkLogger(model_name=model_name)
 
-    with open("../prompt_template.txt", "r", encoding="utf-8") as f:
+    with open("prompt_template.txt", "r", encoding="utf-8") as f:
         prompt = f.read()
     
     print(f"Starting benchmark for model: {model_name}...")
