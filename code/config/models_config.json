@@ -4,15 +4,26 @@
     {
       "name": "Test-Tiny",
       "id": "sshleifer/tiny-gpt2",
-      "params": { "max_new_tokens": 10 }
+      "params": { "max_new_tokens": 10 },
+      "provider": "huggingface"
     },
     {
       "name": "Qwen-2.5-7B",
       "id": "Qwen/Qwen2.5-7B-Instruct",
+      "provider": "huggingface",
       "params": { 
         "max_new_tokens": 500, 
         "temperature": 0.1,
         "top_p": 0.9
+      }
+    },
+    {
+      "name": "GPT-4o-Mini",
+      "id": "gpt-4o-mini", 
+      "provider": "openai",
+      "params": {
+        "max_new_tokens": 500,
+        "temperature": 0.0
       }
     }
   ]
