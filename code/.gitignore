@@ -1,0 +1,23 @@
+
+.venv/
+venv/
+env/
+bin/
+lib/
+include/
+
+models/
+
+
+
+# --- Python Cache & System ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.DS_Store
+Thumbs.db
+
+# --- Config & Secrets ---
+.env
