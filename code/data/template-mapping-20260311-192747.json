@@ -1,0 +1,1068 @@
+{
+  "P181002": {
+    "label": "RE task",
+    "cardinality": "one to one",
+    "description": "What requirements engineering task is your study addressing?",
+    "predicate_label": "RE task",
+    "class_label": "RE task"
+  },
+  "P181003": {
+    "label": "NLP task",
+    "cardinality": "one to one",
+    "description": "What natural language processing task is your study tackling?",
+    "predicate_label": "NLP task",
+    "class_label": "NLP task",
+    "subtemplate_id": "R1544138",
+    "subtemplate_label": "NLP task",
+    "class_id": "C121004",
+    "subtemplate_properties": {
+      "P181004": {
+        "label": "NLP task type",
+        "cardinality": "one to many",
+        "description": "What type of natural language processing task is your study tackling?",
+        "predicate_label": "NLP task type",
+        "class_label": "NLP task type"
+      },
+      "P181005": {
+        "label": "NLP task input",
+        "cardinality": "one to many",
+        "description": "What is the input of your natural language processing task?",
+        "predicate_label": "NLP task input",
+        "class_label": "NLP task input"
+      },
+      "P181006": {
+        "label": "NLP task output",
+        "cardinality": "one to one",
+        "description": "What is the output of your natural language processing task?",
+        "predicate_label": "NLP task output",
+        "class_label": "NLP task output",
+        "subtemplate_id": "R1544158",
+        "subtemplate_label": "NLP task output",
+        "class_id": "C121007",
+        "subtemplate_properties": {
+          "P181007": {
+            "label": "NLP task output type",
+            "cardinality": "one to many",
+            "description": "What is the output type of your natural language processing task?",
+            "predicate_label": "NLP task output type",
+            "class_label": "NLP task output type"
+          },
+          "P181008": {
+            "label": "NLP task output classification label",
+            "cardinality": "one to one",
+            "description": "What is the output label that can be assigned in your natural language processing classification task?",
+            "predicate_label": "NLP task output classification label"
+          },
+          "P181009": {
+            "label": "NLP task output extracted element",
+            "cardinality": "one to one",
+            "description": "What is the type of the element extracted in your natural language processing information extraction task?",
+            "predicate_label": "NLP task output extracted element"
+          },
+          "P181010": {
+            "label": "NLP task translation mapping cardinality",
+            "cardinality": "one to many",
+            "description": "What is the translation mapping cardinality between the initial input and final output in your natural language processing translation task?",
+            "predicate_label": "NLP task output translation mapping cardinality",
+            "class_label": "NLP task translation mapping cardinality"
+          }
+        }
+      }
+    }
+  },
+  "P181011": {
+    "label": "NLP dataset",
+    "cardinality": "one to one",
+    "description": "What natural language processing dataset is your study using?",
+    "predicate_label": "NLP dataset",
+    "class_label": "NLP dataset",
+    "subtemplate_id": "R1544216",
+    "subtemplate_label": "NLP dataset",
+    "class_id": "C121010",
+    "subtemplate_properties": {
+      "P181015": {
+        "label": "NLP data item",
+        "cardinality": "one to one",
+        "description": "How many data items do you process? Please report the numerical information and details about all the data that is used in your evaluation.",
+        "predicate_label": "NLP data item"
+      },
+      "P181016": {
+        "label": "NLP data production time",
+        "cardinality": "one to one",
+        "description": "In which year or interval of year were the data produced?",
+        "predicate_label": "NLP data production time"
+      },
+      "P181017": {
+        "label": "NLP data source",
+        "cardinality": "one to one",
+        "description": "What is the source of the data?",
+        "predicate_label": "NLP data source",
+        "class_label": "NLP data source",
+        "subtemplate_id": "R1544223",
+        "subtemplate_label": "NLP data source",
+        "class_id": "C121011",
+        "subtemplate_properties": {
+          "P181018": {
+            "label": "NLP data source type",
+            "cardinality": "one to many",
+            "description": "What is the source type of the data?",
+            "predicate_label": "NLP data source type",
+            "class_label": "NLP data source type"
+          },
+          "P181019": {
+            "label": "Number of data sources",
+            "cardinality": "one to one",
+            "description": "From how many different sources your data comes from?",
+            "predicate_label": "Number of data sources"
+          },
+          "P181020": {
+            "label": "Data source domain",
+            "cardinality": "one to many",
+            "description": "Please list which domains your data belongs to (e.g., automotive, satellite,\nentertainment, information systems).",
+            "predicate_label": "NLP data source domain",
+            "class_label": "Data source domain"
+          }
+        }
+      },
+      "P181021": {
+        "label": "NLP data abstraction level",
+        "cardinality": "one to many",
+        "description": "What is the level of abstraction of the data (not limited to requirements)?",
+        "predicate_label": "NLP data abstraction level",
+        "class_label": "NLP data abstraction level"
+      },
+      "P181022": {
+        "label": "NLP data type",
+        "cardinality": "one to one",
+        "description": "What is the type of the data?",
+        "predicate_label": "NLP data type",
+        "class_label": "NLP data type",
+        "subtemplate_id": "R1544245",
+        "subtemplate_label": "NLP data type",
+        "class_id": "C121015",
+        "subtemplate_properties": {
+          "P181023": {
+            "label": "NLP data format",
+            "cardinality": "one to many",
+            "description": "What is the format of the data?",
+            "predicate_label": "NLP data format",
+            "class_label": "NLP data format"
+          },
+          "P181024": {
+            "label": "Rigor of data format",
+            "cardinality": "one to many",
+            "description": "How rigorous is the format of the data?",
+            "predicate_label": "Rigor of data format",
+            "class_label": "Rigor of data format"
+          },
+          "P181025": {
+            "label": "Natural language",
+            "cardinality": "one to one",
+            "description": "What is the natural language of\nthe data (if applicable) ?",
+            "predicate_label": "Natural language"
+          }
+        }
+      },
+      "license": {
+        "label": "License",
+        "cardinality": "one to one",
+        "description": "What license has been used?",
+        "predicate_label": "License",
+        "class_label": "License",
+        "subtemplate_id": "R1544265",
+        "subtemplate_label": "License",
+        "class_id": "C121018",
+        "subtemplate_properties": {
+          "P181026": {
+            "label": "Public availability",
+            "cardinality": "one to one",
+            "description": "Is the dataset publicly available?",
+            "predicate_label": "Public availability",
+            "class_label": "Public availability"
+          },
+          "P181027": {
+            "label": "License type",
+            "cardinality": "one to one",
+            "description": "What license has been used?",
+            "predicate_label": "License type",
+            "class_label": "License type"
+          }
+        }
+      },
+      "P181028": {
+        "label": "NLP dataset location",
+        "cardinality": "one to one",
+        "description": "Where is the dataset stored?",
+        "predicate_label": "Dataset location",
+        "class_label": "NLP dataset location",
+        "subtemplate_id": "R1544278",
+        "subtemplate_label": "NLP dataset location",
+        "class_id": "C121022",
+        "subtemplate_properties": {
+          "P181030": {
+            "label": "Location type",
+            "cardinality": "one to many",
+            "description": "Where is the dataset stored?",
+            "predicate_label": "Location type",
+            "class_label": "Location type"
+          },
+          "P1003": {
+            "label": "url",
+            "cardinality": "one to many",
+            "description": "Provide a URL to the dataset, if available, or to the original paper that proposed the dataset",
+            "predicate_label": "url"
+          }
+        }
+      }
+    }
+  },
+  "P181031": {
+    "label": "Annotation process",
+    "cardinality": "one to one",
+    "description": "What annotation process did you use for your dataset?",
+    "predicate_label": "Annotation process",
+    "class_label": "Annotation process",
+    "subtemplate_id": "R1544287",
+    "subtemplate_label": "Annotation process",
+    "class_id": "C121025",
+    "subtemplate_properties": {
+      "P181032": {
+        "label": "Annotator",
+        "cardinality": "one to one",
+        "description": "Who are the annotators of your dataset?",
+        "predicate_label": "Annotator",
+        "class_label": "Annotator",
+        "subtemplate_id": "R1544290",
+        "subtemplate_label": "Annotator",
+        "class_id": "C121026",
+        "subtemplate_properties": {
+          "P59120": {
+            "label": "Number of annotators",
+            "cardinality": "one to one",
+            "description": "How many annotators have been involved in your annotation process?",
+            "predicate_label": "Number of annotators"
+          },
+          "P181033": {
+            "label": "Annotator assignment",
+            "cardinality": "one to many",
+            "description": "How are the entries annotated assigned to the annotators?",
+            "predicate_label": "Annotator assignment",
+            "class_label": "Annotator assignment"
+          },
+          "P181034": {
+            "label": "Level of application domain experience",
+            "cardinality": "one to many",
+            "description": "What is the average level of application domain experience of the annotators?",
+            "predicate_label": "Level of application domain experience",
+            "class_label": "Level of application domain experience"
+          },
+          "P181035": {
+            "label": "Annotator Identity",
+            "cardinality": "one to many",
+            "description": "Who are the annotators?",
+            "predicate_label": "Annotator identity",
+            "class_label": "Annotator Identity"
+          }
+        }
+      },
+      "P181036": {
+        "label": "Annotation Scheme",
+        "cardinality": "one to many",
+        "description": "What is the annotation scheme used for your dataset?",
+        "predicate_label": "Annotation scheme",
+        "class_label": "Annotation Scheme",
+        "subtemplate_id": "R1544307",
+        "subtemplate_label": "Annotation scheme",
+        "class_id": "C121030",
+        "subtemplate_properties": {
+          "P181037": {
+            "label": "Scheme establishement",
+            "cardinality": "one to many",
+            "description": "How was the annotation scheme established among the annotators?",
+            "predicate_label": "Scheme establishement",
+            "class_label": "Scheme establishement"
+          },
+          "P181038": {
+            "label": "Guideline availability",
+            "cardinality": "one to many",
+            "description": "Did you make the written guidelines public?",
+            "predicate_label": "Guideline availability",
+            "class_label": "Guideline availability"
+          }
+        }
+      },
+      "P181039": {
+        "label": "Shared material",
+        "cardinality": "one to many",
+        "description": "Did you share other information that could support the annotators other\nthan the elements to annotate?",
+        "predicate_label": "Shared material",
+        "class_label": "Shared material"
+      },
+      "P181040": {
+        "label": "Fatigue mitigation technique",
+        "cardinality": "one to one",
+        "description": "Did you employ techniques to mitigate fatigue effects during the\nannotation sessions?",
+        "predicate_label": "Fatigue mitigation technique",
+        "class_label": "Fatigue mitigation technique"
+      },
+      "P181041": {
+        "label": "Annotator agreement",
+        "cardinality": "one to one",
+        "description": "What annotator agreement did you apply for your dataset?",
+        "predicate_label": "Annotator agreement",
+        "class_label": "Annotator agreement",
+        "subtemplate_id": "R1544326",
+        "subtemplate_label": "Annotator agreement",
+        "class_id": "C121035",
+        "subtemplate_properties": {
+          "P181042": {
+            "label": "Intercoder reliability metric",
+            "cardinality": "one to many",
+            "description": "What are the metrics used to measure intercoder reliability?",
+            "predicate_label": "Intercoder reliability metric",
+            "class_label": "Intercoder reliability metric"
+          },
+          "P181044": {
+            "label": "Conflict resolution",
+            "cardinality": "one to many",
+            "description": "How were conflicts resolved?",
+            "predicate_label": "Conflict resolution",
+            "class_label": "Conflict resolution"
+          },
+          "P181045": {
+            "label": "Measured agreement",
+            "cardinality": "one to one",
+            "description": "What is the measured agreement?",
+            "predicate_label": "Measured agreement"
+          }
+        }
+      }
+    }
+  },
+  "P181046": {
+    "label": "Implemented approach",
+    "cardinality": "one to one",
+    "description": "What approach did you implement for your study?",
+    "predicate_label": "Implemented approach",
+    "class_label": "Implemented approach",
+    "subtemplate_id": "R1544363",
+    "subtemplate_label": "Implemented approach",
+    "class_id": "C121038",
+    "subtemplate_properties": {
+      "P5043": {
+        "label": "Approach type",
+        "cardinality": "one to many",
+        "description": "What is the type of the implemented approach?",
+        "predicate_label": "Approach type",
+        "class_label": "Approach type"
+      },
+      "P58069": {
+        "label": "Algorithm",
+        "cardinality": "one to many",
+        "description": "What algorithms are used in the implemented approach?",
+        "predicate_label": "Algorithm used",
+        "class_label": "Algorithm"
+      },
+      "P181047": {
+        "label": "Running requirement",
+        "cardinality": "one to many",
+        "description": "What needs to be done for running the implemented approach?",
+        "predicate_label": "Running requirement",
+        "class_label": "Running requirement"
+      },
+      "P41835": {
+        "label": "Documentation type",
+        "cardinality": "one to many",
+        "description": "What type of documentation has been provided alongside the implemented approach?",
+        "predicate_label": "Documentation",
+        "class_label": "Documentation type"
+      },
+      "P181048": {
+        "label": "Dependency",
+        "cardinality": "one to many",
+        "description": "What type of dependencies does the implemented approach have?",
+        "predicate_label": "Dependency",
+        "class_label": "Dependency"
+      },
+      "P181027": {
+        "label": "License type",
+        "cardinality": "one to one",
+        "description": "What license has been used?",
+        "predicate_label": "License type",
+        "class_label": "License type"
+      },
+      "release": {
+        "label": "Release",
+        "cardinality": "one to one",
+        "description": "How was the implemented approach released?",
+        "predicate_label": "Release",
+        "class_label": "Release",
+        "subtemplate_id": "R1544401",
+        "subtemplate_label": "Release",
+        "class_id": "C121044",
+        "subtemplate_properties": {
+          "P181049": {
+            "label": "Release format",
+            "cardinality": "one to many",
+            "description": "What has been released?",
+            "predicate_label": "Release format",
+            "class_label": "Release format"
+          },
+          "P181029": {
+            "label": "Location type",
+            "cardinality": "one to many",
+            "description": "How is the tool released?",
+            "predicate_label": "Location type",
+            "class_label": "Location type"
+          },
+          "P1003": {
+            "label": "url",
+            "cardinality": "one to many",
+            "description": "Where is the tool released?",
+            "predicate_label": "url"
+          }
+        }
+      }
+    }
+  },
+  "HAS_EVALUATION": {
+    "label": "Evaluation",
+    "cardinality": "one to one",
+    "description": "What evaluation did you apply for your study?",
+    "predicate_label": "Evaluation",
+    "class_label": "Evaluation",
+    "subtemplate_id": "R1544421",
+    "subtemplate_label": "Evaluation",
+    "class_id": "C121047",
+    "subtemplate_properties": {
+      "P110006": {
+        "label": "Metric",
+        "cardinality": "one to many",
+        "description": "What metrics are used to evaluate the implemented approach(?",
+        "predicate_label": "Evaluation metric",
+        "class_label": "Metric"
+      },
+      "P181050": {
+        "label": "Validation procedure",
+        "cardinality": "one to many",
+        "description": "What is the validation procedure?",
+        "predicate_label": "Validation procedure",
+        "class_label": "Validation procedure"
+      },
+      "P181051": {
+        "label": "Baseline comparison",
+        "cardinality": "one to one",
+        "description": "What is the baseline comparison applied in the evaluation of an implemented approach?",
+        "predicate_label": "Baseline comparison",
+        "class_label": "Baseline comparison",
+        "subtemplate_id": "R1544450",
+        "subtemplate_label": "Baseline comparison",
+        "class_id": "C121050",
+        "subtemplate_properties": {
+          "P181052": {
+            "label": "Baseline comparison  type",
+            "cardinality": "one to many",
+            "description": "What baseline do you compare against?",
+            "predicate_label": "Baseline comparison type",
+            "class_label": "Baseline comparison  type"
+          },
+          "P181053": {
+            "label": "Baseline comparison detail",
+            "cardinality": "one to one",
+            "description": "Please provide more details about the baseline you compare against, if any.",
+            "predicate_label": "Baseline comparison detail"
+          }
+        }
+      }
+    }
+  },
+  "P181004": {
+    "label": "NLP task type",
+    "cardinality": "one to many",
+    "description": "What type of natural language processing task is your study tackling?",
+    "predicate_label": "NLP task type",
+    "class_label": "NLP task type"
+  },
+  "P181005": {
+    "label": "NLP task input",
+    "cardinality": "one to many",
+    "description": "What is the input of your natural language processing task?",
+    "predicate_label": "NLP task input",
+    "class_label": "NLP task input"
+  },
+  "P181006": {
+    "label": "NLP task output",
+    "cardinality": "one to one",
+    "description": "What is the output of your natural language processing task?",
+    "predicate_label": "NLP task output",
+    "class_label": "NLP task output",
+    "subtemplate_id": "R1544158",
+    "subtemplate_label": "NLP task output",
+    "class_id": "C121007",
+    "subtemplate_properties": {
+      "P181007": {
+        "label": "NLP task output type",
+        "cardinality": "one to many",
+        "description": "What is the output type of your natural language processing task?",
+        "predicate_label": "NLP task output type",
+        "class_label": "NLP task output type"
+      },
+      "P181008": {
+        "label": "NLP task output classification label",
+        "cardinality": "one to one",
+        "description": "What is the output label that can be assigned in your natural language processing classification task?",
+        "predicate_label": "NLP task output classification label"
+      },
+      "P181009": {
+        "label": "NLP task output extracted element",
+        "cardinality": "one to one",
+        "description": "What is the type of the element extracted in your natural language processing information extraction task?",
+        "predicate_label": "NLP task output extracted element"
+      },
+      "P181010": {
+        "label": "NLP task translation mapping cardinality",
+        "cardinality": "one to many",
+        "description": "What is the translation mapping cardinality between the initial input and final output in your natural language processing translation task?",
+        "predicate_label": "NLP task output translation mapping cardinality",
+        "class_label": "NLP task translation mapping cardinality"
+      }
+    }
+  },
+  "P181007": {
+    "label": "NLP task output type",
+    "cardinality": "one to many",
+    "description": "What is the output type of your natural language processing task?",
+    "predicate_label": "NLP task output type",
+    "class_label": "NLP task output type"
+  },
+  "P181008": {
+    "label": "NLP task output classification label",
+    "cardinality": "one to one",
+    "description": "What is the output label that can be assigned in your natural language processing classification task?",
+    "predicate_label": "NLP task output classification label"
+  },
+  "P181009": {
+    "label": "NLP task output extracted element",
+    "cardinality": "one to one",
+    "description": "What is the type of the element extracted in your natural language processing information extraction task?",
+    "predicate_label": "NLP task output extracted element"
+  },
+  "P181010": {
+    "label": "NLP task translation mapping cardinality",
+    "cardinality": "one to many",
+    "description": "What is the translation mapping cardinality between the initial input and final output in your natural language processing translation task?",
+    "predicate_label": "NLP task output translation mapping cardinality",
+    "class_label": "NLP task translation mapping cardinality"
+  },
+  "P181015": {
+    "label": "NLP data item",
+    "cardinality": "one to one",
+    "description": "How many data items do you process? Please report the numerical information and details about all the data that is used in your evaluation.",
+    "predicate_label": "NLP data item"
+  },
+  "P181016": {
+    "label": "NLP data production time",
+    "cardinality": "one to one",
+    "description": "In which year or interval of year were the data produced?",
+    "predicate_label": "NLP data production time"
+  },
+  "P181017": {
+    "label": "NLP data source",
+    "cardinality": "one to one",
+    "description": "What is the source of the data?",
+    "predicate_label": "NLP data source",
+    "class_label": "NLP data source",
+    "subtemplate_id": "R1544223",
+    "subtemplate_label": "NLP data source",
+    "class_id": "C121011",
+    "subtemplate_properties": {
+      "P181018": {
+        "label": "NLP data source type",
+        "cardinality": "one to many",
+        "description": "What is the source type of the data?",
+        "predicate_label": "NLP data source type",
+        "class_label": "NLP data source type"
+      },
+      "P181019": {
+        "label": "Number of data sources",
+        "cardinality": "one to one",
+        "description": "From how many different sources your data comes from?",
+        "predicate_label": "Number of data sources"
+      },
+      "P181020": {
+        "label": "Data source domain",
+        "cardinality": "one to many",
+        "description": "Please list which domains your data belongs to (e.g., automotive, satellite,\nentertainment, information systems).",
+        "predicate_label": "NLP data source domain",
+        "class_label": "Data source domain"
+      }
+    }
+  },
+  "P181021": {
+    "label": "NLP data abstraction level",
+    "cardinality": "one to many",
+    "description": "What is the level of abstraction of the data (not limited to requirements)?",
+    "predicate_label": "NLP data abstraction level",
+    "class_label": "NLP data abstraction level"
+  },
+  "P181022": {
+    "label": "NLP data type",
+    "cardinality": "one to one",
+    "description": "What is the type of the data?",
+    "predicate_label": "NLP data type",
+    "class_label": "NLP data type",
+    "subtemplate_id": "R1544245",
+    "subtemplate_label": "NLP data type",
+    "class_id": "C121015",
+    "subtemplate_properties": {
+      "P181023": {
+        "label": "NLP data format",
+        "cardinality": "one to many",
+        "description": "What is the format of the data?",
+        "predicate_label": "NLP data format",
+        "class_label": "NLP data format"
+      },
+      "P181024": {
+        "label": "Rigor of data format",
+        "cardinality": "one to many",
+        "description": "How rigorous is the format of the data?",
+        "predicate_label": "Rigor of data format",
+        "class_label": "Rigor of data format"
+      },
+      "P181025": {
+        "label": "Natural language",
+        "cardinality": "one to one",
+        "description": "What is the natural language of\nthe data (if applicable) ?",
+        "predicate_label": "Natural language"
+      }
+    }
+  },
+  "license": {
+    "label": "License",
+    "cardinality": "one to one",
+    "description": "What license has been used?",
+    "predicate_label": "License",
+    "class_label": "License",
+    "subtemplate_id": "R1544265",
+    "subtemplate_label": "License",
+    "class_id": "C121018",
+    "subtemplate_properties": {
+      "P181026": {
+        "label": "Public availability",
+        "cardinality": "one to one",
+        "description": "Is the dataset publicly available?",
+        "predicate_label": "Public availability",
+        "class_label": "Public availability"
+      },
+      "P181027": {
+        "label": "License type",
+        "cardinality": "one to one",
+        "description": "What license has been used?",
+        "predicate_label": "License type",
+        "class_label": "License type"
+      }
+    }
+  },
+  "P181028": {
+    "label": "NLP dataset location",
+    "cardinality": "one to one",
+    "description": "Where is the dataset stored?",
+    "predicate_label": "Dataset location",
+    "class_label": "NLP dataset location",
+    "subtemplate_id": "R1544278",
+    "subtemplate_label": "NLP dataset location",
+    "class_id": "C121022",
+    "subtemplate_properties": {
+      "P181030": {
+        "label": "Location type",
+        "cardinality": "one to many",
+        "description": "Where is the dataset stored?",
+        "predicate_label": "Location type",
+        "class_label": "Location type"
+      },
+      "P1003": {
+        "label": "url",
+        "cardinality": "one to many",
+        "description": "Provide a URL to the dataset, if available, or to the original paper that proposed the dataset",
+        "predicate_label": "url"
+      }
+    }
+  },
+  "P181018": {
+    "label": "NLP data source type",
+    "cardinality": "one to many",
+    "description": "What is the source type of the data?",
+    "predicate_label": "NLP data source type",
+    "class_label": "NLP data source type"
+  },
+  "P181019": {
+    "label": "Number of data sources",
+    "cardinality": "one to one",
+    "description": "From how many different sources your data comes from?",
+    "predicate_label": "Number of data sources"
+  },
+  "P181020": {
+    "label": "Data source domain",
+    "cardinality": "one to many",
+    "description": "Please list which domains your data belongs to (e.g., automotive, satellite,\nentertainment, information systems).",
+    "predicate_label": "NLP data source domain",
+    "class_label": "Data source domain"
+  },
+  "P181023": {
+    "label": "NLP data format",
+    "cardinality": "one to many",
+    "description": "What is the format of the data?",
+    "predicate_label": "NLP data format",
+    "class_label": "NLP data format"
+  },
+  "P181024": {
+    "label": "Rigor of data format",
+    "cardinality": "one to many",
+    "description": "How rigorous is the format of the data?",
+    "predicate_label": "Rigor of data format",
+    "class_label": "Rigor of data format"
+  },
+  "P181025": {
+    "label": "Natural language",
+    "cardinality": "one to one",
+    "description": "What is the natural language of\nthe data (if applicable) ?",
+    "predicate_label": "Natural language"
+  },
+  "P181026": {
+    "label": "Public availability",
+    "cardinality": "one to one",
+    "description": "Is the dataset publicly available?",
+    "predicate_label": "Public availability",
+    "class_label": "Public availability"
+  },
+  "P181027": {
+    "label": "License type",
+    "cardinality": "one to one",
+    "description": "What license has been used?",
+    "predicate_label": "License type",
+    "class_label": "License type"
+  },
+  "P181030": {
+    "label": "Location type",
+    "cardinality": "one to many",
+    "description": "Where is the dataset stored?",
+    "predicate_label": "Location type",
+    "class_label": "Location type"
+  },
+  "P1003": {
+    "label": "url",
+    "cardinality": "one to many",
+    "description": "Where is the tool released?",
+    "predicate_label": "url"
+  },
+  "P181032": {
+    "label": "Annotator",
+    "cardinality": "one to one",
+    "description": "Who are the annotators of your dataset?",
+    "predicate_label": "Annotator",
+    "class_label": "Annotator",
+    "subtemplate_id": "R1544290",
+    "subtemplate_label": "Annotator",
+    "class_id": "C121026",
+    "subtemplate_properties": {
+      "P59120": {
+        "label": "Number of annotators",
+        "cardinality": "one to one",
+        "description": "How many annotators have been involved in your annotation process?",
+        "predicate_label": "Number of annotators"
+      },
+      "P181033": {
+        "label": "Annotator assignment",
+        "cardinality": "one to many",
+        "description": "How are the entries annotated assigned to the annotators?",
+        "predicate_label": "Annotator assignment",
+        "class_label": "Annotator assignment"
+      },
+      "P181034": {
+        "label": "Level of application domain experience",
+        "cardinality": "one to many",
+        "description": "What is the average level of application domain experience of the annotators?",
+        "predicate_label": "Level of application domain experience",
+        "class_label": "Level of application domain experience"
+      },
+      "P181035": {
+        "label": "Annotator Identity",
+        "cardinality": "one to many",
+        "description": "Who are the annotators?",
+        "predicate_label": "Annotator identity",
+        "class_label": "Annotator Identity"
+      }
+    }
+  },
+  "P181036": {
+    "label": "Annotation Scheme",
+    "cardinality": "one to many",
+    "description": "What is the annotation scheme used for your dataset?",
+    "predicate_label": "Annotation scheme",
+    "class_label": "Annotation Scheme",
+    "subtemplate_id": "R1544307",
+    "subtemplate_label": "Annotation scheme",
+    "class_id": "C121030",
+    "subtemplate_properties": {
+      "P181037": {
+        "label": "Scheme establishement",
+        "cardinality": "one to many",
+        "description": "How was the annotation scheme established among the annotators?",
+        "predicate_label": "Scheme establishement",
+        "class_label": "Scheme establishement"
+      },
+      "P181038": {
+        "label": "Guideline availability",
+        "cardinality": "one to many",
+        "description": "Did you make the written guidelines public?",
+        "predicate_label": "Guideline availability",
+        "class_label": "Guideline availability"
+      }
+    }
+  },
+  "P181039": {
+    "label": "Shared material",
+    "cardinality": "one to many",
+    "description": "Did you share other information that could support the annotators other\nthan the elements to annotate?",
+    "predicate_label": "Shared material",
+    "class_label": "Shared material"
+  },
+  "P181040": {
+    "label": "Fatigue mitigation technique",
+    "cardinality": "one to one",
+    "description": "Did you employ techniques to mitigate fatigue effects during the\nannotation sessions?",
+    "predicate_label": "Fatigue mitigation technique",
+    "class_label": "Fatigue mitigation technique"
+  },
+  "P181041": {
+    "label": "Annotator agreement",
+    "cardinality": "one to one",
+    "description": "What annotator agreement did you apply for your dataset?",
+    "predicate_label": "Annotator agreement",
+    "class_label": "Annotator agreement",
+    "subtemplate_id": "R1544326",
+    "subtemplate_label": "Annotator agreement",
+    "class_id": "C121035",
+    "subtemplate_properties": {
+      "P181042": {
+        "label": "Intercoder reliability metric",
+        "cardinality": "one to many",
+        "description": "What are the metrics used to measure intercoder reliability?",
+        "predicate_label": "Intercoder reliability metric",
+        "class_label": "Intercoder reliability metric"
+      },
+      "P181044": {
+        "label": "Conflict resolution",
+        "cardinality": "one to many",
+        "description": "How were conflicts resolved?",
+        "predicate_label": "Conflict resolution",
+        "class_label": "Conflict resolution"
+      },
+      "P181045": {
+        "label": "Measured agreement",
+        "cardinality": "one to one",
+        "description": "What is the measured agreement?",
+        "predicate_label": "Measured agreement"
+      }
+    }
+  },
+  "P59120": {
+    "label": "Number of annotators",
+    "cardinality": "one to one",
+    "description": "How many annotators have been involved in your annotation process?",
+    "predicate_label": "Number of annotators"
+  },
+  "P181033": {
+    "label": "Annotator assignment",
+    "cardinality": "one to many",
+    "description": "How are the entries annotated assigned to the annotators?",
+    "predicate_label": "Annotator assignment",
+    "class_label": "Annotator assignment"
+  },
+  "P181034": {
+    "label": "Level of application domain experience",
+    "cardinality": "one to many",
+    "description": "What is the average level of application domain experience of the annotators?",
+    "predicate_label": "Level of application domain experience",
+    "class_label": "Level of application domain experience"
+  },
+  "P181035": {
+    "label": "Annotator Identity",
+    "cardinality": "one to many",
+    "description": "Who are the annotators?",
+    "predicate_label": "Annotator identity",
+    "class_label": "Annotator Identity"
+  },
+  "P181037": {
+    "label": "Scheme establishement",
+    "cardinality": "one to many",
+    "description": "How was the annotation scheme established among the annotators?",
+    "predicate_label": "Scheme establishement",
+    "class_label": "Scheme establishement"
+  },
+  "P181038": {
+    "label": "Guideline availability",
+    "cardinality": "one to many",
+    "description": "Did you make the written guidelines public?",
+    "predicate_label": "Guideline availability",
+    "class_label": "Guideline availability"
+  },
+  "P181042": {
+    "label": "Intercoder reliability metric",
+    "cardinality": "one to many",
+    "description": "What are the metrics used to measure intercoder reliability?",
+    "predicate_label": "Intercoder reliability metric",
+    "class_label": "Intercoder reliability metric"
+  },
+  "P181044": {
+    "label": "Conflict resolution",
+    "cardinality": "one to many",
+    "description": "How were conflicts resolved?",
+    "predicate_label": "Conflict resolution",
+    "class_label": "Conflict resolution"
+  },
+  "P181045": {
+    "label": "Measured agreement",
+    "cardinality": "one to one",
+    "description": "What is the measured agreement?",
+    "predicate_label": "Measured agreement"
+  },
+  "P5043": {
+    "label": "Approach type",
+    "cardinality": "one to many",
+    "description": "What is the type of the implemented approach?",
+    "predicate_label": "Approach type",
+    "class_label": "Approach type"
+  },
+  "P58069": {
+    "label": "Algorithm",
+    "cardinality": "one to many",
+    "description": "What algorithms are used in the implemented approach?",
+    "predicate_label": "Algorithm used",
+    "class_label": "Algorithm"
+  },
+  "P181047": {
+    "label": "Running requirement",
+    "cardinality": "one to many",
+    "description": "What needs to be done for running the implemented approach?",
+    "predicate_label": "Running requirement",
+    "class_label": "Running requirement"
+  },
+  "P41835": {
+    "label": "Documentation type",
+    "cardinality": "one to many",
+    "description": "What type of documentation has been provided alongside the implemented approach?",
+    "predicate_label": "Documentation",
+    "class_label": "Documentation type"
+  },
+  "P181048": {
+    "label": "Dependency",
+    "cardinality": "one to many",
+    "description": "What type of dependencies does the implemented approach have?",
+    "predicate_label": "Dependency",
+    "class_label": "Dependency"
+  },
+  "release": {
+    "label": "Release",
+    "cardinality": "one to one",
+    "description": "How was the implemented approach released?",
+    "predicate_label": "Release",
+    "class_label": "Release",
+    "subtemplate_id": "R1544401",
+    "subtemplate_label": "Release",
+    "class_id": "C121044",
+    "subtemplate_properties": {
+      "P181049": {
+        "label": "Release format",
+        "cardinality": "one to many",
+        "description": "What has been released?",
+        "predicate_label": "Release format",
+        "class_label": "Release format"
+      },
+      "P181029": {
+        "label": "Location type",
+        "cardinality": "one to many",
+        "description": "How is the tool released?",
+        "predicate_label": "Location type",
+        "class_label": "Location type"
+      },
+      "P1003": {
+        "label": "url",
+        "cardinality": "one to many",
+        "description": "Where is the tool released?",
+        "predicate_label": "url"
+      }
+    }
+  },
+  "P181049": {
+    "label": "Release format",
+    "cardinality": "one to many",
+    "description": "What has been released?",
+    "predicate_label": "Release format",
+    "class_label": "Release format"
+  },
+  "P181029": {
+    "label": "Location type",
+    "cardinality": "one to many",
+    "description": "How is the tool released?",
+    "predicate_label": "Location type",
+    "class_label": "Location type"
+  },
+  "P110006": {
+    "label": "Metric",
+    "cardinality": "one to many",
+    "description": "What metrics are used to evaluate the implemented approach(?",
+    "predicate_label": "Evaluation metric",
+    "class_label": "Metric"
+  },
+  "P181050": {
+    "label": "Validation procedure",
+    "cardinality": "one to many",
+    "description": "What is the validation procedure?",
+    "predicate_label": "Validation procedure",
+    "class_label": "Validation procedure"
+  },
+  "P181051": {
+    "label": "Baseline comparison",
+    "cardinality": "one to one",
+    "description": "What is the baseline comparison applied in the evaluation of an implemented approach?",
+    "predicate_label": "Baseline comparison",
+    "class_label": "Baseline comparison",
+    "subtemplate_id": "R1544450",
+    "subtemplate_label": "Baseline comparison",
+    "class_id": "C121050",
+    "subtemplate_properties": {
+      "P181052": {
+        "label": "Baseline comparison  type",
+        "cardinality": "one to many",
+        "description": "What baseline do you compare against?",
+        "predicate_label": "Baseline comparison type",
+        "class_label": "Baseline comparison  type"
+      },
+      "P181053": {
+        "label": "Baseline comparison detail",
+        "cardinality": "one to one",
+        "description": "Please provide more details about the baseline you compare against, if any.",
+        "predicate_label": "Baseline comparison detail"
+      }
+    }
+  },
+  "P181052": {
+    "label": "Baseline comparison  type",
+    "cardinality": "one to many",
+    "description": "What baseline do you compare against?",
+    "predicate_label": "Baseline comparison type",
+    "class_label": "Baseline comparison  type"
+  },
+  "P181053": {
+    "label": "Baseline comparison detail",
+    "cardinality": "one to one",
+    "description": "Please provide more details about the baseline you compare against, if any.",
+    "predicate_label": "Baseline comparison detail"
+  }
+}
+
+
+
+# Abweichungen von der Vorlage:
+# 

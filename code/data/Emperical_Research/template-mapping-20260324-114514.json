@@ -1,0 +1,1258 @@
+{
+  "P135046": {
+    "label": "venue serie",
+    "cardinality": "one to one",
+    "description": "In which conference venue is the publication published?",
+    "predicate_label": "venue serie",
+    "class_label": "venue serie"
+  },
+  "P32": {
+    "label": "Problem",
+    "cardinality": "one to one",
+    "description": "What is the research problem under consideration in the publication?",
+    "predicate_label": "research problem",
+    "class_label": "Problem",
+    "subtemplate_id": "R48000",
+    "subtemplate_label": "Problem",
+    "class_id": "Problem",
+    "subtemplate_properties": {
+      "description": {
+        "label": "description",
+        "cardinality": "one to one",
+        "description": "description",
+        "predicate_label": "description"
+      },
+      "SAME_AS": {
+        "label": "same as",
+        "cardinality": "one to many",
+        "description": "same as",
+        "predicate_label": "same as"
+      },
+      "subProblem": {
+        "label": "Problem",
+        "cardinality": "one to many",
+        "description": "Sub Problem",
+        "predicate_label": "Sub Problem",
+        "class_label": "Problem",
+        "subtemplate_id": "R48000",
+        "subtemplate_label": "Problem",
+        "class_id": "Problem",
+        "subtemplate_properties": {
+          "description": {
+            "label": "description",
+            "cardinality": "one to one",
+            "description": "description",
+            "predicate_label": "description"
+          },
+          "SAME_AS": {
+            "label": "same as",
+            "cardinality": "one to many",
+            "description": "same as",
+            "predicate_label": "same as"
+          },
+          "subProblem": {
+            "label": "Problem",
+            "cardinality": "one to many",
+            "description": "Sub Problem",
+            "predicate_label": "Sub Problem",
+            "class_label": "Problem"
+          }
+        }
+      }
+    }
+  },
+  "P57003": {
+    "label": "research paradigm",
+    "cardinality": "one to one",
+    "description": "What is the underlying research paradigm of the publication?",
+    "predicate_label": "research paradigm",
+    "class_label": "research paradigm"
+  },
+  "P37330": {
+    "label": "research question",
+    "cardinality": "one to many",
+    "description": "What is the research question reported in the publication?",
+    "predicate_label": "research  question ",
+    "class_label": "research question",
+    "subtemplate_id": "R186763",
+    "subtemplate_label": "Research Question",
+    "class_id": "C27006",
+    "subtemplate_properties": {
+      "P44139": {
+        "label": "question",
+        "cardinality": "one to one",
+        "description": "What is the research question reported in the publication?",
+        "predicate_label": "question"
+      },
+      "P55038": {
+        "label": "hidden in text",
+        "cardinality": "one to one",
+        "description": "Is the research question reported in the publication hidden in the text?",
+        "predicate_label": "hidden in text"
+      },
+      "P55039": {
+        "label": "highlighted in text",
+        "cardinality": "one to one",
+        "description": "Is the research question reported in the publication highlighted in the text?",
+        "predicate_label": "highlighted in text"
+      },
+      "P41928": {
+        "label": "question type",
+        "cardinality": "one to one",
+        "description": "What is the type of the research question?",
+        "predicate_label": "question type",
+        "class_label": "question type"
+      },
+      "P57000": {
+        "label": "subquestion",
+        "cardinality": "one to many",
+        "description": "What is the subquestion of the research question reported in the publication?",
+        "predicate_label": "subquestion",
+        "class_label": "subquestion",
+        "subtemplate_id": "R188008",
+        "subtemplate_label": "Subquestion",
+        "class_id": "C29003",
+        "subtemplate_properties": {
+          "P44139": {
+            "label": "question",
+            "cardinality": "one to one",
+            "description": "What is the subquestion of the research question reported in the publication?",
+            "predicate_label": "question"
+          },
+          "P41928": {
+            "label": "question type",
+            "cardinality": "one to one",
+            "description": "What is the type of the sub question?",
+            "predicate_label": "question type",
+            "class_label": "question type"
+          }
+        }
+      }
+    }
+  },
+  "P57004": {
+    "label": "research question answer",
+    "cardinality": "one to one",
+    "description": "How is the answer to the research question reported in the publication?",
+    "predicate_label": "research question answer",
+    "class_label": "research question answer",
+    "subtemplate_id": "R188024",
+    "subtemplate_label": "Research Question Answer",
+    "class_id": "C29005",
+    "subtemplate_properties": {
+      "P55038": {
+        "label": "hidden in text",
+        "cardinality": "one to one",
+        "description": "Is the answer to the research question reported in the publication hidden in the text?",
+        "predicate_label": "hidden in text"
+      },
+      "P55039": {
+        "label": "highlighted in text",
+        "cardinality": "one to one",
+        "description": "Is the answer to the research question reported in the publication highlighted in the text?",
+        "predicate_label": "highlighted in text"
+      }
+    }
+  },
+  "P56008": {
+    "label": "data collection",
+    "cardinality": "one to one",
+    "description": "What is reported about the data collection in the publication?",
+    "predicate_label": "data collection",
+    "class_label": "data collection",
+    "subtemplate_id": "R186737",
+    "subtemplate_label": "Data Collection",
+    "class_id": "C27004",
+    "subtemplate_properties": {
+      "DATA": {
+        "label": "research data",
+        "cardinality": "one to one",
+        "description": "What is reported about the collected data in the publication?",
+        "predicate_label": "data",
+        "class_label": "research data",
+        "subtemplate_id": "R188614",
+        "subtemplate_label": "Research Data",
+        "class_id": "C29030",
+        "subtemplate_properties": {
+          "P7055": {
+            "label": "data type",
+            "cardinality": "one to one",
+            "description": "What is the type of the collected data reported in the publication?",
+            "predicate_label": "Data type",
+            "class_label": "data type"
+          },
+          "url": {
+            "label": "url",
+            "cardinality": "one to many",
+            "description": "Under which URL(s) can the data be found?",
+            "predicate_label": "url"
+          }
+        }
+      },
+      "P1005": {
+        "label": "data collection method",
+        "cardinality": "one to many",
+        "description": "What is the data collection method reported in the publication?",
+        "predicate_label": "method",
+        "class_label": "data collection method",
+        "subtemplate_id": "R691422",
+        "subtemplate_label": "Data Collection Method",
+        "class_id": "C89001",
+        "subtemplate_properties": {
+          "P94003": {
+            "label": "method type",
+            "cardinality": "one to one",
+            "description": "What is the type of method is used for data collection in the publication?",
+            "predicate_label": "method type",
+            "class_label": "method type"
+          },
+          "P145012": {
+            "label": "method name",
+            "cardinality": "one to one",
+            "description": "What is the exact name of the method for data collection reported in the publication?",
+            "predicate_label": "method name"
+          }
+        }
+      }
+    }
+  },
+  "P15124": {
+    "label": "data analysis",
+    "cardinality": "one to one",
+    "description": "What is reported about the data analysis in the publication?",
+    "predicate_label": "data analysis",
+    "class_label": "data analysis",
+    "subtemplate_id": "R187817",
+    "subtemplate_label": "Data Analysis",
+    "class_id": "C28004",
+    "subtemplate_properties": {
+      "P1005": {
+        "label": "Method",
+        "cardinality": "one to many",
+        "description": "What is the data analysis method reported in the publication?",
+        "predicate_label": "method",
+        "class_label": "Method"
+      },
+      "P56043": {
+        "label": "inferential statistics",
+        "cardinality": "one to many",
+        "description": "What is reported about inferential statistics used for data analysis in the publication?",
+        "predicate_label": "inferential statistics",
+        "class_label": "inferential statistics",
+        "subtemplate_id": "R187801",
+        "subtemplate_label": "Inferential Statistics",
+        "class_id": "C28005",
+        "subtemplate_properties": {
+          "P30001": {
+            "label": "Hypothesis",
+            "cardinality": "one to many",
+            "description": "What hypothesis is reported in the publication?",
+            "predicate_label": "hypothesis",
+            "class_label": "Hypothesis"
+          },
+          "P35133": {
+            "label": "Statistical Technique",
+            "cardinality": "one to many",
+            "description": "What statistical tests is reported in the publication?",
+            "predicate_label": "Statistical tests",
+            "class_label": "Statistical Technique"
+          }
+        }
+      },
+      "P56048": {
+        "label": "descriptive statistic",
+        "cardinality": "one to many",
+        "description": "What is reported about descriptive statistics used for data analysis in the publication?",
+        "predicate_label": "descriptive statistics",
+        "class_label": "descriptive statistic",
+        "subtemplate_id": "R187815",
+        "subtemplate_label": "Descriptive Statistics",
+        "class_id": "C20073",
+        "subtemplate_properties": {
+          "P56049": {
+            "label": "measures of frequency",
+            "cardinality": "one to one",
+            "description": "What measures of frequency are reported in the publication?",
+            "predicate_label": "measures of frequency",
+            "class_label": "measures of frequency"
+          },
+          "P57005": {
+            "label": "measures of central tendency",
+            "cardinality": "one to one",
+            "description": "What measures of central tendency are reported in the publication?",
+            "predicate_label": "measures of central tendency",
+            "class_label": "measures of central tendency"
+          },
+          "P57008": {
+            "label": "measures of dispersion or variation",
+            "cardinality": "one to one",
+            "description": "What measures of dispersion or variation are reported in the publication?",
+            "predicate_label": "measures of dispersion or variation",
+            "class_label": "measures of dispersion or variation"
+          },
+          "P57010": {
+            "label": "measures of position",
+            "cardinality": "one to one",
+            "description": "What measures of position are reported in the publication?",
+            "predicate_label": "measures of position",
+            "class_label": "measures of position"
+          }
+        }
+      },
+      "P57016": {
+        "label": "machine learning",
+        "cardinality": "one to many",
+        "description": "What is reported about machine learing used for data analysis in the publication?",
+        "predicate_label": "machine learning",
+        "class_label": "machine learning",
+        "subtemplate_id": "R188038",
+        "subtemplate_label": "Machine Learning",
+        "class_id": "C29012",
+        "subtemplate_properties": {
+          "P2006": {
+            "label": "Metric",
+            "cardinality": "one to one",
+            "description": "What metrics are reported for the machine learning reported in the publication?",
+            "predicate_label": "metric",
+            "class_label": "Metric"
+          },
+          "P2001": {
+            "label": "Machine learning algorithm",
+            "cardinality": "one to many",
+            "description": "What machine learning algorithms are reported in the publication?",
+            "predicate_label": "Algorithm",
+            "class_label": "Machine learning algorithm"
+          }
+        }
+      }
+    }
+  },
+  "P39099": {
+    "label": "threats to validity",
+    "cardinality": "one to one",
+    "description": "What threats to validity are reported in a publication?",
+    "predicate_label": "threat to validity",
+    "class_label": "threats to validity",
+    "subtemplate_id": "R186724",
+    "subtemplate_label": "Threats to Validity",
+    "class_id": "C27003",
+    "subtemplate_properties": {
+      "P55037": {
+        "label": "construct validity",
+        "cardinality": "one to one",
+        "description": "Are threats to construct validity reported?",
+        "predicate_label": "construct validity"
+      },
+      "P55035": {
+        "label": "internal validity",
+        "cardinality": "one to one",
+        "description": "Are threats to internal validity reported?",
+        "predicate_label": "internal validity"
+      },
+      "P55034": {
+        "label": "external validity",
+        "cardinality": "one to one",
+        "description": "Are threats to external validity reported?",
+        "predicate_label": "external validity"
+      },
+      "P55036": {
+        "label": "conclusion validity",
+        "cardinality": "one to one",
+        "description": "Are threats to conclusion validity reported?",
+        "predicate_label": "conclusion validity"
+      },
+      "P59109": {
+        "label": "reliability",
+        "cardinality": "one to one",
+        "description": "Are threats to reliability reported?",
+        "predicate_label": "reliability"
+      },
+      "P60006": {
+        "label": "generalizability",
+        "cardinality": "one to one",
+        "description": "Are threats to generalizability reported?",
+        "predicate_label": "generalizability"
+      },
+      "P97002": {
+        "label": "repeatability",
+        "cardinality": "one to one",
+        "description": "Are threats to repeatability reported?",
+        "predicate_label": "repeatability"
+      },
+      "P68005": {
+        "label": "content validity",
+        "cardinality": "one to one",
+        "description": "Are threats to content validity reported?",
+        "predicate_label": "content validity"
+      },
+      "P97000": {
+        "label": "descriptive validity",
+        "cardinality": "one to one",
+        "description": "Are threats to descriptive validity reported?",
+        "predicate_label": "descriptive validity"
+      },
+      "P97001": {
+        "label": "theoretical validity",
+        "cardinality": "one to one",
+        "description": "Are threats to theoretical validity reported?",
+        "predicate_label": "theoretical validity"
+      },
+      "P145000": {
+        "label": "mentioned",
+        "cardinality": "one to one",
+        "description": "Are threats to validity mentioned but not classified?",
+        "predicate_label": "mentioned"
+      }
+    }
+  },
+  "description": {
+    "label": "description",
+    "cardinality": "one to one",
+    "description": "description",
+    "predicate_label": "description"
+  },
+  "SAME_AS": {
+    "label": "same as",
+    "cardinality": "one to many",
+    "description": "same as",
+    "predicate_label": "same as"
+  },
+  "subProblem": {
+    "label": "Problem",
+    "cardinality": "one to many",
+    "description": "Sub Problem",
+    "predicate_label": "Sub Problem",
+    "class_label": "Problem",
+    "subtemplate_id": "R48000",
+    "subtemplate_label": "Problem",
+    "class_id": "Problem",
+    "subtemplate_properties": {
+      "description": {
+        "label": "description",
+        "cardinality": "one to one",
+        "description": "description",
+        "predicate_label": "description"
+      },
+      "SAME_AS": {
+        "label": "same as",
+        "cardinality": "one to many",
+        "description": "same as",
+        "predicate_label": "same as"
+      },
+      "subProblem": {
+        "label": "Problem",
+        "cardinality": "one to many",
+        "description": "Sub Problem",
+        "predicate_label": "Sub Problem",
+        "class_label": "Problem",
+        "subtemplate_id": "R48000",
+        "subtemplate_label": "Problem",
+        "class_id": "Problem",
+        "subtemplate_properties": {
+          "description": {
+            "label": "description",
+            "cardinality": "one to one",
+            "description": "description",
+            "predicate_label": "description"
+          },
+          "SAME_AS": {
+            "label": "same as",
+            "cardinality": "one to many",
+            "description": "same as",
+            "predicate_label": "same as"
+          },
+          "subProblem": {
+            "label": "Problem",
+            "cardinality": "one to many",
+            "description": "Sub Problem",
+            "predicate_label": "Sub Problem",
+            "class_label": "Problem"
+          }
+        }
+      }
+    }
+  },
+  "P44139": {
+    "label": "question",
+    "cardinality": "one to one",
+    "description": "What is the subquestion of the research question reported in the publication?",
+    "predicate_label": "question"
+  },
+  "P55038": {
+    "label": "hidden in text",
+    "cardinality": "one to one",
+    "description": "Is the answer to the research question reported in the publication hidden in the text?",
+    "predicate_label": "hidden in text"
+  },
+  "P55039": {
+    "label": "highlighted in text",
+    "cardinality": "one to one",
+    "description": "Is the answer to the research question reported in the publication highlighted in the text?",
+    "predicate_label": "highlighted in text"
+  },
+  "P41928": {
+    "label": "question type",
+    "cardinality": "one to one",
+    "description": "What is the type of the sub question?",
+    "predicate_label": "question type",
+    "class_label": "question type"
+  },
+  "P57000": {
+    "label": "subquestion",
+    "cardinality": "one to many",
+    "description": "What is the subquestion of the research question reported in the publication?",
+    "predicate_label": "subquestion",
+    "class_label": "subquestion",
+    "subtemplate_id": "R188008",
+    "subtemplate_label": "Subquestion",
+    "class_id": "C29003",
+    "subtemplate_properties": {
+      "P44139": {
+        "label": "question",
+        "cardinality": "one to one",
+        "description": "What is the subquestion of the research question reported in the publication?",
+        "predicate_label": "question"
+      },
+      "P41928": {
+        "label": "question type",
+        "cardinality": "one to one",
+        "description": "What is the type of the sub question?",
+        "predicate_label": "question type",
+        "class_label": "question type"
+      }
+    }
+  },
+  "DATA": {
+    "label": "research data",
+    "cardinality": "one to one",
+    "description": "What is reported about the collected data in the publication?",
+    "predicate_label": "data",
+    "class_label": "research data",
+    "subtemplate_id": "R188614",
+    "subtemplate_label": "Research Data",
+    "class_id": "C29030",
+    "subtemplate_properties": {
+      "P7055": {
+        "label": "data type",
+        "cardinality": "one to one",
+        "description": "What is the type of the collected data reported in the publication?",
+        "predicate_label": "Data type",
+        "class_label": "data type",
+        "subtemplate_id": "R188611",
+        "subtemplate_label": "Data Type",
+        "class_id": "C29031",
+        "subtemplate_properties": {
+          "P57038": {
+            "label": "qualitative ",
+            "cardinality": "one to one",
+            "description": "Is the collected data reported in the publication qualitative?",
+            "predicate_label": "qualitative "
+          },
+          "P57039": {
+            "label": "quantitative ",
+            "cardinality": "one to one",
+            "description": "Is the collected data reported in the publication quantitative?",
+            "predicate_label": "quantitative "
+          }
+        }
+      },
+      "url": {
+        "label": "url",
+        "cardinality": "one to many",
+        "description": "Under which URL(s) can the data be found?",
+        "predicate_label": "url"
+      }
+    }
+  },
+  "P1005": {
+    "label": "Method",
+    "cardinality": "one to many",
+    "description": "What is the data analysis method reported in the publication?",
+    "predicate_label": "method",
+    "class_label": "Method"
+  },
+  "P7055": {
+    "label": "data type",
+    "cardinality": "one to one",
+    "description": "What is the type of the collected data reported in the publication?",
+    "predicate_label": "Data type",
+    "class_label": "data type",
+    "subtemplate_id": "R188611",
+    "subtemplate_label": "Data Type",
+    "class_id": "C29031",
+    "subtemplate_properties": {
+      "P57038": {
+        "label": "qualitative ",
+        "cardinality": "one to one",
+        "description": "Is the collected data reported in the publication qualitative?",
+        "predicate_label": "qualitative "
+      },
+      "P57039": {
+        "label": "quantitative ",
+        "cardinality": "one to one",
+        "description": "Is the collected data reported in the publication quantitative?",
+        "predicate_label": "quantitative "
+      }
+    }
+  },
+  "url": {
+    "label": "url",
+    "cardinality": "one to many",
+    "description": "Under which URL(s) can the data be found?",
+    "predicate_label": "url"
+  },
+  "P57038": {
+    "label": "qualitative ",
+    "cardinality": "one to one",
+    "description": "Is the collected data reported in the publication qualitative?",
+    "predicate_label": "qualitative "
+  },
+  "P57039": {
+    "label": "quantitative ",
+    "cardinality": "one to one",
+    "description": "Is the collected data reported in the publication quantitative?",
+    "predicate_label": "quantitative "
+  },
+  "P94003": {
+    "label": "method type",
+    "cardinality": "one to one",
+    "description": "What is the type of method is used for data collection in the publication?",
+    "predicate_label": "method type",
+    "class_label": "method type"
+  },
+  "P145012": {
+    "label": "method name",
+    "cardinality": "one to one",
+    "description": "What is the exact name of the method for data collection reported in the publication?",
+    "predicate_label": "method name"
+  },
+  "P56043": {
+    "label": "inferential statistics",
+    "cardinality": "one to many",
+    "description": "What is reported about inferential statistics used for data analysis in the publication?",
+    "predicate_label": "inferential statistics",
+    "class_label": "inferential statistics",
+    "subtemplate_id": "R187801",
+    "subtemplate_label": "Inferential Statistics",
+    "class_id": "C28005",
+    "subtemplate_properties": {
+      "P30001": {
+        "label": "Hypothesis",
+        "cardinality": "one to many",
+        "description": "What hypothesis is reported in the publication?",
+        "predicate_label": "hypothesis",
+        "class_label": "Hypothesis",
+        "subtemplate_id": "R187805",
+        "subtemplate_label": "Hypothesis",
+        "class_id": "C28008",
+        "subtemplate_properties": {
+          "P56046": {
+            "label": "hypothesis statement",
+            "cardinality": "one to one",
+            "description": "What hypothesis statement is reported in the publication?",
+            "predicate_label": "hypothesis statement"
+          },
+          "P41703": {
+            "label": "hypothesis type",
+            "cardinality": "one to one",
+            "description": "What is the type of the hypothesis reported in the publication?",
+            "predicate_label": "Hypothesis type",
+            "class_label": "hypothesis type"
+          }
+        }
+      },
+      "P35133": {
+        "label": "Statistical Technique",
+        "cardinality": "one to many",
+        "description": "What statistical tests is reported in the publication?",
+        "predicate_label": "Statistical tests",
+        "class_label": "Statistical Technique"
+      }
+    }
+  },
+  "P56048": {
+    "label": "descriptive statistic",
+    "cardinality": "one to many",
+    "description": "What is reported about descriptive statistics used for data analysis in the publication?",
+    "predicate_label": "descriptive statistics",
+    "class_label": "descriptive statistic",
+    "subtemplate_id": "R187815",
+    "subtemplate_label": "Descriptive Statistics",
+    "class_id": "C20073",
+    "subtemplate_properties": {
+      "P56049": {
+        "label": "measures of frequency",
+        "cardinality": "one to one",
+        "description": "What measures of frequency are reported in the publication?",
+        "predicate_label": "measures of frequency",
+        "class_label": "measures of frequency",
+        "subtemplate_id": "R187812",
+        "subtemplate_label": "Measures of Frequency",
+        "class_id": "C28009",
+        "subtemplate_properties": {
+          "P55023": {
+            "label": "count",
+            "cardinality": "one to one",
+            "description": "Is count as a measure of frequency reported in the publication?",
+            "predicate_label": "count"
+          },
+          "P56050": {
+            "label": "percent",
+            "cardinality": "one to one",
+            "description": "Is percent as a measure of frequency reported in the publication?",
+            "predicate_label": "percent"
+          }
+        }
+      },
+      "P57005": {
+        "label": "measures of central tendency",
+        "cardinality": "one to one",
+        "description": "What measures of central tendency are reported in the publication?",
+        "predicate_label": "measures of central tendency",
+        "class_label": "measures of central tendency",
+        "subtemplate_id": "R188027",
+        "subtemplate_label": "Measures of Central Tendency",
+        "class_id": "C29006",
+        "subtemplate_properties": {
+          "P47000": {
+            "label": "mean",
+            "cardinality": "one to one",
+            "description": "Is mean as a measure of central tendency reported in the publication?",
+            "predicate_label": "mean"
+          },
+          "P57006": {
+            "label": "median",
+            "cardinality": "one to one",
+            "description": "Is median as a measure of central tendency reported in the publication?",
+            "predicate_label": "median"
+          },
+          "P57007": {
+            "label": "mode",
+            "cardinality": "one to one",
+            "description": "Is mode as a measure of central tendency reported in the publication?",
+            "predicate_label": "mode"
+          },
+          "P44107": {
+            "label": "minimum",
+            "cardinality": "one to one",
+            "description": "Is minimum as a measure of central tendency reported in the publication?",
+            "predicate_label": "minimum"
+          },
+          "P44108": {
+            "label": "maximum",
+            "cardinality": "one to one",
+            "description": "Is maximum as a measure of central tendency reported in the publication?",
+            "predicate_label": "maximum"
+          }
+        }
+      },
+      "P57008": {
+        "label": "measures of dispersion or variation",
+        "cardinality": "one to one",
+        "description": "What measures of dispersion or variation are reported in the publication?",
+        "predicate_label": "measures of dispersion or variation",
+        "class_label": "measures of dispersion or variation",
+        "subtemplate_id": "R188031",
+        "subtemplate_label": "Measures of Dispersion or Variation",
+        "class_id": "C29007",
+        "subtemplate_properties": {
+          "P4013": {
+            "label": "range",
+            "cardinality": "one to one",
+            "description": "Is range as a measure of dispersion or variation reported in the publication?",
+            "predicate_label": "range"
+          },
+          "P57009": {
+            "label": "variance",
+            "cardinality": "one to one",
+            "description": "Is variance as a measure of dispersion or variation reported in the publication?",
+            "predicate_label": "variance"
+          },
+          "P44087": {
+            "label": "standard deviation",
+            "cardinality": "one to one",
+            "description": "Is standard deviation as a measure of dispersion or variation reported in the publication?",
+            "predicate_label": "standard deviation"
+          }
+        }
+      },
+      "P57010": {
+        "label": "measures of position",
+        "cardinality": "one to one",
+        "description": "What measures of position are reported in the publication?",
+        "predicate_label": "measures of position",
+        "class_label": "measures of position",
+        "subtemplate_id": "R188035",
+        "subtemplate_label": "Measures of Position",
+        "class_id": "C29008",
+        "subtemplate_properties": {
+          "P59065": {
+            "label": "boxplot",
+            "cardinality": "one to one",
+            "description": "Is boxplot reported in the publication?",
+            "predicate_label": "boxplot"
+          }
+        }
+      }
+    }
+  },
+  "P57016": {
+    "label": "machine learning",
+    "cardinality": "one to many",
+    "description": "What is reported about machine learing used for data analysis in the publication?",
+    "predicate_label": "machine learning",
+    "class_label": "machine learning",
+    "subtemplate_id": "R188038",
+    "subtemplate_label": "Machine Learning",
+    "class_id": "C29012",
+    "subtemplate_properties": {
+      "P2006": {
+        "label": "Metric",
+        "cardinality": "one to one",
+        "description": "What metrics are reported for the machine learning reported in the publication?",
+        "predicate_label": "metric",
+        "class_label": "Metric",
+        "subtemplate_id": "R188042",
+        "subtemplate_label": "Metrics",
+        "class_id": "C14024",
+        "subtemplate_properties": {
+          "P5073": {
+            "label": "recall",
+            "cardinality": "one to one",
+            "description": "Is recall reported in the publication?",
+            "predicate_label": "recall"
+          },
+          "P3004": {
+            "label": "precision",
+            "cardinality": "one to one",
+            "description": "Is precision reported in the publication?",
+            "predicate_label": "precision"
+          },
+          "P18048": {
+            "label": "accuracy",
+            "cardinality": "one to one",
+            "description": "Is accuracy reported in the publication?",
+            "predicate_label": "accuracy"
+          },
+          "P59137": {
+            "label": "f-score",
+            "cardinality": "one to one",
+            "description": "Is f-score reported in the publication?",
+            "predicate_label": "f-score"
+          }
+        }
+      },
+      "P2001": {
+        "label": "Machine learning algorithm",
+        "cardinality": "one to many",
+        "description": "What machine learning algorithms are reported in the publication?",
+        "predicate_label": "Algorithm",
+        "class_label": "Machine learning algorithm"
+      }
+    }
+  },
+  "P30001": {
+    "label": "Hypothesis",
+    "cardinality": "one to many",
+    "description": "What hypothesis is reported in the publication?",
+    "predicate_label": "hypothesis",
+    "class_label": "Hypothesis",
+    "subtemplate_id": "R187805",
+    "subtemplate_label": "Hypothesis",
+    "class_id": "C28008",
+    "subtemplate_properties": {
+      "P56046": {
+        "label": "hypothesis statement",
+        "cardinality": "one to one",
+        "description": "What hypothesis statement is reported in the publication?",
+        "predicate_label": "hypothesis statement"
+      },
+      "P41703": {
+        "label": "hypothesis type",
+        "cardinality": "one to one",
+        "description": "What is the type of the hypothesis reported in the publication?",
+        "predicate_label": "Hypothesis type",
+        "class_label": "hypothesis type",
+        "subtemplate_id": "R188709",
+        "subtemplate_label": "Hypothesis Type",
+        "class_id": "C29033",
+        "subtemplate_properties": {
+          "P35106": {
+            "label": "Null hypothesis",
+            "cardinality": "one to one",
+            "description": "Is the reported hypothesis the null hypothesis?",
+            "predicate_label": "Null hypothesis"
+          },
+          "P35107": {
+            "label": "Alternative hypothesis",
+            "cardinality": "one to one",
+            "description": "Is the reported hypothesis the alternative hypothesis?",
+            "predicate_label": "Alternative hypothesis"
+          }
+        }
+      }
+    }
+  },
+  "P35133": {
+    "label": "Statistical Technique",
+    "cardinality": "one to many",
+    "description": "What statistical tests is reported in the publication?",
+    "predicate_label": "Statistical tests",
+    "class_label": "Statistical Technique"
+  },
+  "P56046": {
+    "label": "hypothesis statement",
+    "cardinality": "one to one",
+    "description": "What hypothesis statement is reported in the publication?",
+    "predicate_label": "hypothesis statement"
+  },
+  "P41703": {
+    "label": "hypothesis type",
+    "cardinality": "one to one",
+    "description": "What is the type of the hypothesis reported in the publication?",
+    "predicate_label": "Hypothesis type",
+    "class_label": "hypothesis type",
+    "subtemplate_id": "R188709",
+    "subtemplate_label": "Hypothesis Type",
+    "class_id": "C29033",
+    "subtemplate_properties": {
+      "P35106": {
+        "label": "Null hypothesis",
+        "cardinality": "one to one",
+        "description": "Is the reported hypothesis the null hypothesis?",
+        "predicate_label": "Null hypothesis"
+      },
+      "P35107": {
+        "label": "Alternative hypothesis",
+        "cardinality": "one to one",
+        "description": "Is the reported hypothesis the alternative hypothesis?",
+        "predicate_label": "Alternative hypothesis"
+      }
+    }
+  },
+  "P35106": {
+    "label": "Null hypothesis",
+    "cardinality": "one to one",
+    "description": "Is the reported hypothesis the null hypothesis?",
+    "predicate_label": "Null hypothesis"
+  },
+  "P35107": {
+    "label": "Alternative hypothesis",
+    "cardinality": "one to one",
+    "description": "Is the reported hypothesis the alternative hypothesis?",
+    "predicate_label": "Alternative hypothesis"
+  },
+  "P56049": {
+    "label": "measures of frequency",
+    "cardinality": "one to one",
+    "description": "What measures of frequency are reported in the publication?",
+    "predicate_label": "measures of frequency",
+    "class_label": "measures of frequency",
+    "subtemplate_id": "R187812",
+    "subtemplate_label": "Measures of Frequency",
+    "class_id": "C28009",
+    "subtemplate_properties": {
+      "P55023": {
+        "label": "count",
+        "cardinality": "one to one",
+        "description": "Is count as a measure of frequency reported in the publication?",
+        "predicate_label": "count"
+      },
+      "P56050": {
+        "label": "percent",
+        "cardinality": "one to one",
+        "description": "Is percent as a measure of frequency reported in the publication?",
+        "predicate_label": "percent"
+      }
+    }
+  },
+  "P57005": {
+    "label": "measures of central tendency",
+    "cardinality": "one to one",
+    "description": "What measures of central tendency are reported in the publication?",
+    "predicate_label": "measures of central tendency",
+    "class_label": "measures of central tendency",
+    "subtemplate_id": "R188027",
+    "subtemplate_label": "Measures of Central Tendency",
+    "class_id": "C29006",
+    "subtemplate_properties": {
+      "P47000": {
+        "label": "mean",
+        "cardinality": "one to one",
+        "description": "Is mean as a measure of central tendency reported in the publication?",
+        "predicate_label": "mean"
+      },
+      "P57006": {
+        "label": "median",
+        "cardinality": "one to one",
+        "description": "Is median as a measure of central tendency reported in the publication?",
+        "predicate_label": "median"
+      },
+      "P57007": {
+        "label": "mode",
+        "cardinality": "one to one",
+        "description": "Is mode as a measure of central tendency reported in the publication?",
+        "predicate_label": "mode"
+      },
+      "P44107": {
+        "label": "minimum",
+        "cardinality": "one to one",
+        "description": "Is minimum as a measure of central tendency reported in the publication?",
+        "predicate_label": "minimum"
+      },
+      "P44108": {
+        "label": "maximum",
+        "cardinality": "one to one",
+        "description": "Is maximum as a measure of central tendency reported in the publication?",
+        "predicate_label": "maximum"
+      }
+    }
+  },
+  "P57008": {
+    "label": "measures of dispersion or variation",
+    "cardinality": "one to one",
+    "description": "What measures of dispersion or variation are reported in the publication?",
+    "predicate_label": "measures of dispersion or variation",
+    "class_label": "measures of dispersion or variation",
+    "subtemplate_id": "R188031",
+    "subtemplate_label": "Measures of Dispersion or Variation",
+    "class_id": "C29007",
+    "subtemplate_properties": {
+      "P4013": {
+        "label": "range",
+        "cardinality": "one to one",
+        "description": "Is range as a measure of dispersion or variation reported in the publication?",
+        "predicate_label": "range"
+      },
+      "P57009": {
+        "label": "variance",
+        "cardinality": "one to one",
+        "description": "Is variance as a measure of dispersion or variation reported in the publication?",
+        "predicate_label": "variance"
+      },
+      "P44087": {
+        "label": "standard deviation",
+        "cardinality": "one to one",
+        "description": "Is standard deviation as a measure of dispersion or variation reported in the publication?",
+        "predicate_label": "standard deviation"
+      }
+    }
+  },
+  "P57010": {
+    "label": "measures of position",
+    "cardinality": "one to one",
+    "description": "What measures of position are reported in the publication?",
+    "predicate_label": "measures of position",
+    "class_label": "measures of position",
+    "subtemplate_id": "R188035",
+    "subtemplate_label": "Measures of Position",
+    "class_id": "C29008",
+    "subtemplate_properties": {
+      "P59065": {
+        "label": "boxplot",
+        "cardinality": "one to one",
+        "description": "Is boxplot reported in the publication?",
+        "predicate_label": "boxplot"
+      }
+    }
+  },
+  "P55023": {
+    "label": "count",
+    "cardinality": "one to one",
+    "description": "Is count as a measure of frequency reported in the publication?",
+    "predicate_label": "count"
+  },
+  "P56050": {
+    "label": "percent",
+    "cardinality": "one to one",
+    "description": "Is percent as a measure of frequency reported in the publication?",
+    "predicate_label": "percent"
+  },
+  "P47000": {
+    "label": "mean",
+    "cardinality": "one to one",
+    "description": "Is mean as a measure of central tendency reported in the publication?",
+    "predicate_label": "mean"
+  },
+  "P57006": {
+    "label": "median",
+    "cardinality": "one to one",
+    "description": "Is median as a measure of central tendency reported in the publication?",
+    "predicate_label": "median"
+  },
+  "P57007": {
+    "label": "mode",
+    "cardinality": "one to one",
+    "description": "Is mode as a measure of central tendency reported in the publication?",
+    "predicate_label": "mode"
+  },
+  "P44107": {
+    "label": "minimum",
+    "cardinality": "one to one",
+    "description": "Is minimum as a measure of central tendency reported in the publication?",
+    "predicate_label": "minimum"
+  },
+  "P44108": {
+    "label": "maximum",
+    "cardinality": "one to one",
+    "description": "Is maximum as a measure of central tendency reported in the publication?",
+    "predicate_label": "maximum"
+  },
+  "P4013": {
+    "label": "range",
+    "cardinality": "one to one",
+    "description": "Is range as a measure of dispersion or variation reported in the publication?",
+    "predicate_label": "range"
+  },
+  "P57009": {
+    "label": "variance",
+    "cardinality": "one to one",
+    "description": "Is variance as a measure of dispersion or variation reported in the publication?",
+    "predicate_label": "variance"
+  },
+  "P44087": {
+    "label": "standard deviation",
+    "cardinality": "one to one",
+    "description": "Is standard deviation as a measure of dispersion or variation reported in the publication?",
+    "predicate_label": "standard deviation"
+  },
+  "P59065": {
+    "label": "boxplot",
+    "cardinality": "one to one",
+    "description": "Is boxplot reported in the publication?",
+    "predicate_label": "boxplot"
+  },
+  "P2006": {
+    "label": "Metric",
+    "cardinality": "one to one",
+    "description": "What metrics are reported for the machine learning reported in the publication?",
+    "predicate_label": "metric",
+    "class_label": "Metric",
+    "subtemplate_id": "R188042",
+    "subtemplate_label": "Metrics",
+    "class_id": "C14024",
+    "subtemplate_properties": {
+      "P5073": {
+        "label": "recall",
+        "cardinality": "one to one",
+        "description": "Is recall reported in the publication?",
+        "predicate_label": "recall"
+      },
+      "P3004": {
+        "label": "precision",
+        "cardinality": "one to one",
+        "description": "Is precision reported in the publication?",
+        "predicate_label": "precision"
+      },
+      "P18048": {
+        "label": "accuracy",
+        "cardinality": "one to one",
+        "description": "Is accuracy reported in the publication?",
+        "predicate_label": "accuracy"
+      },
+      "P59137": {
+        "label": "f-score",
+        "cardinality": "one to one",
+        "description": "Is f-score reported in the publication?",
+        "predicate_label": "f-score"
+      }
+    }
+  },
+  "P2001": {
+    "label": "Machine learning algorithm",
+    "cardinality": "one to many",
+    "description": "What machine learning algorithms are reported in the publication?",
+    "predicate_label": "Algorithm",
+    "class_label": "Machine learning algorithm"
+  },
+  "P5073": {
+    "label": "recall",
+    "cardinality": "one to one",
+    "description": "Is recall reported in the publication?",
+    "predicate_label": "recall"
+  },
+  "P3004": {
+    "label": "precision",
+    "cardinality": "one to one",
+    "description": "Is precision reported in the publication?",
+    "predicate_label": "precision"
+  },
+  "P18048": {
+    "label": "accuracy",
+    "cardinality": "one to one",
+    "description": "Is accuracy reported in the publication?",
+    "predicate_label": "accuracy"
+  },
+  "P59137": {
+    "label": "f-score",
+    "cardinality": "one to one",
+    "description": "Is f-score reported in the publication?",
+    "predicate_label": "f-score"
+  },
+  "P55037": {
+    "label": "construct validity",
+    "cardinality": "one to one",
+    "description": "Are threats to construct validity reported?",
+    "predicate_label": "construct validity"
+  },
+  "P55035": {
+    "label": "internal validity",
+    "cardinality": "one to one",
+    "description": "Are threats to internal validity reported?",
+    "predicate_label": "internal validity"
+  },
+  "P55034": {
+    "label": "external validity",
+    "cardinality": "one to one",
+    "description": "Are threats to external validity reported?",
+    "predicate_label": "external validity"
+  },
+  "P55036": {
+    "label": "conclusion validity",
+    "cardinality": "one to one",
+    "description": "Are threats to conclusion validity reported?",
+    "predicate_label": "conclusion validity"
+  },
+  "P59109": {
+    "label": "reliability",
+    "cardinality": "one to one",
+    "description": "Are threats to reliability reported?",
+    "predicate_label": "reliability"
+  },
+  "P60006": {
+    "label": "generalizability",
+    "cardinality": "one to one",
+    "description": "Are threats to generalizability reported?",
+    "predicate_label": "generalizability"
+  },
+  "P97002": {
+    "label": "repeatability",
+    "cardinality": "one to one",
+    "description": "Are threats to repeatability reported?",
+    "predicate_label": "repeatability"
+  },
+  "P68005": {
+    "label": "content validity",
+    "cardinality": "one to one",
+    "description": "Are threats to content validity reported?",
+    "predicate_label": "content validity"
+  },
+  "P97000": {
+    "label": "descriptive validity",
+    "cardinality": "one to one",
+    "description": "Are threats to descriptive validity reported?",
+    "predicate_label": "descriptive validity"
+  },
+  "P97001": {
+    "label": "theoretical validity",
+    "cardinality": "one to one",
+    "description": "Are threats to theoretical validity reported?",
+    "predicate_label": "theoretical validity"
+  },
+  "P145000": {
+    "label": "mentioned",
+    "cardinality": "one to one",
+    "description": "Are threats to validity mentioned but not classified?",
+    "predicate_label": "mentioned"
+  }
+}

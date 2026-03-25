@@ -1,0 +1,482 @@
+[
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "1) \n    DE: Welche RE-Tasks werden in den Papers berichtet?\n    \n    EN: Which RE tasks are discussed in the papers?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgr: <http://orkg.org/orkg/resource/> \nPREFIX orkgc: <http://orkg.org/orkg/class/> \nPREFIX orkgp: <http://orkg.org/orkg/predicate/> \nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#> \nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n\nSELECT DISTINCT?paper ?paperLabel ?reTask ?reTaskLabel\nWHERE {\n    # Paper → Contribution\n    ?paper orkgp:P31 ?contribution .\n\n    # Contribution is NLP4RE Template\n    ?contribution a orkgc:C121001 .\n\n    ?contribution orkgp:P181002 ?reTask .\n\n\n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n    OPTIONAL { ?reTask rdfs:label ?reTaskLabel . }\n}\nORDER BY ?paperLabel",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "2) DE: Welche NLP-Task-Typen werden in den Papers berichtet?\n\n   EN: What types of NLP tasks are discussed in the papers?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgr: <http://orkg.org/orkg/resource/> \nPREFIX orkgc: <http://orkg.org/orkg/class/> \nPREFIX orkgp: <http://orkg.org/orkg/predicate/> \nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#> \nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n\nSELECT DISTINCT?paper ?paperLabel ?Nlp_TaskType ?Nlp_TaskTypeLabel\nWHERE{\n    ?paper orkgp:P31 ?contribution .\n\n    ?contribution a orkgc:C121001 ;\n                    orkgp:P181003 ?Nlp_Task .\n    ?Nlp_Task orkgp:P181004 ?Nlp_TaskType .\n\n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n    OPTIONAL { ?Nlp_Task rdfs:label ?Nlp_TaskLabel . }\n    OPTIONAL { ?Nlp_TaskType rdfs:label ?Nlp_TaskTypeLabel . }\n}",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "3) DE: Welche Inputs haben die NLP-Tasks?\n\n   EN: What are the inputs for the NLP tasks?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgr: <http://orkg.org/orkg/resource/> \nPREFIX orkgc: <http://orkg.org/orkg/class/> \nPREFIX orkgp: <http://orkg.org/orkg/predicate/> \nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#> \nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n\nSELECT DISTINCT ?Nlp_Task ?Nlp_TaskLabel ?Nlp_TaskInput ?Nlp_InputLabel\nWHERE{\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C121001 ;\n                    orkgp:P181003 ?Nlp_Task .\n\n    ?Nlp_Task orkgp:P181005 ?Nlp_TaskInput .\n\n    OPTIONAL { ?Nlp_Task rdfs:label ?Nlp_TaskLabel . }\n    OPTIONAL { ?Nlp_TaskInput rdfs:label ?Nlp_InputLabel . }\n}",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "4) Welche Output-Typen werden für welche NLP-Task-Typen berichtet?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n\nSELECT DISTINCT ?nlpTaskType ?nlpTaskTypeLabel ?outputType ?outputTypeLabel\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 ;\n                orkgp:P181003 ?nlpTask .\n\n  ?nlpTask orkgp:P181004 ?nlpTaskType ;\n           orkgp:P181006 ?nlpTaskOutput .\n\n  ?nlpTaskOutput orkgp:P181007 ?outputType .\n\n  OPTIONAL { ?nlpTaskType rdfs:label ?nlpTaskTypeLabel . }\n  OPTIONAL { ?outputType rdfs:label ?outputTypeLabel . }\n}\nORDER BY ?nlpTaskTypeLabel ?outputTypeLabel",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "5) Welche NLP-Datensätze werden in den Papers verwendet?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n\nSELECT DISTINCT ?dataset ?datasetLabel\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 ;\n                orkgp:P181011 ?dataset .\n\n  OPTIONAL { ?dataset rdfs:label ?datasetLabel . }\n}\nORDER BY ?datasetLabel",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "6) Welche natürliche Sprachen werden für die Datensätze berichtet?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n\nSELECT DISTINCT ?naturalLanguage ?naturalLanguageLabel\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 ;\n                orkgp:P181011 ?dataset .\n\n  ?dataset orkgp:P181022 ?dataType .\n  ?dataType orkgp:P181025 ?naturalLanguage .\n\n  OPTIONAL { ?naturalLanguage rdfs:label ?naturalLanguageLabel . }\n}\nORDER BY ?naturalLanguage",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "7) Wie viele Annotatoren werden pro Paper berichtet?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n\nSELECT DISTINCT ?paper ?paperLabel  (xsd:integer(?numberOfAnnotations) AS ?numberOfAnnotations)\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C121001 ;\n                orkgp:P181031 ?annotationProcess .\n\n    ?annotationProcess orkgp:P181032 ?annotator.\n    ?annotator  orkgp:P59120 ?numberOfAnnotations .\n    \n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n\n}\nORDER BY DESC(?numberOfAnnotations) ?paperLabel\n",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "8) Welche Guideline Availabilitys werden im Annotationsschema berichtet?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n\nSELECT DISTINCT ?guidelineAvailability ?guidelineAvailabilityLabel\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 ;\n                orkgp:P181031 ?annotationProcess .\n\n  ?annotationProcess orkgp:P181036 ?annotationScheme .\n   ?annotationScheme   orkgp:P181038 ?guidelineAvailability .\n\n  OPTIONAL { ?guidelineAvailability rdfs:label ?guidelineAvailabilityLabel . }\n}\nORDER BY ?guidelineAvailability",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "9) Welche Evaluationsmetrik benutzt jedes paper",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n\nSELECT ?paper ?paperLabel\n       (GROUP_CONCAT(DISTINCT ?metricLabel; separator=\", \") AS ?metrics)\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 ;\n                orkgp:HAS_EVALUATION ?evaluation .\n\n  OPTIONAL {?evaluation orkgp:P110006 ?metric .}\n\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n  OPTIONAL { ?metric rdfs:label ?metricLabel . }\n}\nGROUP BY ?paper ?paperLabel\nORDER BY ?paperLabel",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "10) Welche Baseline-Typen werden in der Evaluation berichtet?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n\nSELECT ?paper ?paperLabel\n       (GROUP_CONCAT(DISTINCT ?baselineTypeLabel; separator=\", \") AS ?baselineTypes)\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 .\n\n  OPTIONAL {\n    ?contribution orkgp:HAS_EVALUATION ?evaluation .\n    ?evaluation orkgp:P181051 ?baselineComparison .\n    ?baselineComparison orkgp:P181052 ?baselineType .\n    OPTIONAL { ?baselineType rdfs:label ?baselineTypeLabel . }\n  }\n\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}\nGROUP BY ?paper ?paperLabel\nORDER BY ?paperLabel",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "11) Welche Kombinationen aus RE-Task, NLP-Task-Typ und NLP-Task-Output-Typ werden in den erfassten Papers am häufigsten berichtet, und welche konkreten Papers gehören jeweils zu diesen Kombinationen?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n\nSELECT\n  ?reTask\n  ?reTaskLabel\n  ?nlpTaskType\n  ?nlpTaskTypeLabel\n  ?outputType\n  ?outputTypeLabel\n  ?paperCount\n  (GROUP_CONCAT(DISTINCT ?paperLabel; SEPARATOR=\" | \") AS ?papers)\nWHERE {\n\n  # Häufigkeit pro Kombination\n  {\n    SELECT\n      ?reTask\n      ?nlpTaskType\n      ?outputType\n      (COUNT(DISTINCT ?paper) AS ?paperCount)\n    WHERE {\n      ?paper orkgp:P31 ?contribution .\n\n      ?contribution a orkgc:C121001 ;\n                    orkgp:P181002 ?reTask ;\n                    orkgp:P181003 ?nlpTask .\n\n      ?nlpTask orkgp:P181004 ?nlpTaskType ;\n               orkgp:P181006 ?nlpTaskOutput .\n\n      ?nlpTaskOutput orkgp:P181007 ?outputType .\n    }\n    GROUP BY ?reTask ?nlpTaskType ?outputType\n  }\n\n  # Maximale Häufigkeit über alle Kombinationen\n  {\n    SELECT (MAX(?cnt) AS ?maxCount)\n    WHERE {\n      {\n        SELECT\n          ?reTask2\n          ?nlpTaskType2\n          ?outputType2\n          (COUNT(DISTINCT ?paper2) AS ?cnt)\n        WHERE {\n          ?paper2 orkgp:P31 ?contribution2 .\n\n          ?contribution2 a orkgc:C121001 ;\n                         orkgp:P181002 ?reTask2 ;\n                         orkgp:P181003 ?nlpTask2 .\n\n          ?nlpTask2 orkgp:P181004 ?nlpTaskType2 ;\n                    orkgp:P181006 ?nlpTaskOutput2 .\n\n          ?nlpTaskOutput2 orkgp:P181007 ?outputType2 .\n        }\n        GROUP BY ?reTask2 ?nlpTaskType2 ?outputType2\n      }\n    }\n  }\n\n  FILTER(?paperCount = ?maxCount)\n\n  # Papers zu diesen häufigsten Kombinationen holen\n  ?paper orkgp:P31 ?contribution .\n\n  ?contribution a orkgc:C121001 ;\n                orkgp:P181002 ?reTask ;\n                orkgp:P181003 ?nlpTask .\n\n  ?nlpTask orkgp:P181004 ?nlpTaskType ;\n           orkgp:P181006 ?nlpTaskOutput .\n\n  ?nlpTaskOutput orkgp:P181007 ?outputType .\n\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n  OPTIONAL { ?reTask rdfs:label ?reTaskLabel . }\n  OPTIONAL { ?nlpTaskType rdfs:label ?nlpTaskTypeLabel . }\n  OPTIONAL { ?outputType rdfs:label ?outputTypeLabel . }\n}\nGROUP BY\n  ?reTask ?reTaskLabel\n  ?nlpTaskType ?nlpTaskTypeLabel\n  ?outputType ?outputTypeLabel\n  ?paperCount\nORDER BY DESC(?paperCount) ?reTaskLabel ?nlpTaskTypeLabel ?outputTypeLabel",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "12) Für jeden RE-Task: Welche Kombinationen aus NLP-Task-Input und NLP-Task-Output-Typ werden berichtet, und welche Papers verwenden jeweils diese Kombinationen?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n\nSELECT\n  ?reTask\n  ?reTaskLabel\n  ?nlpTaskInput\n  ?nlpTaskInputLabel\n  ?outputType\n  ?outputTypeLabel\n  (COUNT(DISTINCT ?paper) AS ?paperCount)\n  (GROUP_CONCAT(DISTINCT ?paperLabel; SEPARATOR=\" | \") AS ?papers)\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n\n  ?contribution a orkgc:C121001 ;\n                orkgp:P181002 ?reTask ;\n                orkgp:P181003 ?nlpTask .\n\n  ?nlpTask orkgp:P181005 ?nlpTaskInput ;\n           orkgp:P181006 ?nlpTaskOutput .\n\n  ?nlpTaskOutput orkgp:P181007 ?outputType .\n\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n  OPTIONAL { ?reTask rdfs:label ?reTaskLabel . }\n  OPTIONAL { ?nlpTaskInput rdfs:label ?nlpTaskInputLabel . }\n  OPTIONAL { ?outputType rdfs:label ?outputTypeLabel . }\n}\nGROUP BY\n  ?reTask ?reTaskLabel\n  ?nlpTaskInput ?nlpTaskInputLabel\n  ?outputType ?outputTypeLabel\nORDER BY ?reTaskLabel DESC(?paperCount) ?nlpTaskInputLabel ?outputTypeLabel",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "13) Welche Papers berichten einen NLP-Datensatz mit angegebener URL, und welcher Grad der öffentlichen Verfügbarkeit, welcher Lizenztyp sowie welcher Typ des Datensatzspeicherorts werden in diesen Papers jeweils angegeben? und am Ende soll nach Availaybility sortiert werden.",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n\nSELECT DISTINCT\n  ?paper\n  ?paperLabel\n  ?licenseType\n  ?licenseTypeLabel\n  ?locationType\n  ?locationTypeLabel\n  ?publicAvailabilityLabel\n  ?url\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n\n  ?contribution a orkgc:C121001 ;\n                orkgp:P181011 ?dataset .\n\n  ?dataset orkgp:license ?license ;\n           orkgp:P181028 ?datasetLocation .\n\n  ?license orkgp:P181026 ?publicAvailability ;\n           orkgp:P181027 ?licenseType .\n\n  ?datasetLocation orkgp:P181030 ?locationType;\n                    orkgp:P1003 ?url .\n\n\n\n\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n  OPTIONAL { ?licenseType rdfs:label ?licenseTypeLabel . }\n  OPTIONAL { ?locationType rdfs:label ?locationTypeLabel . }\n  OPTIONAL { ?publicAvailability rdfs:label ?publicAvailabilityLabel . }\n  \n}\nORDER BY ?publicAvailabilityLabel ?paperLabel",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "14) Welche Kombinationen aus Typ der Datenquelle und Domäne der Datenquelle kommen am häufigsten vor, und welche konkreten Papers verwenden jeweils diese Kombinationen?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX orkgr: <http://orkg.org/orkg/resource/>\n\nSELECT\n  ?sourceType\n  ?sourceTypeLabel\n  ?sourceDomain\n  ?sourceDomainLabel\n  ?paperCount\n  (GROUP_CONCAT(DISTINCT ?paperLabel; SEPARATOR=\" | \") AS ?papers)\nWHERE {\n\n  {\n    SELECT\n      ?sourceType\n      ?sourceDomain\n      (COUNT(DISTINCT ?paper) AS ?paperCount)\n    WHERE {\n      ?paper orkgp:P31 ?contribution .\n\n      ?contribution a orkgc:C121001 ;\n                    orkgp:P181011 ?dataset .\n\n      ?dataset orkgp:P181017 ?dataSource .\n\n      ?dataSource orkgp:P181018 ?sourceType ;\n                  orkgp:P181020 ?sourceDomain .\n    }\n    GROUP BY ?sourceType ?sourceDomain\n  }\n\n  {\n    SELECT (MAX(?cnt) AS ?maxCount)\n    WHERE {\n      {\n        SELECT\n          ?sourceType2\n          ?sourceDomain2\n          (COUNT(DISTINCT ?paper2) AS ?cnt)\n        WHERE {\n          ?paper2 orkgp:P31 ?contribution2 .\n\n          ?contribution2 a orkgc:C121001 ;\n                         orkgp:P181011 ?dataset2 .\n\n          ?dataset2 orkgp:P181017 ?dataSource2 .\n\n          ?dataSource2 orkgp:P181018 ?sourceType2 ;\n                       orkgp:P181020 ?sourceDomain2 .\n        }\n        GROUP BY ?sourceType2 ?sourceDomain2\n      }\n    }\n  }\n\n  FILTER(?paperCount = ?maxCount)\n\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 ;\n                orkgp:P181011 ?dataset .\n  ?dataset orkgp:P181017 ?dataSource .\n  ?dataSource orkgp:P181018 ?sourceType ;\n              orkgp:P181020 ?sourceDomain .\n\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n  OPTIONAL { ?sourceType rdfs:label ?sourceTypeLabel . }\n  OPTIONAL { ?sourceDomain rdfs:label ?sourceDomainLabel . }\n}\nGROUP BY\n  ?sourceType ?sourceTypeLabel\n  ?sourceDomain ?sourceDomainLabel\n  ?paperCount\nORDER BY DESC(?paperCount) ?sourceTypeLabel ?sourceDomainLabel",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "15) Welche Papers machen Angaben zur Verfügbarkeit von Annotierungsrichtlinien und zum Annotator Agreement, und welche Intercoder-Reliabilitätsmetrik sowie welche Konfliktlösungsmethode werden in diesen Papers jeweils angegeben?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n\nSELECT\n  ?paper\n  ?paperLabel\n  (GROUP_CONCAT(DISTINCT ?guidelineAvailabilityLabel; SEPARATOR=\" | \") AS ?guidelineAvailabilities)\n  (GROUP_CONCAT(DISTINCT ?measuredAgreement; SEPARATOR=\" | \") AS ?measuredAgreements)\n  (GROUP_CONCAT(DISTINCT ?metricLabel; SEPARATOR=\" | \") AS ?metrics)\n  (GROUP_CONCAT(DISTINCT ?conflictResolutionLabel; SEPARATOR=\" | \") AS ?conflictResolutions)\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n\n  ?contribution a orkgc:C121001 ;\n                orkgp:P181031 ?annotationProcess .\n\n  ?annotationProcess orkgp:P181036 ?annotationScheme ;\n                     orkgp:P181041 ?annotatorAgreement .\n\n  ?annotationScheme orkgp:P181038 ?guidelineAvailability .\n  ?annotatorAgreement orkgp:P181045 ?measuredAgreement ;\n                      orkgp:P181042 ?metric ;\n                      orkgp:P181044 ?conflictResolution .\n\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n  OPTIONAL { ?guidelineAvailability rdfs:label ?guidelineAvailabilityLabel . }\n  OPTIONAL { ?metric rdfs:label ?metricLabel . }\n  OPTIONAL { ?conflictResolution rdfs:label ?conflictResolutionLabel . }\n}\nGROUP BY ?paper ?paperLabel\nORDER BY ?paperLabel",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "16) Welche Papers berichten mehr als einen Typ des Baseline-Vergleichs, und welche Baseline-Vergleichstypen sowie welche Baseline-Vergleichsdetails werden pro Paper angegeben?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX orkgr: <http://orkg.org/orkg/resource/>\n\nSELECT\n    ?paper\n    ?paperLabel\n    ?baselineDetail\n    (COUNT(DISTINCT ?baselineType) AS ?baselineTypeCount)\n    (GROUP_CONCAT(DISTINCT ?baselineTypeLabel; SEPARATOR=\" | \") AS ?baselineTypes)\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n\n    ?contribution a orkgc:C121001 ;\n                orkgp:HAS_EVALUATION ?evaluation .\n\n    ?evaluation orkgp:P181051 ?baselineComparison .\n\n    ?baselineComparison orkgp:P181052 ?baselineType ;\n                orkgp:P181053 ?baselineDetail .\n    \n    \n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n    OPTIONAL { ?baselineType rdfs:label ?baselineTypeLabel . }\n    \n}\n\nGROUP BY ?paper ?paperLabel ?baselineDetail\nHAVING(COUNT(DISTINCT ?baselineType) > 1)\nORDER BY ?paperLabel\n",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "17) Welche Kombinationen aus Typ des implementierten Ansatzes und verwendetem Algorithmus werden am häufigsten berichtet, und welche konkreten Papers gehören jeweils zu diesen Kombinationen?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX orkgr: <http://orkg.org/orkg/resource/>\n\nSELECT\n  ?approachType\n  ?approachTypeLabel\n  ?algorithm\n  ?algorithmLabel\n  ?paperCount\n  (GROUP_CONCAT(DISTINCT ?paperLabel; SEPARATOR=\" | \") AS ?papers)\nWHERE {\n\n  {\n    SELECT\n      ?approachType\n      ?algorithm\n      (COUNT(DISTINCT ?paper) AS ?paperCount)\n    WHERE {\n      ?paper orkgp:P31 ?contribution .\n\n      ?contribution a orkgc:C121001 ;\n                    orkgp:P181046 ?implementedApproach .\n\n      ?implementedApproach orkgp:P5043 ?approachType ;\n                           orkgp:P58069 ?algorithm .\n    }\n    GROUP BY ?approachType ?algorithm\n  }\n\n  {\n    SELECT (MAX(?cnt) AS ?maxCount)\n    WHERE {\n      {\n        SELECT\n          ?approachType2\n          ?algorithm2\n          (COUNT(DISTINCT ?paper2) AS ?cnt)\n        WHERE {\n          ?paper2 orkgp:P31 ?contribution2 .\n\n          ?contribution2 a orkgc:C121001 ;\n                         orkgp:P181046 ?implementedApproach2 .\n\n          ?implementedApproach2 orkgp:P5043 ?approachType2 ;\n                                orkgp:P58069 ?algorithm2 .\n        }\n        GROUP BY ?approachType2 ?algorithm2\n      }\n    }\n  }\n\n  FILTER(?paperCount = ?maxCount)\n\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 ;\n                orkgp:P181046 ?implementedApproach .\n  ?implementedApproach orkgp:P5043 ?approachType ;\n                       orkgp:P58069 ?algorithm .\n\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n  OPTIONAL { ?approachType rdfs:label ?approachTypeLabel . }\n  OPTIONAL { ?algorithm rdfs:label ?algorithmLabel . }\n}\nGROUP BY\n  ?approachType ?approachTypeLabel\n  ?algorithm ?algorithmLabel\n  ?paperCount\nORDER BY DESC(?paperCount) ?approachTypeLabel ?algorithmLabel",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "18) Welche Papers berichten eine Veröffentlichung des implementierten Ansatzes, und welche Angaben zu Release-Format, Veröffentlichungstyp, URL und Dokumentation werden in diesen Papers jeweils gemacht?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX orkgr: <http://orkg.org/orkg/resource/>\n\nSELECT\n  ?paper\n  ?paperLabel\n  ?releaseFormats\n  ?publicationTypes\n  ?urls\n  ?documentationTypes\nWHERE {\n  # Nur Papers mit Implemented approach + Release\n  {\n    SELECT DISTINCT ?paper ?paperLabel\n    WHERE {\n      ?paper orkgp:P31 ?contribution .\n      ?contribution a orkgc:C121001 ;\n                    orkgp:P181046 ?implementedApproach .\n      ?implementedApproach orkgp:release ?release .\n      OPTIONAL { ?paper rdfs:label ?paperLabel . }\n    }\n  }\n\n  # Release-Formate pro Paper\n  OPTIONAL {\n    SELECT\n      ?paper\n      (GROUP_CONCAT(DISTINCT ?releaseFormatLabel; SEPARATOR=\" | \") AS ?releaseFormats)\n    WHERE {\n      ?paper orkgp:P31 ?contribution .\n      ?contribution a orkgc:C121001 ;\n                    orkgp:P181046 ?implementedApproach .\n      ?implementedApproach orkgp:release ?release .\n      ?release orkgp:P181049 ?releaseFormat .\n      OPTIONAL { ?releaseFormat rdfs:label ?releaseFormatLabel . }\n    }\n    GROUP BY ?paper\n  }\n\n  # Veröffentlichungstyp / Location type pro Paper\n  OPTIONAL {\n    SELECT\n      ?paper\n      (GROUP_CONCAT(DISTINCT ?locationTypeLabel; SEPARATOR=\" | \") AS ?publicationTypes)\n    WHERE {\n      ?paper orkgp:P31 ?contribution .\n      ?contribution a orkgc:C121001 ;\n                    orkgp:P181046 ?implementedApproach .\n      ?implementedApproach orkgp:release ?release .\n      ?release orkgp:P181029 ?locationType .\n      OPTIONAL { ?locationType rdfs:label ?locationTypeLabel . }\n    }\n    GROUP BY ?paper\n  }\n\n  # URLs pro Paper\n  OPTIONAL {\n    SELECT\n      ?paper\n      (GROUP_CONCAT(DISTINCT STR(?url); SEPARATOR=\" | \") AS ?urls)\n    WHERE {\n      ?paper orkgp:P31 ?contribution .\n      ?contribution a orkgc:C121001 ;\n                    orkgp:P181046 ?implementedApproach .\n      ?implementedApproach orkgp:release ?release .\n      ?release orkgp:P1003 ?url .\n    }\n    GROUP BY ?paper\n  }\n\n  # Dokumentationstypen pro Paper\n  OPTIONAL {\n    SELECT\n      ?paper\n      (GROUP_CONCAT(DISTINCT ?documentationTypeLabel; SEPARATOR=\" | \") AS ?documentationTypes)\n    WHERE {\n      ?paper orkgp:P31 ?contribution .\n      ?contribution a orkgc:C121001 ;\n                    orkgp:P181046 ?implementedApproach .\n      ?implementedApproach orkgp:P41835 ?documentationType .\n      OPTIONAL { ?documentationType rdfs:label ?documentationTypeLabel . }\n    }\n    GROUP BY ?paper\n  }\n}\nORDER BY ?paperLabel",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "19) Für jedes Publikationsjahr: Welche Evaluationsmetriken werden zusammen mit welchen Validierungsverfahren berichtet, und welche Papers gehören jeweils zu diesen Jahr-Metrik-Validierungs-Kombinationen?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX orkgr: <http://orkg.org/orkg/resource/>\n\n\nSELECT\n  ?year\n  ?evaluation_metricLabel\n  ?validation_procedureLabel\n  (COUNT(DISTINCT ?paper) AS ?paperCount)\n  (GROUP_CONCAT(DISTINCT ?paperLabel; SEPARATOR=\" | \") AS ?papers)\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 ;\n                orkgp:HAS_EVALUATION ?evaluation .\n\n  ?evaluation orkgp:P110006 ?evaluation_metric ;\n              orkgp:P181050 ?validation_procedure .\n\n  ?evaluation_metric rdfs:label ?evaluation_metricLabel .\n  ?validation_procedure rdfs:label ?validation_procedureLabel .\n  ?paper rdfs:label ?paperLabel .\n  ?paper orkgp:P29 ?year .\n}\nGROUP BY ?year ?evaluation_metricLabel ?validation_procedureLabel\nORDER BY ?year ?evaluation_metricLabel ?validation_procedureLabel",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "20) Welche Papers berichten eine Produktionszeit der NLP-Daten, und welche Produktionszeiten werden angegeben?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX orkgr: <http://orkg.org/orkg/resource/>\n\n\nSELECT DISTINCT\n  ?paper\n  ?paperLabel\n  ?productionTime\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C121001 ;\n                orkgp:P181011 ?dataset .\n\n  ?dataset orkgp:P181016 ?productionTime .\n  FILTER(STR(?productionTime) != \"Not reported\")\n\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}\nORDER BY ?paperLabel ?productionTime",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "21) Welche NLP-Task-Typen werden in den einzelnen Publikationsdekaden (2000er, 2010er und 2020er) am häufigsten berichtet, und welche konkreten Papers gehören jeweils zu diesen dekadenspezifischen Task-Typen?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "\nPREFIX orkgr: <http://orkg.org/orkg/resource/> \nPREFIX orkgc: <http://orkg.org/orkg/class/> \nPREFIX orkgp: <http://orkg.org/orkg/predicate/> \nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#> \nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n\nSELECT \n    ?publicationDecade\n    ?NLPTaskTypeLabel\n    ?paperCount\n    (GROUP_CONCAT(DISTINCT ?paperLabel; SEPARATOR=\" | \") AS ?papers)\nWHERE {\n  {\n    SELECT ?publicationDecade ?NLPTaskTypeLabel ?paperCount\n    WHERE {\n      {\n        SELECT \n          ?publicationDecade\n          ?NLPTaskTypeLabel\n          (COUNT(DISTINCT ?paper) AS ?paperCount)\n        WHERE {\n          ?paper orkgp:P31 ?contribution .\n          ?paper orkgp:P29 ?year .\n          ?contribution a orkgc:C121001 .\n\n          ?contribution orkgp:P181003 ?NLPTask .\n          ?NLPTask orkgp:P181004 ?NLPTaskType .\n          ?NLPTaskType rdfs:label ?NLPTaskTypeLabel .\n\n          FILTER(LCASE(STR(?NLPTaskTypeLabel)) != \"not reported\")\n\n          BIND(xsd:integer(FLOOR(xsd:decimal(?year) / 10) * 10) AS ?decadeStart)\n          BIND(CONCAT(STR(?decadeStart), \"s\") AS ?publicationDecade)\n        }\n        GROUP BY ?publicationDecade ?NLPTaskTypeLabel\n      }\n\n      {\n        SELECT ?publicationDecade (MAX(?cnt) AS ?maxCount)\n        WHERE {\n          {\n            SELECT \n              ?publicationDecade\n              ?NLPTaskTypeLabel\n              (COUNT(DISTINCT ?paper) AS ?cnt)\n            WHERE {\n              ?paper orkgp:P31 ?contribution .\n              ?paper orkgp:P29 ?year .\n              ?contribution a orkgc:C121001 .\n\n              ?contribution orkgp:P181003 ?NLPTask .\n              ?NLPTask orkgp:P181004 ?NLPTaskType .\n              ?NLPTaskType rdfs:label ?NLPTaskTypeLabel .\n\n              FILTER(LCASE(STR(?NLPTaskTypeLabel)) != \"not reported\")\n\n              BIND(xsd:integer(FLOOR(xsd:decimal(?year) / 10) * 10) AS ?decadeStart)\n              BIND(CONCAT(STR(?decadeStart), \"s\") AS ?publicationDecade)\n            }\n            GROUP BY ?publicationDecade ?NLPTaskTypeLabel\n          }\n        }\n        GROUP BY ?publicationDecade\n      }\n\n      FILTER(?paperCount = ?maxCount)\n    }\n  }\n\n  ?paper orkgp:P31 ?contribution .\n  ?paper orkgp:P29 ?year .\n  ?contribution a orkgc:C121001 .\n\n  ?contribution orkgp:P181003 ?NLPTask .\n  ?NLPTask orkgp:P181004 ?NLPTaskType .\n  ?NLPTaskType rdfs:label ?NLPTaskTypeLabel .\n\n  FILTER(LCASE(STR(?NLPTaskTypeLabel)) != \"not reported\")\n\n  BIND(xsd:integer(FLOOR(xsd:decimal(?year) / 10) * 10) AS ?decadeStart2)\n  BIND(CONCAT(STR(?decadeStart2), \"s\") AS ?publicationDecade)\n\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}\nGROUP BY ?publicationDecade ?NLPTaskTypeLabel ?paperCount\nORDER BY ?publicationDecade ?NLPTaskTypeLabel",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "22) Welche Requirements-Engineering-Tasks werden in Papers aus den Zeiträumen 2006–2015 bzw. 2016–2025 berichtet, und welche konkreten Papers gehören jeweils zu den einzelnen RE-Tasks in diesen beiden Zeitintervallen?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n\nSELECT ?timeInterval ?RETaskLabel\n       (GROUP_CONCAT(DISTINCT ?paperLabel; SEPARATOR=\" | \") AS ?papers)\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n    ?paper orkgp:P29 ?year .\n    ?contribution a orkgc:C121001 .\n    ?contribution orkgp:P181002 ?RETask .\n    ?RETask rdfs:label ?RETaskLabel .\n\n    FILTER(xsd:integer(?year) >= 2006 && xsd:integer(?year) <= 2025)\n    FILTER(LCASE(STR(?RETaskLabel)) != \"not reported\")\n\n    BIND(\n        IF(\n        xsd:integer(?year) <= 2015,\n        \"2006-2015\",\n        \"2016-2025\"\n        ) AS ?timeInterval\n    )\n\n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}\nGROUP BY ?timeInterval ?RETaskLabel\nORDER BY ?timeInterval ?RETaskLabel",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "23) Welche Evaluationsmetriken werden in den letzten 20 Jahren (2006–2025) am häufigsten berichtet, gruppiert nach Publikationsdekade, und welche Papers tragen innerhalb jeder Dekade zu den jeweiligen Metriken bei?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n\nSELECT ?publicationDecade (MAX(?cnt) AS ?maxCount)\nWHERE {\n  {\n    SELECT ?publicationDecade ?evaluationMetricLabel (COUNT(DISTINCT ?paper) AS ?cnt)\n    WHERE {\n      ?paper orkgp:P31 ?contribution .\n      ?paper orkgp:P29 ?year .\n      ?contribution a orkgc:C121001 .\n\n      ?contribution orkgp:HAS_EVALUATION ?evaluation .\n      ?evaluation orkgp:P110006 ?evaluationMetric .\n      ?evaluationMetric rdfs:label ?evaluationMetricLabel .\n\n      FILTER(xsd:integer(?year) >= 2006 && xsd:integer(?year) <= 2025)\n      FILTER(LCASE(STR(?evaluationMetricLabel)) != \"not reported\")\n\n      BIND(xsd:integer(FLOOR(xsd:decimal(?year) / 10) * 10) AS ?decadeStart)\n      BIND(CONCAT(STR(?decadeStart), \"s\") AS ?publicationDecade)\n    }\n    GROUP BY ?publicationDecade ?evaluationMetricLabel\n  }\n}\nGROUP BY ?publicationDecade\nORDER BY ?publicationDecade",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "24) Welche Validierungsverfahren werden in Papers aus dem Zeitraum 2006–2025 in den einzelnen Dekaden am häufigsten berichtet, und welche konkreten Papers berichten diese Verfahren?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n\nSELECT ?publicationDecade ?validationProcedureLabel ?paperCount\n        (GROUP_CONCAT(DISTINCT ?paperLabel; SEPARATOR=\" | \") AS ?papers)\nWHERE {\n  {\n    SELECT ?publicationDecade ?validationProcedureLabel ?paperCount\n    WHERE {\n      {\n        SELECT ?publicationDecade ?validationProcedureLabel (COUNT(DISTINCT ?paper) AS ?paperCount)\n        WHERE {\n            ?paper orkgp:P31 ?contribution .\n            ?paper orkgp:P29 ?year .\n            ?contribution a orkgc:C121001 .\n\n            ?contribution orkgp:HAS_EVALUATION ?evaluation .\n            ?evaluation orkgp:P181050 ?validationProcedure .\n            ?validationProcedure rdfs:label ?validationProcedureLabel .\n\n            FILTER(xsd:integer(?year) >= 2006 && xsd:integer(?year) <= 2025)\n            FILTER(LCASE(STR(?validationProcedureLabel)) != \"not reported\")\n\n            BIND(xsd:integer(FLOOR(xsd:decimal(?year) / 10) * 10) AS ?decadeStart)\n            BIND(CONCAT(STR(?decadeStart), \"s\") AS ?publicationDecade)\n        }\n          GROUP BY ?publicationDecade ?validationProcedureLabel\n      }\n\n      {\n        SELECT ?publicationDecade (MAX(?cnt) AS ?maxCount)\n        WHERE {\n          {\n            SELECT ?publicationDecade ?validationProcedureLabel (COUNT(DISTINCT ?paper) AS ?cnt)\n            WHERE {\n                ?paper orkgp:P31 ?contribution .\n                ?paper orkgp:P29 ?year .\n                ?contribution a orkgc:C121001 .\n\n                ?contribution orkgp:HAS_EVALUATION ?evaluation .\n                ?evaluation orkgp:P181050 ?validationProcedure .\n                ?validationProcedure rdfs:label ?validationProcedureLabel .\n\n                FILTER(xsd:integer(?year) >= 2006 && xsd:integer(?year) <= 2025)\n                FILTER(LCASE(STR(?validationProcedureLabel)) != \"not reported\")\n\n                BIND(xsd:integer(FLOOR(xsd:decimal(?year) / 10) * 10) AS ?decadeStart)\n                BIND(CONCAT(STR(?decadeStart), \"s\") AS ?publicationDecade)\n              }\n              GROUP BY ?publicationDecade ?validationProcedureLabel\n          }\n        }\n        GROUP BY ?publicationDecade\n      }\n\n      FILTER(?paperCount = ?maxCount)\n    }\n  }\n\n    ?paper orkgp:P31 ?contribution .\n    ?paper orkgp:P29 ?year .\n    ?contribution a orkgc:C121001 .\n\n    ?contribution orkgp:HAS_EVALUATION ?evaluation .\n    ?evaluation orkgp:P181050 ?validationProcedure .\n    ?validationProcedure rdfs:label ?validationProcedureLabel .\n\n    FILTER(xsd:integer(?year) >= 2006 && xsd:integer(?year) <= 2025)\n    FILTER(LCASE(STR(?validationProcedureLabel)) != \"not reported\")\n\n    BIND(xsd:integer(FLOOR(xsd:decimal(?year) / 10) * 10) AS ?decadeStart2)\n    BIND(CONCAT(STR(?decadeStart2), \"s\") AS ?publicationDecade)\n\n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}\nGROUP BY ?publicationDecade ?validationProcedureLabel ?paperCount\nORDER BY ?publicationDecade ?validationProcedureLabel",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "25) Welche natürlichen Sprachen werden für NLP-Datensätze in Papers aus den Zeiträumen 2006–2010, 2011–2015, 2016–2020 und 2021–2025 berichtet, und welche Papers gehören jeweils zu jeder Kombination aus Zeitintervall und Sprache?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n\nSELECT ?timeInterval ?naturalLanguage\n       (GROUP_CONCAT(DISTINCT ?paperLabel; SEPARATOR=\" | \") AS ?papers)\nWHERE {\n  ?paper orkgp:P31 ?contribution .\n  ?paper orkgp:P29 ?year .\n  ?contribution a orkgc:C121001 .\n\n  ?contribution orkgp:P181011 ?NLPdataset .\n  ?NLPdataset orkgp:P181022 ?NLPdatatype .\n  ?NLPdatatype orkgp:P181025 ?naturalLanguage .\n\n  FILTER(xsd:integer(?year) >= 2006 && xsd:integer(?year) <= 2025)\n  FILTER(LCASE(STR(?naturalLanguage)) != \"not reported\")\n\n  BIND(\n    IF(xsd:integer(?year) <= 2010, \"2006-2010\",\n      IF(xsd:integer(?year) <= 2015, \"2011-2015\",\n        IF(xsd:integer(?year) <= 2020, \"2016-2020\", \"2021-2025\")\n      )\n    ) AS ?timeInterval\n  )\n\n  OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}\nGROUP BY ?timeInterval ?naturalLanguage\nORDER BY ?timeInterval ?naturalLanguage",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "26) Welche konkreten Jahresangaben oder Zeitintervalle zur Produktionszeit von NLP-Daten werden in den einzelnen Publikationsdekaden berichtet, und welche konkreten Papers gehören jeweils zu jeder Kombination aus Publikationsdekade und Produktionszeitangabe?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n\nSELECT ?publicationDecade ?dataProductionTime\n       (GROUP_CONCAT(DISTINCT ?paperLabel; SEPARATOR=\" | \") AS ?papers)\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n    ?paper orkgp:P29 ?year .\n    ?contribution a orkgc:C121001 .\n\n    ?contribution orkgp:P181011 ?NLPdataset .\n    ?NLPdataset orkgp:P181016 ?dataProductionTime .\n\n    FILTER(xsd:integer(?year) >= 2006 && xsd:integer(?year) <= 2025)\n    FILTER(LCASE(STR(?dataProductionTime)) != \"not reported\")\n\n    BIND(xsd:integer(FLOOR(xsd:decimal(?year) / 10) * 10) AS ?decadeStart)\n    BIND(CONCAT(STR(?decadeStart), \"s\") AS ?publicationDecade)\n\n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}\nGROUP BY ?publicationDecade ?dataProductionTime\nORDER BY ?publicationDecade ?dataProductionTime",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "27) Welche Domänen der NLP-Datenquellen werden in Papers der 2010er und welche in Papers der 2020er am häufigsten berichtet, und welche konkreten Papers berichten diese Domänen in den jeweiligen Dekaden?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n\nSELECT ?publicationDecade ?datasourceDomainLabel ?paperCount\n       (GROUP_CONCAT(DISTINCT ?paperLabel; SEPARATOR=\" | \") AS ?papers)\nWHERE {\n  {\n    SELECT ?publicationDecade ?datasourceDomainLabel ?paperCount\n    WHERE {\n        {\n            SELECT ?publicationDecade ?datasourceDomainLabel (COUNT(DISTINCT ?paper) AS ?paperCount)\n            WHERE {\n            ?paper orkgp:P31 ?contribution .\n            ?paper orkgp:P29 ?year .\n            ?contribution a orkgc:C121001 .\n\n            ?contribution orkgp:P181011 ?NLPdataset .\n            ?NLPdataset orkgp:P181017 ?NLPdatasource .\n            ?NLPdatasource orkgp:P181020 ?datasourceDomain .\n            ?datasourceDomain rdfs:label ?datasourceDomainLabel .\n\n            FILTER(xsd:integer(?year) >= 2010 && xsd:integer(?year) <= 2029)\n            FILTER(LCASE(STR(?datasourceDomainLabel)) != \"not reported\")\n\n            BIND(IF(xsd:integer(?year) <= 2019, \"2010s\", \"2020s\") AS ?publicationDecade)\n            }\n            GROUP BY ?publicationDecade ?datasourceDomainLabel\n        }\n\n        {\n            SELECT ?publicationDecade (MAX(?cnt) AS ?maxCount)\n            WHERE {\n            {\n                SELECT ?publicationDecade ?datasourceDomainLabel (COUNT(DISTINCT ?paper) AS ?cnt)\n                WHERE {\n                ?paper orkgp:P31 ?contribution .\n                ?paper orkgp:P29 ?year .\n                ?contribution a orkgc:C121001 .\n\n                ?contribution orkgp:P181011 ?NLPdataset .\n                ?NLPdataset orkgp:P181017 ?NLPdatasource .\n                ?NLPdatasource orkgp:P181020 ?datasourceDomain .\n                ?datasourceDomain rdfs:label ?datasourceDomainLabel .\n\n                FILTER(xsd:integer(?year) >= 2010 && xsd:integer(?year) <= 2029)\n                FILTER(LCASE(STR(?datasourceDomainLabel)) != \"not reported\")\n\n                BIND(IF(xsd:integer(?year) <= 2019, \"2010s\", \"2020s\") AS ?publicationDecade)\n                }\n                GROUP BY ?publicationDecade ?datasourceDomainLabel\n            }\n            }\n            GROUP BY ?publicationDecade\n        }\n\n        FILTER(?paperCount = ?maxCount)\n    }\n  }\n\n    ?paper orkgp:P31 ?contribution .\n    ?paper orkgp:P29 ?year .\n    ?contribution a orkgc:C121001 .\n\n    ?contribution orkgp:P181011 ?NLPdataset .\n    ?NLPdataset orkgp:P181017 ?NLPdatasource .\n    ?NLPdatasource orkgp:P181020 ?datasourceDomain .\n    ?datasourceDomain rdfs:label ?datasourceDomainLabel .\n\n    FILTER(xsd:integer(?year) >= 2010 && xsd:integer(?year) <= 2029)\n    FILTER(LCASE(STR(?datasourceDomainLabel)) != \"not reported\")\n\n    BIND(IF(xsd:integer(?year) <= 2019, \"2010s\", \"2020s\") AS ?publicationDecade)\n\n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}\nGROUP BY ?publicationDecade ?datasourceDomainLabel ?paperCount\nORDER BY ?publicationDecade ?datasourceDomainLabel",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "28) Gibt es Papers, die sowohl eine Evaluationsmetrik als auch ein Validierungsverfahren berichten?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n\nASK {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C121001 .\n\n    ?contribution orkgp:HAS_EVALUATION ?evaluation .\n    ?evaluation orkgp:P110006 ?metric .\n    ?evaluation orkgp:P181050 ?validationProcedure .\n\n    ?metric rdfs:label ?metricLabel .\n    ?validationProcedure rdfs:label ?validationProcedureLabel .\n\n    FILTER(LCASE(STR(?metricLabel)) != \"not reported\")\n    FILTER(LCASE(STR(?validationProcedureLabel)) != \"not reported\")\n}",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "29) Gibt es Papers, die berichten eine Annotation Scheme Guideline Availability, aber keine weiteren Shared Materials zur Unterstützung der Annotator:innen?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n\nASK {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C121001 .\n\n    ?contribution orkgp:P181031 ?annotationProcess .\n    ?annotationProcess orkgp:P181036 ?annotationScheme .\n    ?annotationScheme orkgp:P181038 ?guidelineAvailability .\n    ?guidelineAvailability rdfs:label ?guidelineAvailabilityLabel .\n\n    FILTER(LCASE(STR(?guidelineAvailabilityLabel)) != \"not reported\")\n\n    FILTER NOT EXISTS {\n        ?annotationProcess orkgp:P181039 ?sharedMaterial .\n        ?sharedMaterial rdfs:label ?sharedMaterialLabel .\n        FILTER(LCASE(STR(?sharedMaterialLabel)) != \"not reported\")\n    }\n}",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "30) Gibt es Papers, in denen ein Annotator Agreement berichtet wird, aber weder eine Intercoder-Reliability-Metrik noch eine Conflict-Resolution-Angabe vorhanden ist?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n\nASK {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C121001 .\n\n    ?contribution orkgp:P181031 ?annotationProcess .\n    ?annotationProcess orkgp:P181041 ?annotatorAgreement .\n    ?annotatorAgreement rdfs:label ?annotatorAgreementLabel .\n\n    FILTER(LCASE(STR(?annotatorAgreementLabel)) != \"not reported\")\n\n    FILTER NOT EXISTS {\n        ?annotatorAgreement orkgp:P181042 ?metric .\n        ?metric rdfs:label ?metricLabel .\n        FILTER(LCASE(STR(?metricLabel)) != \"not reported\")\n    }\n\n    FILTER NOT EXISTS {\n        ?annotatorAgreement orkgp:P181044 ?conflictResolution .\n        ?conflictResolution rdfs:label ?conflictResolutionLabel .\n        FILTER(LCASE(STR(?conflictResolutionLabel)) != \"not reported\")\n    }\n}",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "31) Welche Papers enthalten sowohl Angaben zur natürlichen Sprache der NLP-Daten als auch Angaben zum NLP-Datenformat, und welche Papers berichten nur eines von beiden?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n\nSELECT DISTINCT ?paper ?paperLabel ?reportingStatus\nWHERE {\n    {\n        ?paper orkgp:P31 ?contribution .\n        ?contribution a orkgc:C121001 .\n        ?contribution orkgp:P181011 ?NLPdataset .\n        ?NLPdataset orkgp:P181022 ?NLPdatatype .\n\n        ?NLPdatatype orkgp:P181025 ?naturalLanguage .\n        ?NLPdatatype orkgp:P181023 ?dataFormat .\n        ?dataFormat rdfs:label ?dataFormatLabel .\n\n        FILTER(LCASE(STR(?naturalLanguage)) != \"not reported\")\n        FILTER(LCASE(STR(?dataFormatLabel)) != \"not reported\")\n\n        BIND(\"both\" AS ?reportingStatus)\n    }\n  UNION\n    {\n        ?paper orkgp:P31 ?contribution .\n        ?contribution a orkgc:C121001 .\n        ?contribution orkgp:P181011 ?NLPdataset .\n        ?NLPdataset orkgp:P181022 ?NLPdatatype .\n\n        ?NLPdatatype orkgp:P181025 ?naturalLanguage .\n        FILTER(LCASE(STR(?naturalLanguage)) != \"not reported\")\n\n        FILTER NOT EXISTS {\n        ?NLPdatatype orkgp:P181023 ?dataFormat .\n        ?dataFormat rdfs:label ?dataFormatLabel .\n        FILTER(LCASE(STR(?dataFormatLabel)) != \"not reported\")\n        }\n\n        BIND(\"only natural language\" AS ?reportingStatus)\n    }\n  UNION\n    {\n        ?paper orkgp:P31 ?contribution .\n        ?contribution a orkgc:C121001 .\n        ?contribution orkgp:P181011 ?NLPdataset .\n        ?NLPdataset orkgp:P181022 ?NLPdatatype .\n\n        ?NLPdatatype orkgp:P181023 ?dataFormat .\n        ?dataFormat rdfs:label ?dataFormatLabel .\n        FILTER(LCASE(STR(?dataFormatLabel)) != \"not reported\")\n\n        FILTER NOT EXISTS {\n        ?NLPdatatype orkgp:P181025 ?naturalLanguage .\n        FILTER(LCASE(STR(?naturalLanguage)) != \"not reported\")\n        }\n\n        BIND(\"only data format\" AS ?reportingStatus)\n    }\n\n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}\nORDER BY ?reportingStatus ?paperLabel",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "32) Gibt es Papers, die berichten mindestens zwei verschiedene Domänen der NLP-Datenquellen?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n\nASK {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C121001 .\n\n    ?contribution orkgp:P181011 ?NLPdataset .\n    ?NLPdataset orkgp:P181017 ?NLPdatasource .\n\n    ?NLPdatasource orkgp:P181020 ?domain1 .\n    ?NLPdatasource orkgp:P181020 ?domain2 .\n\n    ?domain1 rdfs:label ?domainLabel1 .\n    ?domain2 rdfs:label ?domainLabel2 .\n\n    FILTER(LCASE(STR(?domainLabel1)) != \"not reported\")\n    FILTER(LCASE(STR(?domainLabel2)) != \"not reported\")\n    FILTER(?domain1 != ?domain2)\n}",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "33) Welche Papers beschreiben einen veröffentlichten Implemented Approach mit Release-Format oder Release-Location-Type, aber ohne dokumentierten License Type?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n\nSELECT DISTINCT ?paper ?paperLabel\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C121001 .\n    ?contribution orkgp:P181046 ?implementedApproach .\n    ?implementedApproach orkgp:release ?release .\n\n    {\n        ?release orkgp:P181049 ?releaseFormat .\n        ?releaseFormat rdfs:label ?releaseFormatLabel .\n        FILTER(LCASE(STR(?releaseFormatLabel)) != \"not reported\")\n    }\n    UNION\n    {\n        ?release orkgp:P181029 ?releaseLocationType .\n        ?releaseLocationType rdfs:label ?releaseLocationTypeLabel .\n        FILTER(LCASE(STR(?releaseLocationTypeLabel)) != \"not reported\")\n    }\n\n    FILTER NOT EXISTS {\n        ?implementedApproach orkgp:P181027 ?licenseType .\n        ?licenseType rdfs:label ?licenseTypeLabel .\n        FILTER(LCASE(STR(?licenseTypeLabel)) != \"not reported\")\n    }\n\n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n}\nORDER BY ?paperLabel",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "34) Gibt es Papers, die eine Baseline Comparison berichten, aber keine zugehörige Baseline Comparison Type oder kein Baseline Comparison Detail angeben?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n\nASK {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C121001 .\n\n    ?contribution orkgp:HAS_EVALUATION ?evaluation .\n    ?evaluation orkgp:P181051 ?baselineComparison .\n    ?baselineComparison rdfs:label ?baselineComparisonLabel .\n\n    FILTER(LCASE(STR(?baselineComparisonLabel)) != \"not reported\")\n\n    FILTER(\n        NOT EXISTS {\n        ?baselineComparison orkgp:P181052 ?baselineType .\n        ?baselineType rdfs:label ?baselineTypeLabel .\n        FILTER(LCASE(STR(?baselineTypeLabel)) != \"not reported\")\n        }\n        ||\n        NOT EXISTS {\n        ?baselineComparison orkgp:P181053 ?baselineDetail .\n        FILTER(LCASE(STR(?baselineDetail)) != \"not reported\")\n        }\n    )\n}",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "35) Gibt es Papers, die für den Implemented Approach sowohl eine Dependency als auch mindestens eine Running Requirement angeben?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n\nASK {\n    \n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C121001 .\n    ?contribution orkgp:P181046 ?implementedApproach .\n\n    ?implementedApproach orkgp:P181048 ?dependency .\n    ?implementedApproach orkgp:P181047 ?runningRequirement .\n\n    ?dependency rdfs:label ?dependencyLabel .\n    ?runningRequirement rdfs:label ?runningRequirementLabel .\n    ?paper rdfs:label ?paperLabel .\n\n    FILTER(STR(?dependencyLabel) != \"Not reported\")\n    FILTER(STR(?runningRequirementLabel) != \"Not reported\")\n}\n",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "36) Welche Papers berichten für ihren NLP-Datensatz mindestens eine Number-of-Data-Sources-Angabe und mindestens zwei unterschiedliche Data-Source-Types?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n\nSELECT DISTINCT\n    ?paper\n    ?paperLabel\n    ?numberOfDatasources\n    (GROUP_CONCAT(DISTINCT ?datasourceTypeLabel; separator=\", \") AS ?datasourceTypes)\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution rdf:type orkgc:C121001 ;\n                  orkgp:P181011 ?NLPdataset .\n\n    ?NLPdataset orkgp:P181017 ?NLPdatasource .\n    ?NLPdatasource orkgp:P181019 ?numberOfDatasources ;\n                  orkgp:P181018 ?datasourceType .\n\n    ?datasourceType rdfs:label ?datasourceTypeLabel .\n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n\n    FILTER(STR(?datasourceTypeLabel) != \"Not reported\")\n    FILTER(STR(?numberOfDatasources) != \"Not reported\")\n}\nGROUP BY ?paper ?paperLabel ?numberOfDatasources\nHAVING (COUNT(DISTINCT ?datasourceTypeLabel) > 1)\nORDER BY ?paperLabel",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "37) Welche Papers berichten eine Dataset-URL, aber keinen Dataset-Location-Type?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n\nSELECT DISTINCT ?paper ?paperLabel ?datasetURL\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution rdf:type orkgc:C121001 ;\n                    orkgp:P181011 ?NLPdataset .\n\n    ?NLPdataset orkgp:P181028 ?datasetLocation .\n    ?datasetLocation orkgp:P1003 ?datasetURL .\n\n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n\n    FILTER(STR(?datasetURL) != \"Not reported\")\n\n    FILTER NOT EXISTS {\n        ?datasetLocation orkgp:P181030 ?locationType .\n        ?locationType rdfs:label ?locationTypeLabel .\n        FILTER(STR(?locationTypeLabel) != \"Not reported\")\n    }\n}\nORDER BY ?paperLabel",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "38) Welche Papers berichten mindestens einen Algorithmus für den Implemented Approach, aber keinen Approach Type?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n\nSELECT DISTINCT\n    ?paper\n    ?paperLabel\n    (GROUP_CONCAT(DISTINCT ?algorithmLabel; separator=\"| \") AS ?algorithms)\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C121001 .\n    ?contribution orkgp:P181046 ?implementedApproach .\n\n    ?implementedApproach orkgp:P58069 ?algorithm .\n    ?algorithm rdfs:label ?algorithmLabel .\n\n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n\n    FILTER(STR(?algorithmLabel) != \"Not reported\")\n\n    FILTER NOT EXISTS {\n        ?implementedApproach orkgp:P5043 ?approachType .\n        ?approachType rdfs:label ?approachTypeLabel .\n        FILTER(STR(?approachTypeLabel) != \"Not reported\")\n    }\n}\nGROUP BY ?paper ?paperLabel\nORDER BY ?paperLabel",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "39) Welche Papers berichten mindestens zwei verschiedene Running Requirements für denselben Implemented Approach?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n\nSELECT DISTINCT\n    ?paper\n    ?paperLabel\n    (GROUP_CONCAT(DISTINCT ?runningRequirementLabel; separator=\"| \") AS ?runningRequirements)\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution rdf:type orkgc:C121001 ;\n                    orkgp:P181046 ?implementedApproach .\n\n    ?implementedApproach orkgp:P181047 ?runningRequirement .\n    ?runningRequirement rdfs:label ?runningRequirementLabel .\n\n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n\n    FILTER(STR(?runningRequirementLabel) != \"Not reported\")\n}\nGROUP BY ?paper ?paperLabel\nHAVING (COUNT(DISTINCT ?runningRequirementLabel) > 1)\nORDER BY ?paperLabel",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "40) Welche Papers berichten mindestens zwei verschiedene Dependencies für denselben Implemented Approach?",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\n\nSELECT DISTINCT\n    ?paper\n    ?paperLabel\n    (GROUP_CONCAT(DISTINCT ?dependencyLabel; separator=\"| \") AS ?dependencies)\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C121001 .\n    ?contribution orkgp:P181046 ?implementedApproach .\n\n    ?implementedApproach orkgp:P181048 ?dependency .\n    ?dependency rdfs:label ?dependencyLabel .\n\n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n\n    FILTER(STR(?dependencyLabel) != \"Not reported\")\n}\nGROUP BY ?paper ?paperLabel\nHAVING (COUNT(DISTINCT ?dependencyLabel) > 1)\nORDER BY ?paperLabel",
+    "metadata": {}
+  }
+]
