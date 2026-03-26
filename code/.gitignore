@@ -25,3 +25,6 @@ Thumbs.db
 
 .vscode/
 .tools/
+
+node_modules/
+dist/
