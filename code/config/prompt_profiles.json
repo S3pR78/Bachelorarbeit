@@ -1,0 +1,35 @@
+{
+  "version": "1.0",
+  "default_query_language": "sparql",
+  "default_prefix_profile": "orkg_default",
+  "profiles": {
+    "empirical_research_v1": {
+      "family": "empirical_research",
+      "template_id": "R186491",
+      "template_label": "Empirical Research Practice",
+      "target_class_id": "C27001",
+      "contribution_class": "orkgc:C27001",
+      "query_language": "sparql",
+      "prefix_profile": "orkg_default",
+      "prompt_artifact_path": "code/prompts/generated/empirical_research_v1.json",
+      "prompt_generator_source": "EmpiRE-Compass",
+      "enabled": true
+    },
+    "nlp4re_v1": {
+      "family": "nlp4re",
+      "template_id": "R1544125",
+      "template_label": "NLP for Requirements Engineering",
+      "target_class_id": "C121001",
+      "contribution_class": "orkgc:C121001",
+      "query_language": "sparql",
+      "prefix_profile": "orkg_default",
+      "prompt_artifact_path": "code/prompts/generated/nlp4re_v1.json",
+      "prompt_generator_source": "EmpiRE-Compass",
+      "enabled": true
+    }
+  },
+  "family_to_profile": {
+    "empirical_research": "empirical_research_v1",
+    "nlp4re": "nlp4re_v1"
+  }
+}

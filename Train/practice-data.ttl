@@ -1,0 +1,142 @@
+@prefix : <http://example.org/kg/> .
+@prefix ex: <http://example.org/vocab/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Classes
+ex:Person a rdfs:Class .
+ex:Student a rdfs:Class ; rdfs:subClassOf ex:Person .
+ex:Professor a rdfs:Class ; rdfs:subClassOf ex:Person .
+ex:City a rdfs:Class .
+ex:University a rdfs:Class .
+ex:Course a rdfs:Class .
+ex:Book a rdfs:Class .
+ex:Company a rdfs:Class .
+ex:Project a rdfs:Class .
+ex:Event a rdfs:Class .
+ex:Movie a rdfs:Class .
+
+# Cities
+:Berlin a ex:City ; rdfs:label "Berlin"@de , "Berlin"@en ; ex:country "Germany" ; ex:population 3850000 .
+:Hamburg a ex:City ; rdfs:label "Hamburg"@de , "Hamburg"@en ; ex:country "Germany" ; ex:population 1900000 .
+:Munich a ex:City ; rdfs:label "München"@de , "Munich"@en ; ex:country "Germany" ; ex:population 1480000 .
+:Hildesheim a ex:City ; rdfs:label "Hildesheim"@de , "Hildesheim"@en ; ex:country "Germany" ; ex:population 103000 .
+:Paris a ex:City ; rdfs:label "Paris"@fr , "Paris"@en ; ex:country "France" ; ex:population 2100000 .
+
+# Universities
+:UniHildesheim a ex:University ; foaf:name "University of Hildesheim" ; ex:locatedIn :Hildesheim ; ex:foundedYear 1978 .
+:TUberlin a ex:University ; foaf:name "TU Berlin" ; ex:locatedIn :Berlin ; ex:foundedYear 1879 .
+:LMU a ex:University ; foaf:name "LMU Munich" ; ex:locatedIn :Munich ; ex:foundedYear 1472 .
+
+# Courses
+:SPARQL101 a ex:Course ; rdfs:label "SPARQL Basics"@en ; ex:credits 5 ; ex:difficulty "beginner" ; ex:taughtAt :UniHildesheim .
+:SPARQL201 a ex:Course ; rdfs:label "Advanced SPARQL"@en ; ex:credits 6 ; ex:difficulty "advanced" ; ex:taughtAt :UniHildesheim .
+:KG101 a ex:Course ; rdfs:label "Knowledge Graphs"@en ; ex:credits 5 ; ex:difficulty "intermediate" ; ex:taughtAt :TUberlin .
+:DB101 a ex:Course ; rdfs:label "Databases"@en ; ex:credits 4 ; ex:difficulty "beginner" ; ex:taughtAt :UniHildesheim .
+:AI101 a ex:Course ; rdfs:label "Intro to AI"@en ; ex:credits 5 ; ex:difficulty "beginner" ; ex:taughtAt :LMU .
+
+# Companies
+:GraphSoft a ex:Company ; foaf:name "GraphSoft" ; ex:locatedIn :Berlin ; ex:employeeCount 120 .
+:DataForge a ex:Company ; foaf:name "DataForge" ; ex:locatedIn :Hamburg ; ex:employeeCount 45 .
+:SemanticWorks a ex:Company ; foaf:name "SemanticWorks" ; ex:locatedIn :Munich ; ex:employeeCount 78 .
+
+# Projects
+:ProjectAtlas a ex:Project ; rdfs:label "Project Atlas"@en ; ex:status "active" ; ex:budget 120000 ; ex:runBy :GraphSoft .
+:ProjectNova a ex:Project ; rdfs:label "Project Nova"@en ; ex:status "planned" ; ex:budget 80000 ; ex:runBy :SemanticWorks .
+:ProjectEcho a ex:Project ; rdfs:label "Project Echo"@en ; ex:status "completed" ; ex:budget 50000 ; ex:runBy :DataForge .
+
+# Events
+:HackDay2025 a ex:Event ; rdfs:label "Hack Day 2025"@en ; ex:heldIn :Berlin ; ex:startDate "2025-05-03"^^xsd:date ; ex:endDate "2025-05-04"^^xsd:date .
+:KGSummit2025 a ex:Event ; rdfs:label "KG Summit 2025"@en ; ex:heldIn :Paris ; ex:startDate "2025-09-12"^^xsd:date ; ex:endDate "2025-09-14"^^xsd:date .
+:DataWeekend2024 a ex:Event ; rdfs:label "Data Weekend 2024"@en ; ex:heldIn :Hamburg ; ex:startDate "2024-11-16"^^xsd:date ; ex:endDate "2024-11-17"^^xsd:date .
+
+# Books
+:BookGraphs a ex:Book ; foaf:name "Learning Graphs" ; ex:isbn "978-1-11111-111-1" ; ex:price 39.99 ; ex:year 2022 ; ex:topic "graphs" .
+:BookSPARQL a ex:Book ; foaf:name "Mastering SPARQL" ; ex:isbn "978-1-22222-222-2" ; ex:price 44.50 ; ex:year 2023 ; ex:topic "sparql" .
+:BookRDF a ex:Book ; foaf:name "RDF in Practice" ; ex:isbn "978-1-33333-333-3" ; ex:price 35.00 ; ex:year 2021 ; ex:topic "rdf" .
+:BookAI a ex:Book ; foaf:name "AI Foundations" ; ex:isbn "978-1-44444-444-4" ; ex:price 49.00 ; ex:year 2024 ; ex:topic "ai" .
+
+# Movies
+:MovieGraph a ex:Movie ; foaf:name "The Graph Mystery" ; ex:genre "thriller" ; ex:rating 8.1 ; ex:year 2020 .
+:MovieData a ex:Movie ; foaf:name "Data Dreams" ; ex:genre "science-fiction" ; ex:rating 7.4 ; ex:year 2022 .
+:MovieSemantic a ex:Movie ; foaf:name "Semantic Hearts" ; ex:genre "drama" ; ex:rating 6.9 ; ex:year 2021 .
+
+# Professors
+:ProfMeyer a ex:Professor, foaf:Person ; foaf:name "Anna Meyer" ; ex:age 46 ; ex:worksAt :UniHildesheim ; ex:teaches :SPARQL101, :SPARQL201 ; ex:hasSkill "SPARQL", "RDF", "Knowledge Graphs" ; ex:livesIn :Hildesheim ; foaf:homepage <https://example.org/anna> .
+:ProfSchmidt a ex:Professor, foaf:Person ; foaf:name "Lukas Schmidt" ; ex:age 52 ; ex:worksAt :TUberlin ; ex:teaches :KG101 ; ex:hasSkill "OWL", "SHACL", "Linked Data" ; ex:livesIn :Berlin .
+:ProfDubois a ex:Professor, foaf:Person ; foaf:name "Claire Dubois" ; ex:age 49 ; ex:worksAt :LMU ; ex:teaches :AI101 ; ex:hasSkill "AI", "Machine Learning" ; ex:livesIn :Munich .
+
+# Students
+:Alice a ex:Student, foaf:Person ; foaf:name "Alice" ; ex:age 22 ; ex:email "alice@example.org" ; ex:livesIn :Hildesheim ; ex:studiesAt :UniHildesheim ; ex:enrolledIn :SPARQL101, :DB101 ; ex:gpa 1.7 ; ex:hasSkill "Python", "SQL" ; foaf:knows :Bob, :Clara ; rdfs:label "Alice A."@en .
+:Bob a ex:Student, foaf:Person ; foaf:name "Bob" ; ex:age 24 ; ex:email "bob@example.org" ; ex:livesIn :Berlin ; ex:studiesAt :TUberlin ; ex:enrolledIn :KG101, :SPARQL101 ; ex:gpa 2.1 ; ex:hasSkill "Java", "SPARQL" ; foaf:knows :Alice, :Dina ; rdfs:label "Bob B."@en .
+:Clara a ex:Student, foaf:Person ; foaf:name "Clara" ; ex:age 21 ; ex:livesIn :Hamburg ; ex:studiesAt :UniHildesheim ; ex:enrolledIn :DB101 ; ex:gpa 1.3 ; ex:hasSkill "R", "Statistics" ; foaf:knows :Alice ; rdfs:label "Clara C."@en .
+:Dina a ex:Student, foaf:Person ; foaf:name "Dina" ; ex:age 23 ; ex:email "dina@example.org" ; ex:livesIn :Munich ; ex:studiesAt :LMU ; ex:enrolledIn :AI101, :KG101 ; ex:gpa 1.9 ; ex:hasSkill "Python", "Machine Learning" ; foaf:knows :Bob, :Eva .
+:Eva a ex:Student, foaf:Person ; foaf:name "Eva" ; ex:age 20 ; ex:livesIn :Berlin ; ex:studiesAt :TUberlin ; ex:enrolledIn :SPARQL101 ; ex:gpa 2.4 ; ex:hasSkill "HTML", "CSS" ; foaf:knows :Dina ; rdfs:label "Eva E."@en .
+:Faris a ex:Student, foaf:Person ; foaf:name "Faris" ; ex:age 26 ; ex:email "faris@example.org" ; ex:livesIn :Paris ; ex:studiesAt :LMU ; ex:enrolledIn :AI101, :SPARQL201 ; ex:gpa 1.5 ; ex:hasSkill "Python", "SPARQL", "RDF" ; foaf:knows :Alice, :ProfDubois .
+:Gina a ex:Student, foaf:Person ; foaf:name "Gina" ; ex:age 22 ; ex:livesIn :Hamburg ; ex:studiesAt :UniHildesheim ; ex:enrolledIn :SPARQL101, :SPARQL201 ; ex:gpa 1.8 ; ex:hasSkill "SPARQL", "Linked Data" ; foaf:knows :Alice, :Bob ; rdfs:label "Gina G."@en .
+:Hassan a ex:Student, foaf:Person ; foaf:name "Hassan" ; ex:age 25 ; ex:email "hassan@example.org" ; ex:livesIn :Berlin ; ex:studiesAt :TUberlin ; ex:enrolledIn :KG101 ; ex:gpa 2.7 ; ex:hasSkill "JavaScript" ; foaf:knows :Eva .
+:Iris a ex:Student, foaf:Person ; foaf:name "Iris" ; ex:age 23 ; ex:livesIn :Munich ; ex:studiesAt :LMU ; ex:enrolledIn :AI101, :SPARQL201 ; ex:gpa 1.4 ; ex:hasSkill "Python", "AI", "SPARQL" ; foaf:knows :Dina, :Faris .
+:Jonas a ex:Student, foaf:Person ; foaf:name "Jonas" ; ex:age 21 ; ex:livesIn :Hildesheim ; ex:studiesAt :UniHildesheim ; ex:enrolledIn :DB101 ; ex:gpa 2.9 ; ex:hasSkill "SQL" ; foaf:knows :Clara .
+
+# Employment and internships
+:Alice ex:internsAt :GraphSoft .
+:Bob ex:worksPartTimeAt :GraphSoft .
+:Dina ex:internsAt :SemanticWorks .
+:Faris ex:internsAt :DataForge .
+:Iris ex:worksPartTimeAt :SemanticWorks .
+
+# Reading interests
+:Alice ex:likesBook :BookSPARQL, :BookGraphs .
+:Bob ex:likesBook :BookRDF .
+:Clara ex:likesBook :BookGraphs .
+:Dina ex:likesBook :BookAI .
+:Eva ex:likesBook :BookSPARQL .
+:Faris ex:likesBook :BookSPARQL, :BookRDF .
+:Gina ex:likesBook :BookGraphs, :BookSPARQL .
+:Hassan ex:likesBook :BookAI .
+:Iris ex:likesBook :BookAI, :BookSPARQL .
+:Jonas ex:likesBook :BookRDF .
+
+# Movie interests
+:Alice ex:likesMovie :MovieGraph .
+:Bob ex:likesMovie :MovieData .
+:Clara ex:likesMovie :MovieSemantic .
+:Dina ex:likesMovie :MovieData, :MovieGraph .
+:Eva ex:likesMovie :MovieGraph .
+:Faris ex:likesMovie :MovieData .
+:Gina ex:likesMovie :MovieGraph, :MovieSemantic .
+:Iris ex:likesMovie :MovieData .
+
+# Project memberships
+:Alice ex:memberOf :ProjectAtlas .
+:Bob ex:memberOf :ProjectAtlas .
+:Dina ex:memberOf :ProjectNova .
+:Faris ex:memberOf :ProjectEcho .
+:Gina ex:memberOf :ProjectAtlas .
+:Iris ex:memberOf :ProjectNova .
+:ProfMeyer ex:advisorOf :ProjectAtlas .
+:ProfSchmidt ex:advisorOf :ProjectNova .
+:ProfDubois ex:advisorOf :ProjectEcho .
+
+# Event attendance
+:Alice ex:attends :HackDay2025 .
+:Bob ex:attends :HackDay2025, :DataWeekend2024 .
+:Clara ex:attends :DataWeekend2024 .
+:Dina ex:attends :KGSummit2025 .
+:Eva ex:attends :HackDay2025 .
+:Faris ex:attends :KGSummit2025 .
+:Gina ex:attends :HackDay2025, :KGSummit2025 .
+:Hassan ex:attends :DataWeekend2024 .
+:Iris ex:attends :KGSummit2025 .
+:Jonas ex:attends :DataWeekend2024 .
+
+# Additional labels for UNION / language exercises
+:SPARQL101 rdfs:label "SPARQL Grundlagen"@de .
+:SPARQL201 rdfs:label "Fortgeschrittenes SPARQL"@de .
+:KG101 rdfs:label "Wissensgraphen"@de .
+:BookGraphs rdfs:label "Lernende Graphen"@de .
+:BookSPARQL rdfs:label "SPARQL meistern"@de .
+:ProjectAtlas rdfs:label "Projekt Atlas"@de .
+

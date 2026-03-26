@@ -2,7 +2,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "1) \n    EN: Which RE tasks are discussed in the papers?\n    \n    DE: Welche RE-Tasks werden in den Papers berichtet?\n    ",
+    "value": "1) \n    DE: Welche RE-Tasks werden in den Papers berichtet?\n    \n    EN: Which RE tasks are discussed in the papers?",
     "metadata": {}
   },
   {
@@ -14,7 +14,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "2) EN: What types of NLP tasks are discussed in the papers?\n\n   DE: Welche NLP-Task-Typen werden in den Papers berichtet?\n\n   ",
+    "value": "2) DE: Welche NLP-Task-Typen werden in den Papers berichtet?\n\n   EN: What types of NLP tasks are discussed in the papers?",
     "metadata": {}
   },
   {
@@ -26,7 +26,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "3)  EN: What are the inputs for the NLP tasks?\n\n    DE: Welche Inputs haben die NLP-Tasks?\n",
+    "value": "3) DE: Welche Inputs haben die NLP-Tasks?\n\n   EN: What are the inputs for the NLP tasks?",
     "metadata": {}
   },
   {
@@ -38,7 +38,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "4) EN: Which NLP task output types are reported for which NLP task types?\n\n   DE: Welche Output-Typen werden für welche NLP-Task-Typen berichtet?",
+    "value": "4) Welche Output-Typen werden für welche NLP-Task-Typen berichtet?",
     "metadata": {}
   },
   {
@@ -50,7 +50,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "5) EN: Which NLP datasets are used in the papers?\n\n   DE:   Welche NLP-Datensätze werden in den Papers verwendet?",
+    "value": "5) Welche NLP-Datensätze werden in den Papers verwendet?",
     "metadata": {}
   },
   {
@@ -62,7 +62,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "6) EN: Which natural languages are reported for the datasets?\n\n   DE: Welche natürliche Sprachen werden für die Datensätze berichtet?",
+    "value": "6) Welche natürliche Sprachen werden für die Datensätze berichtet?",
     "metadata": {}
   },
   {
@@ -74,7 +74,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "7) EN: How many annotators are reported per paper?\n\n   DE: Wie viele Annotatoren werden pro Paper berichtet?",
+    "value": "7) Wie viele Annotatoren werden pro Paper berichtet?",
     "metadata": {}
   },
   {
@@ -86,7 +86,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "8) EN: Which Guideline availability values are reported in the Annotation scheme?\n\n   DE: Welche Guideline Availabilitys werden im Annotationsschema berichtet?",
+    "value": "8) Welche Guideline Availabilitys werden im Annotationsschema berichtet?",
     "metadata": {}
   },
   {
@@ -98,7 +98,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "9) EN: Which evaluation metrics does each paper use?\n\n   DE: Welche Evaluationsmetrik benutzt jedes paper",
+    "value": "9) Welche Evaluationsmetrik benutzt jedes paper",
     "metadata": {}
   },
   {
@@ -110,7 +110,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "10) EN: Which Baseline comparison types are reported in the evaluation?\n\n    DE: Welche Baseline-Typen werden in der Evaluation berichtet?",
+    "value": "10) Welche Baseline-Typen werden in der Evaluation berichtet?",
     "metadata": {}
   },
   {
@@ -122,7 +122,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "11) EN: Which combinations of RE task, NLP task type, and NLP task output type are reported most frequently in the collected papers, and which specific papers belong to each of these combinations?\n\n    DE: Welche Kombinationen aus RE-Task, NLP-Task-Typ und NLP-Task-Output-Typ werden in den erfassten Papers am häufigsten berichtet, und welche konkreten Papers gehören jeweils zu diesen Kombinationen?",
+    "value": "11) Welche Kombinationen aus RE-Task, NLP-Task-Typ und NLP-Task-Output-Typ werden in den erfassten Papers am häufigsten berichtet, und welche konkreten Papers gehören jeweils zu diesen Kombinationen?",
     "metadata": {}
   },
   {
@@ -134,7 +134,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "12) EN: For each RE task: which combinations of NLP task input and NLP task output type are reported, and which papers use each of these combinations?\n\n    DE: Für jeden RE-Task: Welche Kombinationen aus NLP-Task-Input und NLP-Task-Output-Typ werden berichtet, und welche Papers verwenden jeweils diese Kombinationen?",
+    "value": "12) Für jeden RE-Task: Welche Kombinationen aus NLP-Task-Input und NLP-Task-Output-Typ werden berichtet, und welche Papers verwenden jeweils diese Kombinationen?",
     "metadata": {}
   },
   {
@@ -146,7 +146,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "13) EN: Which papers report an NLP dataset with a specified URL, and which Public availability, License type, and Dataset location type are reported in each of these papers? The results should be sorted by Public availability at the end.\n\n    DE: Welche Papers berichten einen NLP-Datensatz mit angegebener URL, und welcher Grad der öffentlichen Verfügbarkeit, welcher Lizenztyp sowie welcher Typ des Datensatzspeicherorts werden in diesen Papers jeweils angegeben? und am Ende soll nach Availaybility sortiert werden.",
+    "value": "13) Welche Papers berichten einen NLP-Datensatz mit angegebener URL, und welcher Grad der öffentlichen Verfügbarkeit, welcher Lizenztyp sowie welcher Typ des Datensatzspeicherorts werden in diesen Papers jeweils angegeben? und am Ende soll nach Availaybility sortiert werden.",
     "metadata": {}
   },
   {
@@ -158,7 +158,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "14) EN: Which combinations of data source type and data source domain occur most frequently, and which specific papers use each of these combinations?\n\n    DE: Welche Kombinationen aus Typ der Datenquelle und Domäne der Datenquelle kommen am häufigsten vor, und welche konkreten Papers verwenden jeweils diese Kombinationen?",
+    "value": "14) Welche Kombinationen aus Typ der Datenquelle und Domäne der Datenquelle kommen am häufigsten vor, und welche konkreten Papers verwenden jeweils diese Kombinationen?",
     "metadata": {}
   },
   {
@@ -170,7 +170,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "15) EN: Which papers provide information on the availability of annotation guidelines and on Annotator agreement, and which Intercoder reliability metric and Conflict resolution are reported in each of these papers?\n\n    DE: Welche Papers machen Angaben zur Verfügbarkeit von Annotierungsrichtlinien und zum Annotator Agreement, und welche Intercoder-Reliabilitätsmetrik sowie welche Konfliktlösungsmethode werden in diesen Papers jeweils angegeben?",
+    "value": "15) Welche Papers machen Angaben zur Verfügbarkeit von Annotierungsrichtlinien und zum Annotator Agreement, und welche Intercoder-Reliabilitätsmetrik sowie welche Konfliktlösungsmethode werden in diesen Papers jeweils angegeben?",
     "metadata": {}
   },
   {
@@ -182,7 +182,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "16) EN: Which papers report more than one Baseline comparison type, and which Baseline comparison types and Baseline comparison details are given per paper?\n\n    DE: Welche Papers berichten mehr als einen Typ des Baseline-Vergleichs, und welche Baseline-Vergleichstypen sowie welche Baseline-Vergleichsdetails werden pro Paper angegeben?",
+    "value": "16) Welche Papers berichten mehr als einen Typ des Baseline-Vergleichs, und welche Baseline-Vergleichstypen sowie welche Baseline-Vergleichsdetails werden pro Paper angegeben?",
     "metadata": {}
   },
   {
@@ -194,7 +194,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "17) EN: Which combinations of Approach type and Algorithm are reported most frequently, and which specific papers belong to each of these combinations?\n\n    DE: Welche Kombinationen aus Typ des implementierten Ansatzes und verwendetem Algorithmus werden am häufigsten berichtet, und welche konkreten Papers gehören jeweils zu diesen Kombinationen?",
+    "value": "17) Welche Kombinationen aus Typ des implementierten Ansatzes und verwendetem Algorithmus werden am häufigsten berichtet, und welche konkreten Papers gehören jeweils zu diesen Kombinationen?",
     "metadata": {}
   },
   {
@@ -206,19 +206,19 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "18) EN: Which papers report a Release of the Implemented approach, and which information on Release format, Location type, URL, and Documentation type is provided in each of these papers?\n\n    DE: Welche Papers berichten eine Veröffentlichung des implementierten Ansatzes, und welche Angaben zu Release-Format, Veröffentlichungstyp, URL und Dokumentation werden in diesen Papers jeweils gemacht?",
+    "value": "18) Welche Papers berichten eine Veröffentlichung des implementierten Ansatzes, und welche Angaben zu Release-Format, Veröffentlichungstyp, URL und Dokumentation werden in diesen Papers jeweils gemacht?",
     "metadata": {}
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "PREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX orkgr: <http://orkg.org/orkg/resource/>\n\nSELECT\n  ?paper\n  ?paperLabel\n  ?releaseFormats\n  ?publicationTypes\n  ?urls\n  ?documentationTypes\nWHERE {\n  {\n    SELECT DISTINCT ?paper ?paperLabel\n    WHERE {\n      ?paper orkgp:P31 ?contribution .\n      ?contribution a orkgc:C121001 ;\n                    orkgp:P181046 ?implementedApproach .\n      ?implementedApproach orkgp:release ?release .\n      OPTIONAL { ?paper rdfs:label ?paperLabel . }\n    }\n  }\n\n  OPTIONAL {\n    SELECT\n      ?paper\n      (GROUP_CONCAT(DISTINCT ?releaseFormatLabel; SEPARATOR=\" | \") AS ?releaseFormats)\n    WHERE {\n      ?paper orkgp:P31 ?contribution .\n      ?contribution a orkgc:C121001 ;\n                    orkgp:P181046 ?implementedApproach .\n      ?implementedApproach orkgp:release ?release .\n      ?release orkgp:P181049 ?releaseFormat .\n      OPTIONAL { ?releaseFormat rdfs:label ?releaseFormatLabel . }\n    }\n    GROUP BY ?paper\n  }\n\n  OPTIONAL {\n    SELECT\n      ?paper\n      (GROUP_CONCAT(DISTINCT ?locationTypeLabel; SEPARATOR=\" | \") AS ?publicationTypes)\n    WHERE {\n      ?paper orkgp:P31 ?contribution .\n      ?contribution a orkgc:C121001 ;\n                    orkgp:P181046 ?implementedApproach .\n      ?implementedApproach orkgp:release ?release .\n      ?release orkgp:P181029 ?locationType .\n      OPTIONAL { ?locationType rdfs:label ?locationTypeLabel . }\n    }\n    GROUP BY ?paper\n  }\n\n  OPTIONAL {\n    SELECT\n      ?paper\n      (GROUP_CONCAT(DISTINCT STR(?url); SEPARATOR=\" | \") AS ?urls)\n    WHERE {\n      ?paper orkgp:P31 ?contribution .\n      ?contribution a orkgc:C121001 ;\n                    orkgp:P181046 ?implementedApproach .\n      ?implementedApproach orkgp:release ?release .\n      ?release orkgp:P1003 ?url .\n    }\n    GROUP BY ?paper\n  }\n\n  OPTIONAL {\n    SELECT\n      ?paper\n      (GROUP_CONCAT(DISTINCT ?documentationTypeLabel; SEPARATOR=\" | \") AS ?documentationTypes)\n    WHERE {\n      ?paper orkgp:P31 ?contribution .\n      ?contribution a orkgc:C121001 ;\n                    orkgp:P181046 ?implementedApproach .\n      ?implementedApproach orkgp:P41835 ?documentationType .\n      OPTIONAL { ?documentationType rdfs:label ?documentationTypeLabel . }\n    }\n    GROUP BY ?paper\n  }\n}\nORDER BY ?paperLabel",
+    "value": "PREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX orkgr: <http://orkg.org/orkg/resource/>\n\nSELECT\n  ?paper\n  ?paperLabel\n  ?releaseFormats\n  ?publicationTypes\n  ?urls\n  ?documentationTypes\nWHERE {\n  # Nur Papers mit Implemented approach + Release\n  {\n    SELECT DISTINCT ?paper ?paperLabel\n    WHERE {\n      ?paper orkgp:P31 ?contribution .\n      ?contribution a orkgc:C121001 ;\n                    orkgp:P181046 ?implementedApproach .\n      ?implementedApproach orkgp:release ?release .\n      OPTIONAL { ?paper rdfs:label ?paperLabel . }\n    }\n  }\n\n  # Release-Formate pro Paper\n  OPTIONAL {\n    SELECT\n      ?paper\n      (GROUP_CONCAT(DISTINCT ?releaseFormatLabel; SEPARATOR=\" | \") AS ?releaseFormats)\n    WHERE {\n      ?paper orkgp:P31 ?contribution .\n      ?contribution a orkgc:C121001 ;\n                    orkgp:P181046 ?implementedApproach .\n      ?implementedApproach orkgp:release ?release .\n      ?release orkgp:P181049 ?releaseFormat .\n      OPTIONAL { ?releaseFormat rdfs:label ?releaseFormatLabel . }\n    }\n    GROUP BY ?paper\n  }\n\n  # Veröffentlichungstyp / Location type pro Paper\n  OPTIONAL {\n    SELECT\n      ?paper\n      (GROUP_CONCAT(DISTINCT ?locationTypeLabel; SEPARATOR=\" | \") AS ?publicationTypes)\n    WHERE {\n      ?paper orkgp:P31 ?contribution .\n      ?contribution a orkgc:C121001 ;\n                    orkgp:P181046 ?implementedApproach .\n      ?implementedApproach orkgp:release ?release .\n      ?release orkgp:P181029 ?locationType .\n      OPTIONAL { ?locationType rdfs:label ?locationTypeLabel . }\n    }\n    GROUP BY ?paper\n  }\n\n  # URLs pro Paper\n  OPTIONAL {\n    SELECT\n      ?paper\n      (GROUP_CONCAT(DISTINCT STR(?url); SEPARATOR=\" | \") AS ?urls)\n    WHERE {\n      ?paper orkgp:P31 ?contribution .\n      ?contribution a orkgc:C121001 ;\n                    orkgp:P181046 ?implementedApproach .\n      ?implementedApproach orkgp:release ?release .\n      ?release orkgp:P1003 ?url .\n    }\n    GROUP BY ?paper\n  }\n\n  # Dokumentationstypen pro Paper\n  OPTIONAL {\n    SELECT\n      ?paper\n      (GROUP_CONCAT(DISTINCT ?documentationTypeLabel; SEPARATOR=\" | \") AS ?documentationTypes)\n    WHERE {\n      ?paper orkgp:P31 ?contribution .\n      ?contribution a orkgc:C121001 ;\n                    orkgp:P181046 ?implementedApproach .\n      ?implementedApproach orkgp:P41835 ?documentationType .\n      OPTIONAL { ?documentationType rdfs:label ?documentationTypeLabel . }\n    }\n    GROUP BY ?paper\n  }\n}\nORDER BY ?paperLabel",
     "metadata": {}
   },
   {
     "kind": 1,
     "language": "markdown",
-    "value": "19) EN: For each publication year: which evaluation metrics are reported together with which validation procedures, and which papers belong to each of these year-metric-validation combinations?\n\n    DE: Für jedes Publikationsjahr: Welche Evaluationsmetriken werden zusammen mit welchen Validierungsverfahren berichtet, und welche Papers gehören jeweils zu diesen Jahr-Metrik-Validierungs-Kombinationen?",
+    "value": "19) Für jedes Publikationsjahr: Welche Evaluationsmetriken werden zusammen mit welchen Validierungsverfahren berichtet, und welche Papers gehören jeweils zu diesen Jahr-Metrik-Validierungs-Kombinationen?",
     "metadata": {}
   },
   {
@@ -230,7 +230,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "20) EN: Which papers report an NLP data production time, and which production times are given?\n\n    DE: Welche Papers berichten eine Produktionszeit der NLP-Daten, und welche Produktionszeiten werden angegeben?",
+    "value": "20) Welche Papers berichten eine Produktionszeit der NLP-Daten, und welche Produktionszeiten werden angegeben?",
     "metadata": {}
   },
   {
@@ -242,7 +242,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "21) EN: Which NLP task types are reported most frequently in the individual publication decades (2000s, 2010s, and 2020s), and which specific papers belong to these decade-specific task types?\n\n    DE: Welche NLP-Task-Typen werden in den einzelnen Publikationsdekaden (2000er, 2010er und 2020er) am häufigsten berichtet, und welche konkreten Papers gehören jeweils zu diesen dekadenspezifischen Task-Typen?",
+    "value": "21) Welche NLP-Task-Typen werden in den einzelnen Publikationsdekaden (2000er, 2010er und 2020er) am häufigsten berichtet, und welche konkreten Papers gehören jeweils zu diesen dekadenspezifischen Task-Typen?",
     "metadata": {}
   },
   {
@@ -254,7 +254,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "22) EN: \n\n    DE: Welche Requirements-Engineering-Tasks werden in Papers aus den Zeiträumen 2006–2015 bzw. 2016–2025 berichtet, und welche konkreten Papers gehören jeweils zu den einzelnen RE-Tasks in diesen beiden Zeitintervallen?",
+    "value": "22) Welche Requirements-Engineering-Tasks werden in Papers aus den Zeiträumen 2006–2015 bzw. 2016–2025 berichtet, und welche konkreten Papers gehören jeweils zu den einzelnen RE-Tasks in diesen beiden Zeitintervallen?",
     "metadata": {}
   },
   {
@@ -266,7 +266,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "23) EN: \n\n    DE: Welche Evaluationsmetriken werden in den letzten 20 Jahren (2006–2025) am häufigsten berichtet, gruppiert nach Publikationsdekade, und welche Papers tragen innerhalb jeder Dekade zu den jeweiligen Metriken bei?",
+    "value": "23) Welche Evaluationsmetriken werden in den letzten 20 Jahren (2006–2025) am häufigsten berichtet, gruppiert nach Publikationsdekade, und welche Papers tragen innerhalb jeder Dekade zu den jeweiligen Metriken bei?",
     "metadata": {}
   },
   {
@@ -278,7 +278,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "24) EN: \n\n    DE: Welche Validierungsverfahren werden in Papers aus dem Zeitraum 2006–2025 in den einzelnen Dekaden am häufigsten berichtet, und welche konkreten Papers berichten diese Verfahren?",
+    "value": "24) Welche Validierungsverfahren werden in Papers aus dem Zeitraum 2006–2025 in den einzelnen Dekaden am häufigsten berichtet, und welche konkreten Papers berichten diese Verfahren?",
     "metadata": {}
   },
   {
@@ -290,7 +290,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "25) EN: \n\n    DE: Welche natürlichen Sprachen werden für NLP-Datensätze in Papers aus den Zeiträumen 2006–2010, 2011–2015, 2016–2020 und 2021–2025 berichtet, und welche Papers gehören jeweils zu jeder Kombination aus Zeitintervall und Sprache?",
+    "value": "25) Welche natürlichen Sprachen werden für NLP-Datensätze in Papers aus den Zeiträumen 2006–2010, 2011–2015, 2016–2020 und 2021–2025 berichtet, und welche Papers gehören jeweils zu jeder Kombination aus Zeitintervall und Sprache?",
     "metadata": {}
   },
   {
@@ -302,7 +302,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "26) EN: \n\n    DE: Welche konkreten Jahresangaben oder Zeitintervalle zur Produktionszeit von NLP-Daten werden in den einzelnen Publikationsdekaden berichtet, und welche konkreten Papers gehören jeweils zu jeder Kombination aus Publikationsdekade und Produktionszeitangabe?",
+    "value": "26) Welche konkreten Jahresangaben oder Zeitintervalle zur Produktionszeit von NLP-Daten werden in den einzelnen Publikationsdekaden berichtet, und welche konkreten Papers gehören jeweils zu jeder Kombination aus Publikationsdekade und Produktionszeitangabe?",
     "metadata": {}
   },
   {
@@ -314,7 +314,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "27) EN: \n\n    DE: Welche Domänen der NLP-Datenquellen werden in Papers der 2010er und welche in Papers der 2020er am häufigsten berichtet, und welche konkreten Papers berichten diese Domänen in den jeweiligen Dekaden?",
+    "value": "27) Welche Domänen der NLP-Datenquellen werden in Papers der 2010er und welche in Papers der 2020er am häufigsten berichtet, und welche konkreten Papers berichten diese Domänen in den jeweiligen Dekaden?",
     "metadata": {}
   },
   {
@@ -326,7 +326,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "28) EN: \n\n    DE: Gibt es Papers, die sowohl eine Evaluationsmetrik als auch ein Validierungsverfahren berichten?",
+    "value": "28) Gibt es Papers, die sowohl eine Evaluationsmetrik als auch ein Validierungsverfahren berichten?",
     "metadata": {}
   },
   {
@@ -338,7 +338,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "29) EN: \n\n    DE: Gibt es Papers, die berichten eine Annotation Scheme Guideline Availability, aber keine weiteren Shared Materials zur Unterstützung der Annotator:innen?",
+    "value": "29) Gibt es Papers, die berichten eine Annotation Scheme Guideline Availability, aber keine weiteren Shared Materials zur Unterstützung der Annotator:innen?",
     "metadata": {}
   },
   {
@@ -350,7 +350,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "30) EN: \n\n    DE: Gibt es Papers, in denen ein Annotator Agreement berichtet wird, aber weder eine Intercoder-Reliability-Metrik noch eine Conflict-Resolution-Angabe vorhanden ist?",
+    "value": "30) Gibt es Papers, in denen ein Annotator Agreement berichtet wird, aber weder eine Intercoder-Reliability-Metrik noch eine Conflict-Resolution-Angabe vorhanden ist?",
     "metadata": {}
   },
   {
@@ -362,7 +362,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "31) EN: \n\n    DE: Welche Papers enthalten sowohl Angaben zur natürlichen Sprache der NLP-Daten als auch Angaben zum NLP-Datenformat, und welche Papers berichten nur eines von beiden?",
+    "value": "31) Welche Papers enthalten sowohl Angaben zur natürlichen Sprache der NLP-Daten als auch Angaben zum NLP-Datenformat, und welche Papers berichten nur eines von beiden?",
     "metadata": {}
   },
   {
@@ -374,7 +374,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "32) EN: \n\n    DE: Gibt es Papers, die berichten mindestens zwei verschiedene Domänen der NLP-Datenquellen?",
+    "value": "32) Gibt es Papers, die berichten mindestens zwei verschiedene Domänen der NLP-Datenquellen?",
     "metadata": {}
   },
   {
@@ -386,7 +386,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "33) EN: \n\n    DE: Welche Papers beschreiben einen veröffentlichten Implemented Approach mit Release-Format oder Release-Location-Type, aber ohne dokumentierten License Type?",
+    "value": "33) Welche Papers beschreiben einen veröffentlichten Implemented Approach mit Release-Format oder Release-Location-Type, aber ohne dokumentierten License Type?",
     "metadata": {}
   },
   {
@@ -398,7 +398,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "34) EN: \n\n    DE: Gibt es Papers, die eine Baseline Comparison berichten, aber keine zugehörige Baseline Comparison Type oder kein Baseline Comparison Detail angeben?",
+    "value": "34) Gibt es Papers, die eine Baseline Comparison berichten, aber keine zugehörige Baseline Comparison Type oder kein Baseline Comparison Detail angeben?",
     "metadata": {}
   },
   {
@@ -410,7 +410,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "35) EN:\n\n    DE: Gibt es Papers, die für den Implemented Approach sowohl eine Dependency als auch mindestens eine Running Requirement angeben?",
+    "value": "35) Gibt es Papers, die für den Implemented Approach sowohl eine Dependency als auch mindestens eine Running Requirement angeben?",
     "metadata": {}
   },
   {
@@ -422,7 +422,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "36) EN: \n\n    DE: Welche Papers berichten für ihren NLP-Datensatz mindestens eine Number-of-Data-Sources-Angabe und mindestens zwei unterschiedliche Data-Source-Types?",
+    "value": "36) Welche Papers berichten für ihren NLP-Datensatz mindestens eine Number-of-Data-Sources-Angabe und mindestens zwei unterschiedliche Data-Source-Types?",
     "metadata": {}
   },
   {
@@ -434,7 +434,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "37) EN: \n\n    DE: Welche Papers berichten eine Dataset-URL, aber keinen Dataset-Location-Type?",
+    "value": "37) Welche Papers berichten eine Dataset-URL, aber keinen Dataset-Location-Type?",
     "metadata": {}
   },
   {
@@ -446,7 +446,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "38) EN: \n\n    DE: Welche Papers berichten mindestens einen Algorithmus für den Implemented Approach, aber keinen Approach Type?",
+    "value": "38) Welche Papers berichten mindestens einen Algorithmus für den Implemented Approach, aber keinen Approach Type?",
     "metadata": {}
   },
   {
@@ -458,7 +458,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "39) EN: \n\n    DE: Welche Papers berichten mindestens zwei verschiedene Running Requirements für denselben Implemented Approach?",
+    "value": "39) Welche Papers berichten mindestens zwei verschiedene Running Requirements für denselben Implemented Approach?",
     "metadata": {}
   },
   {
@@ -470,7 +470,7 @@
   {
     "kind": 1,
     "language": "markdown",
-    "value": "40) EN: \n\n    DE: Welche Papers berichten mindestens zwei verschiedene Dependencies für denselben Implemented Approach?",
+    "value": "40) Welche Papers berichten mindestens zwei verschiedene Dependencies für denselben Implemented Approach?",
     "metadata": {}
   },
   {

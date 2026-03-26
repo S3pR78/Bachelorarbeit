@@ -1,0 +1,86 @@
+[
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "Gib alle Personen mit Namen aus.",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix foaf: <http://xmlns.com/foaf/0.1/> \n\nSELECT ?name\nWHERE{\n    ?person a foaf:Person .\n    ?person foaf:name ?name .\n}",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "Gib alle Städte mit Bevölkerungszahl aus.",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix ex: <http://example.org/vocab/> \nprefix : <http://example.org/kg/> \n\nSELECT ?city ?population\nWHERE{\n    ?city a ex:City .\n    ?city ex:population ?population\n}\nORDER BY ?population",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "Welche Typen gibt es und wie oft kommen sie vor?\n\n",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix ex: <http://example.org/vocab/> \nprefix : <http://example.org/kg/> \nprefix foaf: <http://xmlns.com/foaf/0.1/>\n\nSELECT ?type (COUNT(?resource) AS ?count)\nWHERE{\n    ?resource a ?type\n}\nGROUP BY ?type\nORDER BY ?count",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "Gib alle Kurse mit Credits aus.",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix : <http://example.org/kg/> \nprefix ex: <http://example.org/vocab/> \n\n\nSELECT ?course ?credits\nWHERE{\n    ?course a ex:Course ;\n            ex:credits ?credits .\n}\n\nORDER BY ?credits\n",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "Finde alle Bücher mit Preis.",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix : <http://example.org/kg/> \nprefix ex: <http://example.org/vocab/> \nPREFIX foaf: <http://xmlns.com/foaf/0.1/>\n\nSELECT ?book ?name ?price\nWHERE{\n    ?book a ex:Book;\n        foaf:name ?name ;\n        ex:price ?price .\n}\nORDER BY ?price",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "Finde alle Studierenden in Berlin.",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix : <http://example.org/kg/> \nprefix ex: <http://example.org/vocab/> \nprefix foaf: <http://xmlns.com/foaf/0.1/> \n\nSELECT ?studentsName\nWHERE{\n    ?student a ex:Student ;\n            ex:livesIn :Berlin ;\n            foaf:name ?studentsName .\n}",
+    "metadata": {}
+  },
+  {
+    "kind": 1,
+    "language": "markdown",
+    "value": "Finde alle Personen mit `foaf:name` oder `rdfs:label`.",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "prefix : <http://example.org/kg/> \nprefix ex: <http://example.org/vocab/> \nprefix foaf: <http://xmlns.com/foaf/0.1/> \nprefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> \n\nSELECT ?person ?name\nWHERE {\n  ?person a foaf:Person .\n  { ?person foaf:name ?name . }\n  UNION\n  { ?person rdfs:label ?name . }\n}\nORDER BY ?name",
+    "metadata": {}
+  }
+]

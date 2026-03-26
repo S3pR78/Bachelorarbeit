@@ -21,3 +21,7 @@ Thumbs.db
 
 # --- Config & Secrets ---
 .env
+
+
+.vscode/
+.tools/
