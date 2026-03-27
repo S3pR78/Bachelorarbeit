@@ -1,0 +1,10 @@
+{
+  "input_file": "code/data/canonical/merged/benchmark_merged.jsonl",
+  "total_entries": 101,
+  "error_count": 0,
+  "warning_count": 0,
+  "errors": [],
+  "warnings": [],
+  "validation_passed": true,
+  "generated_at": "2026-03-27T03:01:08.595077"
+}

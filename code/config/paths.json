@@ -1,5 +1,8 @@
 {
-  "config": {
-    "dataset_registry": "code/config/dataset_registry.json"
-  }
+    "config": {
+        "dataset_registry": "code/config/dataset_registry.json"
+    },
+    "reports": {
+        "validation_dir": "code/data/canonical/validation/reports"
+    }
 }

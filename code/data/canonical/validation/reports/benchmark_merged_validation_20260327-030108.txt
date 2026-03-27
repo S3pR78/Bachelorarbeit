@@ -1,0 +1,11 @@
+========================================================================
+Canonical Dataset Validation Report
+========================================================================
+Input file:    code/data/canonical/merged/benchmark_merged.jsonl
+Total entries: 101
+Errors:        0
+Warnings:      0
+
+No issues found.
+
+Validation result: PASSED

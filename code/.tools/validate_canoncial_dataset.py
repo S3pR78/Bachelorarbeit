@@ -2,12 +2,12 @@
 """
 validate_canoncial_dataset.py
 
-Validate a canonical benchmark dataset stored as JSONL or JSON.
+Validate a canonical benchmark dataset stored as JSON or JSONL.
 
 Expected canonical entry structure (minimum):
 {
-  "uid": "nlp4-0001",
-  "source_dataset": "NLP4",
+  "uid": "nlp4re-0001",
+  "source_dataset": "NLP4RE",
   "source_id": 1,
   "family": "nlp4re",
   "question": "Which papers report ...?",
@@ -16,19 +16,19 @@ Expected canonical entry structure (minimum):
 }
 
 This script checks:
-- file can be loaded
-- entries are dictionaries
+- the input file can be loaded
+- entries are JSON objects
 - required fields exist
 - uid values are unique
 - question exists and is not empty
-- gold_query is not empty
+- gold_query exists and is not empty
 - PREFIX lines were removed from gold_query
-- contribution_class is present and looks valid
+- contribution_class exists and looks valid
 - obvious empty/null values are detected
 
-Exit codes:
-- 0: validation passed (warnings may still exist)
-- 1: validation failed
+Optional report writing:
+- A report can be written via --report as a base path
+- Or via --save-report using the default report directory from paths.json
 """
 
 from __future__ import annotations
@@ -37,12 +37,82 @@ import argparse
 import json
 import re
 import sys
+from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
 
 PREFIX_PATTERN = re.compile(r"^\s*PREFIX\s+", re.IGNORECASE | re.MULTILINE)
 CONTRIBUTION_CLASS_PATTERN = re.compile(r"^orkgc:C\d+$")
+
+
+def get_repo_root() -> Path:
+    """
+    Resolve the repository root from this file location.
+
+    Expected file location:
+        code/tools/validate_canoncial_dataset.py
+    """
+    return Path(__file__).resolve().parents[2]
+
+
+def resolve_path(repo_root: Path, raw_path: str) -> Path:
+    """
+    Resolve a path relative to the repository root unless it is already absolute.
+    """
+    path = Path(raw_path)
+    if path.is_absolute():
+        return path
+    return repo_root / path
+
+
+def normalize_output_base(output_path: Path) -> Path:
+    """
+    Normalize the report base path.
+
+    If the user passes a path ending in .json, .jsonl, or .txt,
+    remove the extension because this script writes both .json and .txt reports.
+    """
+    output_str = str(output_path)
+
+    for suffix in (".jsonl", ".json", ".txt"):
+        if output_str.endswith(suffix):
+            output_str = output_str[: -len(suffix)]
+            break
+
+    return Path(output_str)
+
+
+def load_json_object(path: Path) -> Dict[str, Any]:
+    """
+    Load a JSON file and return its parsed object.
+    """
+    with path.open("r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    if not isinstance(data, dict):
+        raise ValueError(f"Expected a JSON object in {path}, got {type(data).__name__}")
+
+    return data
+
+
+def get_default_report_base(paths_config_path: Path, repo_root: Path, input_path: Path) -> Path:
+    """
+    Build a default report base path from paths.json and the input file name.
+    """
+    paths_config = load_json_object(paths_config_path)
+
+    reports_section = paths_config.get("reports")
+    if not isinstance(reports_section, dict):
+        raise ValueError("paths.json must contain a 'reports' object.")
+
+    validation_dir_raw = reports_section.get("validation_dir")
+    if not isinstance(validation_dir_raw, str) or not validation_dir_raw.strip():
+        raise ValueError("paths.json must define reports.validation_dir as a non-empty string.")
+
+    validation_dir = resolve_path(repo_root, validation_dir_raw)
+    timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+    return validation_dir / f"{input_path.stem}_validation_{timestamp}"
 
 
 def load_dataset(path: Path) -> List[Dict[str, Any]]:
@@ -58,7 +128,9 @@ def load_dataset(path: Path) -> List[Dict[str, Any]]:
     if not path.exists():
         raise FileNotFoundError(f"File not found: {path}")
 
-    if path.suffix.lower() == ".jsonl":
+    suffix = path.suffix.lower()
+
+    if suffix == ".jsonl":
         entries: List[Dict[str, Any]] = []
         with path.open("r", encoding="utf-8") as f:
             for line_number, line in enumerate(f, start=1):
@@ -69,26 +141,31 @@ def load_dataset(path: Path) -> List[Dict[str, Any]]:
                     obj = json.loads(stripped)
                 except json.JSONDecodeError as exc:
                     raise ValueError(
-                        f"Invalid JSON on line {line_number}: {exc}"
+                        f"Invalid JSON on line {line_number} in {path}: {exc}"
                     ) from exc
+
                 if not isinstance(obj, dict):
                     raise ValueError(
-                        f"Line {line_number} does not contain a JSON object."
+                        f"Line {line_number} in {path} does not contain a JSON object."
                     )
+
                 entries.append(obj)
         return entries
 
-    if path.suffix.lower() == ".json":
+    if suffix == ".json":
         with path.open("r", encoding="utf-8") as f:
             data = json.load(f)
+
         if not isinstance(data, list):
-            raise ValueError("JSON file must contain a list of objects.")
+            raise ValueError(f"JSON file must contain a list of objects: {path}")
+
         for index, item in enumerate(data, start=1):
             if not isinstance(item, dict):
-                raise ValueError(f"Item {index} in JSON file is not an object.")
+                raise ValueError(f"Item {index} in {path} is not a JSON object.")
+
         return data
 
-    raise ValueError("Unsupported file type. Please use .json or .jsonl")
+    raise ValueError(f"Unsupported file type: {path}. Use .json or .jsonl")
 
 
 def is_blank(value: Any) -> bool:
@@ -225,63 +302,171 @@ def validate_dataset(entries: List[Dict[str, Any]]) -> Tuple[List[str], List[str
     return errors, warnings
 
 
-def print_report(entries: List[Dict[str, Any]], errors: List[str], warnings: List[str]) -> None:
+def build_report_text(
+    input_path: Path,
+    entries: List[Dict[str, Any]],
+    errors: List[str],
+    warnings: List[str],
+) -> str:
     """
-    Print a readable validation summary.
+    Build a human-readable validation report.
     """
-    print("=" * 72)
-    print("Canonical Dataset Validation Report")
-    print("=" * 72)
-    print(f"Total entries: {len(entries)}")
-    print(f"Errors:        {len(errors)}")
-    print(f"Warnings:      {len(warnings)}")
-    print()
+    lines: List[str] = []
+    lines.append("=" * 72)
+    lines.append("Canonical Dataset Validation Report")
+    lines.append("=" * 72)
+    lines.append(f"Input file:    {input_path}")
+    lines.append(f"Total entries: {len(entries)}")
+    lines.append(f"Errors:        {len(errors)}")
+    lines.append(f"Warnings:      {len(warnings)}")
+    lines.append("")
 
     if errors:
-        print("Errors")
-        print("-" * 72)
+        lines.append("Errors")
+        lines.append("-" * 72)
         for message in errors:
-            print(f"[ERROR] {message}")
-        print()
+            lines.append(f"[ERROR] {message}")
+        lines.append("")
 
     if warnings:
-        print("Warnings")
-        print("-" * 72)
+        lines.append("Warnings")
+        lines.append("-" * 72)
         for message in warnings:
-            print(f"[WARN]  {message}")
-        print()
+            lines.append(f"[WARN]  {message}")
+        lines.append("")
 
     if not errors and not warnings:
-        print("No issues found.")
-        print()
+        lines.append("No issues found.")
+        lines.append("")
 
     if not errors:
-        print("Validation result: PASSED")
+        lines.append("Validation result: PASSED")
     else:
-        print("Validation result: FAILED")
+        lines.append("Validation result: FAILED")
+
+    return "\n".join(lines)
 
 
-def main() -> int:
+def build_report_json(
+    input_path: Path,
+    entries: List[Dict[str, Any]],
+    errors: List[str],
+    warnings: List[str],
+) -> Dict[str, Any]:
     """
-    Parse arguments, run validation, and return the process exit code.
+    Build a machine-readable validation report.
     """
+    return {
+        "input_file": str(input_path),
+        "total_entries": len(entries),
+        "error_count": len(errors),
+        "warning_count": len(warnings),
+        "errors": errors,
+        "warnings": warnings,
+        "validation_passed": len(errors) == 0,
+        "generated_at": datetime.now().isoformat(),
+    }
+
+
+def write_reports(report_base: Path, report_text: str, report_json: Dict[str, Any]) -> Tuple[Path, Path]:
+    """
+    Write both TXT and JSON reports using the given base path.
+    """
+    txt_path = report_base.with_suffix(".txt")
+    json_path = report_base.with_suffix(".json")
+
+    txt_path.parent.mkdir(parents=True, exist_ok=True)
+
+    with txt_path.open("w", encoding="utf-8") as f:
+        f.write(report_text)
+
+    with json_path.open("w", encoding="utf-8") as f:
+        json.dump(report_json, f, ensure_ascii=False, indent=2)
+
+    return txt_path, json_path
+
+
+def parse_args() -> argparse.Namespace:
+    """
+    Parse CLI arguments.
+    """
+    repo_root = get_repo_root()
+    default_paths_config = repo_root / "code/config/paths.json"
+
     parser = argparse.ArgumentParser(
         description="Validate a canonical benchmark dataset (.json or .jsonl)."
     )
     parser.add_argument(
-        "input_file",
-        type=str,
+        "--input",
+        required=True,
         help="Path to the canonical dataset file (.json or .jsonl).",
     )
-    args = parser.parse_args()
+    parser.add_argument(
+        "--report",
+        default=None,
+        help="Optional base path for saving TXT and JSON reports.",
+    )
+    parser.add_argument(
+        "--save-report",
+        action="store_true",
+        help="Save the report to the default validation report directory from paths.json.",
+    )
+    parser.add_argument(
+        "--paths-config",
+        default=str(default_paths_config),
+        help="Path to paths.json. Defaults to code/config/paths.json.",
+    )
 
-    input_path = Path(args.input_file)
+    return parser.parse_args()
+
+
+def main() -> int:
+    """
+    Parse arguments, run validation, optionally write reports, and return the exit code.
+    """
+    args = parse_args()
+    repo_root = get_repo_root()
+
+    input_path = resolve_path(repo_root, args.input)
+    paths_config_path = resolve_path(repo_root, args.paths_config)
 
     try:
         entries = load_dataset(input_path)
         errors, warnings = validate_dataset(entries)
-        print_report(entries, errors, warnings)
+
+        report_text = build_report_text(
+            input_path=input_path,
+            entries=entries,
+            errors=errors,
+            warnings=warnings,
+        )
+        report_json = build_report_json(
+            input_path=input_path,
+            entries=entries,
+            errors=errors,
+            warnings=warnings,
+        )
+
+        print(report_text)
+
+        report_base: Path | None = None
+        if args.report:
+            report_base = normalize_output_base(resolve_path(repo_root, args.report))
+        elif args.save_report:
+            report_base = get_default_report_base(
+                paths_config_path=paths_config_path,
+                repo_root=repo_root,
+                input_path=input_path,
+            )
+
+        if report_base is not None:
+            txt_path, json_path = write_reports(report_base, report_text, report_json)
+            print("")
+            print(f"Saved TXT report:  {txt_path}")
+            print(f"Saved JSON report: {json_path}")
+
         return 0 if not errors else 1
+
     except Exception as exc:
         print(f"[FATAL] {exc}", file=sys.stderr)
         return 1
