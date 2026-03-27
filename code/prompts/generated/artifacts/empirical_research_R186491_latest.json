@@ -1,5 +1,5 @@
 {
-  "prompt_profile": "empirical_research_R186491_v1",
+  "prompt_profile": "empirical_research",
   "template_id": "R186491",
   "template_label": "Empirical Research Practice",
   "contribution_class": "orkgc:C27001",
@@ -7,8 +7,8 @@
   "query_language": "sparql",
   "prefix_profile": "orkg_default",
   "prompt_version": "v1",
-  "source_mapping_path": "/home/s3pr/UNI/BA/code/src/templates/empirical_research_practice.json",
-  "generated_at": "2026-03-27T00:01:26.926Z",
+  "source_mapping_path": "/home/s3pr/UNI/BA/code/data/templates/empirical_research_practice.json",
+  "generated_at": "2026-03-27T02:15:38.208Z",
   "template_mapping": {
     "P135046": {
       "label": "venue serie",

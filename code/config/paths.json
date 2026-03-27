@@ -5,7 +5,11 @@
   },
   "prompts": {
     "rendered_dir": "code/prompts/generated/rendered",
-    "artifacts_dir": "code/prompts/generated/artifacts"
+    "artifacts_dir": "code/prompts/generated/artifacts",
+    "mapping_sources": {
+      "nlp4re": "code/data/templates/nlp4re-template.json",
+      "empirical_research": "code/data/templates/empirical_research_practice.json"
+    }
   },
   "reports": {
     "validation_dir": "code/data/canonical/validation/reports"

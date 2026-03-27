@@ -1,5 +1,5 @@
 {
-  "prompt_profile": "nlp4re_R1544125_v1",
+  "prompt_profile": "nlp4re",
   "template_id": "R1544125",
   "template_label": "NLP for Requirements Engineering",
   "contribution_class": "orkgc:C121001",
@@ -7,8 +7,8 @@
   "query_language": "sparql",
   "prefix_profile": "orkg_default",
   "prompt_version": "v1",
-  "source_mapping_path": "/home/s3pr/UNI/BA/code/src/templates/nlp4re-template.json",
-  "generated_at": "2026-03-27T00:01:26.924Z",
+  "source_mapping_path": "/home/s3pr/UNI/BA/code/data/templates/nlp4re-template.json",
+  "generated_at": "2026-03-27T02:15:38.213Z",
   "template_mapping": {
     "P181002": {
       "label": "RE task",

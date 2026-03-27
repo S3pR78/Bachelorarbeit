@@ -3,61 +3,59 @@ import * as path from "node:path";
 import { generateDynamicSPARQLPrompt } from "./promptGenerator";
 import { PredicatesMapping } from "./types";
 
-type PromptConfig = {
-  name: string;
-  templateId: string;
-  templateLabel: string;
-  targetClassId: string;
-  mappingPath: string;
+type PromptProfile = {
+    family: string;
+    template_id: string;
+    template_label: string;
+    target_class_id: string;
+    contribution_class: string;
+    query_language?: string;
+    prefix_profile?: string;
+    output_base_name: string;
+    prompt_generator_source?: string;
+    enabled?: boolean;
+};
+
+type PromptProfilesConfig = {
+	version: string;
+	default_query_language?: string;
+	default_prefix_profile?: string;
+	profiles: Record<string, PromptProfile>;
+	family_to_profile?: Record<string, string>;
+};
+
+type PathsConfig = {
+  config: {
+    prompt_profiles: string;
+    dataset_registry?: string;
+  };
+  prompts: {
+    rendered_dir: string;
+    artifacts_dir: string;
+    mapping_sources: Record<string, string>;
+  };
+  reports?: {
+    validation_dir?: string;
+  };
 };
 
 type PromptArtifact = {
-  prompt_profile: string;
-  template_id: string;
-  template_label: string;
-  contribution_class: string;
-  target_class_id: string;
-  query_language: "sparql";
-  prefix_profile: string;
-  prompt_version: string;
-  source_mapping_path: string;
-  generated_at: string;
-  template_mapping: PredicatesMapping;
-  prompt_text: string;
+	prompt_profile: string;
+	template_id: string;
+	template_label: string;
+	contribution_class: string;
+	target_class_id: string;
+	query_language: string;
+	prefix_profile: string;
+	prompt_version: string;
+	source_mapping_path: string;
+	generated_at: string;
+	template_mapping: PredicatesMapping;
+	prompt_text: string;
 };
 
-const ROOT_DIR = path.resolve(__dirname, "../../..");
-const OUTPUT_JSON_DIR = path.join(
-  ROOT_DIR,
-  "code/prompts/generated/artifacts"
-);
-const OUTPUT_TXT_DIR = path.join(
-  ROOT_DIR,
-  "code/prompts/generated/rendered"
-);
-
-const PROMPT_CONFIGS: PromptConfig[] = [
-  {
-    name: "nlp4re",
-    templateId: "R1544125",
-    templateLabel: "NLP for Requirements Engineering",
-    targetClassId: "C121001",
-    mappingPath: path.join(
-      ROOT_DIR,
-      "code/data/templates/nlp4re-template.json"
-    ),
-  },
-  {
-    name: "empirical_research",
-    templateId: "R186491",
-    templateLabel: "Empirical Research Practice",
-    targetClassId: "C27001",
-    mappingPath: path.join(
-      ROOT_DIR,
-      "code/data/templates/empirical_research_practice.json"
-    ),
-  },
-];
+const REPO_ROOT = path.resolve(__dirname, "../../..");
+const DEFAULT_PATHS_CONFIG = path.join(REPO_ROOT, "code/config/paths.json");
 
 function ensureDir(dirPath: string): void {
   fs.mkdirSync(dirPath, { recursive: true });
@@ -76,6 +74,13 @@ function writeJsonFile(filePath: string, data: unknown): void {
 function writeTextFile(filePath: string, content: string): void {
   ensureDir(path.dirname(filePath));
   fs.writeFileSync(filePath, content, "utf-8");
+}
+
+function resolvePath(rawPath: string): string {
+  if (path.isAbsolute(rawPath)) {
+    return rawPath;
+  }
+  return path.join(REPO_ROOT, rawPath);
 }
 
 function escapeRegExp(value: string): string {
@@ -112,64 +117,103 @@ function getMaxVersionInDir(
   return maxVersion;
 }
 
-function getNextVersion(baseName: string): number {
-  const maxJsonVersion = getMaxVersionInDir(baseName, OUTPUT_JSON_DIR, "json");
-  const maxTxtVersion = getMaxVersionInDir(baseName, OUTPUT_TXT_DIR, "txt");
+function getNextVersion(
+  baseName: string,
+  outputJsonDir: string,
+  outputTxtDir: string
+): number {
+  const maxJsonVersion = getMaxVersionInDir(baseName, outputJsonDir, "json");
+  const maxTxtVersion = getMaxVersionInDir(baseName, outputTxtDir, "txt");
   return Math.max(maxJsonVersion, maxTxtVersion) + 1;
 }
 
-function buildBaseName(config: PromptConfig): string {
-  return `${config.name}_${config.templateId}`;
+function loadPathsConfig(pathsConfigPath: string): PathsConfig {
+  const config = readJsonFile<PathsConfig>(pathsConfigPath);
+
+  if (!config.config?.prompt_profiles) {
+    throw new Error("paths.json is missing config.prompt_profiles");
+  }
+
+  if (!config.prompts?.rendered_dir) {
+    throw new Error("paths.json is missing prompts.rendered_dir");
+  }
+
+  if (!config.prompts?.artifacts_dir) {
+    throw new Error("paths.json is missing prompts.artifacts_dir");
+  }
+
+  if (!config.prompts?.mapping_sources) {
+    throw new Error("paths.json is missing prompts.mapping_sources");
+  }
+
+  return config;
 }
 
-function buildPromptArtifact(config: PromptConfig): void {
-  if (!fs.existsSync(config.mappingPath)) {
-    console.warn(`[SKIP] Mapping file not found: ${config.mappingPath}`);
+function loadPromptProfiles(promptProfilesPath: string): PromptProfilesConfig {
+  const config = readJsonFile<PromptProfilesConfig>(promptProfilesPath);
+
+  if (!config.profiles || typeof config.profiles !== "object") {
+    throw new Error("prompt_profiles.json must contain a 'profiles' object");
+  }
+
+  return config;
+}
+
+function buildPromptArtifact(
+  profileName: string,
+  profile: PromptProfile,
+  mappingPath: string,
+  outputJsonDir: string,
+  outputTxtDir: string,
+  defaultQueryLanguage: string,
+  defaultPrefixProfile: string
+): void {
+  if (!fs.existsSync(mappingPath)) {
+    console.warn(`[SKIP] Mapping file not found for profile '${profileName}': ${mappingPath}`);
     return;
   }
 
-  const mapping = readJsonFile<PredicatesMapping>(config.mappingPath);
-
+  const mapping = readJsonFile<PredicatesMapping>(mappingPath);
   const promptText = generateDynamicSPARQLPrompt(
     mapping,
-    config.templateId,
-    config.templateLabel,
-    config.targetClassId
+    profile.template_id,
+    profile.template_label,
+    profile.target_class_id
   );
 
-  const baseName = buildBaseName(config);
-  const nextVersion = getNextVersion(baseName);
+  const baseName = profile.output_base_name;
+  const nextVersion = getNextVersion(baseName, outputJsonDir, outputTxtDir);
   const versionTag = `v${nextVersion}`;
 
   const artifact: PromptArtifact = {
-    prompt_profile: `${baseName}_${versionTag}`,
-    template_id: config.templateId,
-    template_label: config.templateLabel,
-    contribution_class: `orkgc:${config.targetClassId}`,
-    target_class_id: config.targetClassId,
-    query_language: "sparql",
-    prefix_profile: "orkg_default",
+    prompt_profile: `${profileName}`,
+    template_id: profile.template_id,
+    template_label: profile.template_label,
+    contribution_class: profile.contribution_class,
+    target_class_id: profile.target_class_id,
+    query_language: profile.query_language ?? defaultQueryLanguage,
+    prefix_profile: profile.prefix_profile ?? defaultPrefixProfile,
     prompt_version: versionTag,
-    source_mapping_path: config.mappingPath,
+    source_mapping_path: mappingPath,
     generated_at: new Date().toISOString(),
     template_mapping: mapping,
     prompt_text: promptText,
   };
 
   const versionedJsonPath = path.join(
-    OUTPUT_JSON_DIR,
+    outputJsonDir,
     `${baseName}_${versionTag}.json`
   );
   const versionedTxtPath = path.join(
-    OUTPUT_TXT_DIR,
+    outputTxtDir,
     `${baseName}_${versionTag}.txt`
   );
   const latestJsonPath = path.join(
-    OUTPUT_JSON_DIR,
+    outputJsonDir,
     `${baseName}_latest.json`
   );
   const latestTxtPath = path.join(
-    OUTPUT_TXT_DIR,
+    outputTxtDir,
     `${baseName}_latest.txt`
   );
 
@@ -179,24 +223,60 @@ function buildPromptArtifact(config: PromptConfig): void {
   writeJsonFile(latestJsonPath, artifact);
   writeTextFile(latestTxtPath, promptText);
 
-  console.log(`[OK] ${config.templateLabel} -> ${versionTag}`);
-  console.log(`     JSON:   ${versionedJsonPath}`);
-  console.log(`     TXT:    ${versionedTxtPath}`);
-  console.log(`     LATEST JSON: ${latestJsonPath}`);
-  console.log(`     LATEST TXT:  ${latestTxtPath}`);
+  console.log(`[OK] ${profileName} -> ${versionTag}`);
+  console.log(`     JSON:         ${versionedJsonPath}`);
+  console.log(`     TXT:          ${versionedTxtPath}`);
+  console.log(`     LATEST JSON:  ${latestJsonPath}`);
+  console.log(`     LATEST TXT:   ${latestTxtPath}`);
   console.log("");
 }
 
 function main(): void {
-  ensureDir(OUTPUT_JSON_DIR);
-  ensureDir(OUTPUT_TXT_DIR);
+  const pathsConfig = loadPathsConfig(DEFAULT_PATHS_CONFIG);
 
-  console.log(`JSON output dir: ${OUTPUT_JSON_DIR}`);
-  console.log(`TXT output dir:  ${OUTPUT_TXT_DIR}`);
+  const promptProfilesPath = resolvePath(pathsConfig.config.prompt_profiles);
+  const outputJsonDir = resolvePath(pathsConfig.prompts.artifacts_dir);
+  const outputTxtDir = resolvePath(pathsConfig.prompts.rendered_dir);
+  const mappingSources = pathsConfig.prompts.mapping_sources;
+
+  const promptProfilesConfig = loadPromptProfiles(promptProfilesPath);
+
+  const defaultQueryLanguage =
+    promptProfilesConfig.default_query_language ?? "sparql";
+  const defaultPrefixProfile =
+    promptProfilesConfig.default_prefix_profile ?? "orkg_default";
+
+  ensureDir(outputJsonDir);
+  ensureDir(outputTxtDir);
+
+  console.log(`Prompt profiles: ${promptProfilesPath}`);
+  console.log(`JSON output dir: ${outputJsonDir}`);
+  console.log(`TXT output dir:  ${outputTxtDir}`);
   console.log("");
 
-  for (const config of PROMPT_CONFIGS) {
-    buildPromptArtifact(config);
+  for (const [profileName, profile] of Object.entries(promptProfilesConfig.profiles)) {
+    if (profile.enabled === false) {
+      console.log(`[SKIP] Profile '${profileName}' is disabled.`);
+      continue;
+    }
+
+    const rawMappingPath = mappingSources[profileName];
+    if (!rawMappingPath) {
+      console.warn(`[SKIP] No mapping source configured for profile '${profileName}' in paths.json`);
+      continue;
+    }
+
+    const mappingPath = resolvePath(rawMappingPath);
+
+    buildPromptArtifact(
+      profileName,
+      profile,
+      mappingPath,
+      outputJsonDir,
+      outputTxtDir,
+      defaultQueryLanguage,
+      defaultPrefixProfile
+    );
   }
 }
 
