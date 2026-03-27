@@ -1,8 +1,13 @@
 {
-    "config": {
-        "dataset_registry": "code/config/dataset_registry.json"
-    },
-    "reports": {
-        "validation_dir": "code/data/canonical/validation/reports"
-    }
+  "config": {
+    "dataset_registry": "code/config/dataset_registry.json",
+    "prompt_profiles": "code/config/prompt_profiles.json"
+  },
+  "prompts": {
+    "rendered_dir": "code/prompts/generated/rendered",
+    "artifacts_dir": "code/prompts/generated/artifacts"
+  },
+  "reports": {
+    "validation_dir": "code/data/canonical/validation/reports"
+  }
 }

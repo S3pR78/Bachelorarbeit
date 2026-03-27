@@ -1,5 +1,5 @@
 {
-  "version": "2.0",
+  "version": "3.0",
   "default_query_language": "sparql",
   "default_prefix_profile": "orkg_default",
   "profiles": {
@@ -12,10 +12,6 @@
       "query_language": "sparql",
       "prefix_profile": "orkg_default",
       "output_base_name": "empirical_research_R186491",
-      "rendered_dir": "code/prompts/generated/rendered",
-      "artifacts_dir": "code/prompts/generated/artifacts",
-      "latest_rendered_path": "code/prompts/generated/rendered/empirical_research_R186491_latest.txt",
-      "latest_artifact_path": "code/prompts/generated/artifacts/empirical_research_R186491_latest.json",
       "prompt_generator_source": "EmpiRE-Compass",
       "enabled": true
     },
@@ -28,10 +24,6 @@
       "query_language": "sparql",
       "prefix_profile": "orkg_default",
       "output_base_name": "nlp4re_R1544125",
-      "rendered_dir": "code/prompts/generated/rendered",
-      "artifacts_dir": "code/prompts/generated/artifacts",
-      "latest_rendered_path": "code/prompts/generated/rendered/nlp4re_R1544125_latest.txt",
-      "latest_artifact_path": "code/prompts/generated/artifacts/nlp4re_R1544125_latest.json",
       "prompt_generator_source": "EmpiRE-Compass",
       "enabled": true
     }
