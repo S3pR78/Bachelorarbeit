@@ -1,0 +1,551 @@
+[
+  {
+    "uid": "empirical_research-0001",
+    "source_dataset": "Emperical_Research",
+    "source_id": 1,
+    "family": "empirical_research",
+    "question": "Which papers report which venue series?",
+    "gold_query": "SELECT DISTINCT ?paper ?paperLabel ?venue ?venueLabel\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C27001 .\n    ?contribution orkgp:P135046 ?venue .\n\n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n    OPTIONAL { ?venue rdfs:label ?venueLabel . }\n}\nORDER BY ?paperLabel ?venueLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0002",
+    "source_dataset": "Emperical_Research",
+    "source_id": 2,
+    "family": "empirical_research",
+    "question": "Which papers report which research paradigm?",
+    "gold_query": "SELECT DISTINCT ?paper ?paperLabel ?researchParadigm ?researchParadigmLabel\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C27001.               \n    ?contribution orkgp:P57003 ?researchParadigm .\n    ?contribution orkgp:P135046 ?venue .\n    ?venue rdfs:label ?venue_name .\n\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n    OPTIONAL { ?researchParadigm rdfs:label ?researchParadigmLabel . }\n}\nORDER BY ?paperLabel ?researchParadigmLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0003",
+    "source_dataset": "Emperical_Research",
+    "source_id": 3,
+    "family": "empirical_research",
+    "question": "Which papers report the wording of which research question?",
+    "gold_query": "SELECT DISTINCT ?paper ?paperLabel ?researchQuestion ?researchQuestionLabel ?questionWording\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C27001 .\n    ?contribution orkgp:P37330 ?researchQuestion .\n\n    ?contribution orkgp:P135046 ?venue .\n    ?venue rdfs:label ?venue_name .\n\n    ?researchQuestion orkgp:P44139 ?questionWording .\n    \n    OPTIONAL {?researchQuestion rdfs:label ?researchQuestionLabel}\n    OPTIONAL {?paper rdfs:label ?paperLabel .}\n    \n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nORDER BY ?paperLabel ?questionWording",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0004",
+    "source_dataset": "Emperical_Research",
+    "source_id": 4,
+    "family": "empirical_research",
+    "question": "Which papers report which research question type?",
+    "gold_query": "SELECT ?paper ?paperLabel\n       (GROUP_CONCAT(DISTINCT ?questionTypeLabel; separator=\" | \") AS ?questionTypes)\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C27001 ;\n                    orkgp:P135046 ?venue .\n    ?contribution orkgp:P37330 ?researchQuestion .\n    ?researchQuestion orkgp:P41928 ?questionType .\n\n    ?venue rdfs:label ?venue_name .\n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n    OPTIONAL { ?questionType rdfs:label ?questionTypeLabel . }\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nGROUP BY ?paper ?paperLabel\nORDER BY ?paperLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0005",
+    "source_dataset": "Emperical_Research",
+    "source_id": 5,
+    "family": "empirical_research",
+    "question": "Which papers report which data type of the collected research data?",
+    "gold_query": "SELECT DISTINCT ?paper ?paperLabel ?dataType ?dataTypeLabel\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C27001 ;\n                    orkgp:P135046 ?venue .\n\n    ?contribution orkgp:P56008 ?dataCollection .\n    ?dataCollection orkgp:DATA ?researchData .\n    ?researchData orkgp:P7055 ?dataType .\n    ?venue rdfs:label ?venue_name .\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n\n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n    OPTIONAL { ?dataType rdfs:label ?dataTypeLabel . }\n}\nORDER BY ?paperLabel ?dataTypeLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0006",
+    "source_dataset": "Emperical_Research",
+    "source_id": 6,
+    "family": "empirical_research",
+    "question": "Which papers report the exact name of which data collection method and filter \"no method\"?",
+    "gold_query": "SELECT DISTINCT ?paper ?paperLabel\n    (GROUP_CONCAT(DISTINCT ?methodName; separator=\" | \") AS ?dataCollectionMethods)\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C27001 .\n\n    ?contribution orkgp:P56008 ?dataCollection .\n    ?dataCollection orkgp:P1005 ?dataCollectionMethod .\n    ?dataCollectionMethod orkgp:P145012 ?methodName .\n\n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n    FILTER(LCASE(STR(?methodName)) != LCASE(\"no method\"))\n}\nGROUP BY ?paper ?paperLabel\nORDER BY ?paperLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0007",
+    "source_dataset": "Emperical_Research",
+    "source_id": 7,
+    "family": "empirical_research",
+    "question": "Which papers report which data analysis method?",
+    "gold_query": "SELECT DISTINCT ?paper ?paperLabel \n          (GROUP_CONCAT(DISTINCT ?methodLabel; separator=\" | \") AS ?dataAnalysisMethods)\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C27001 ;\n                    orkgp:P135046 ?venue .\n\n    ?contribution orkgp:P15124 ?dataAnalysis .\n    ?dataAnalysis rdfs:label ?da_label .\n    ?dataAnalysis orkgp:P1005 ?method .\n\n    ?venue rdfs:label ?venue_name .\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n    FILTER(?da_label != \"no analysis\"^^xsd:string)\n\n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n    OPTIONAL { ?method rdfs:label ?methodLabel . }\n\n    FILTER(LCASE(STR(?methodLabel)) != LCASE(\"no method\"))\n}\nGROUP BY ?paper ?paperLabel\nORDER BY ?paperLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0008",
+    "source_dataset": "Emperical_Research",
+    "source_id": 8,
+    "family": "empirical_research",
+    "question": "Which papers report which statistical tests?",
+    "gold_query": "SELECT ?paper ?paperLabel\n       (GROUP_CONCAT(DISTINCT ?testLabel; separator=\" | \") AS ?statisticalTests)\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C27001 ;\n                    orkgp:P135046 ?venue .\n\n    ?contribution orkgp:P15124 ?dataAnalysis .\n    ?dataAnalysis rdfs:label ?da_label .\n    ?dataAnalysis orkgp:P56043 ?inferentialStatistics .\n    ?inferentialStatistics orkgp:P35133 ?test .\n\n    ?venue rdfs:label ?venue_name .\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n    FILTER(?da_label != \"no analysis\"^^xsd:string)\n\n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n    OPTIONAL { ?test rdfs:label ?testLabel . }\n\n}\nGROUP BY ?paper ?paperLabel\nORDER BY ?paperLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0009",
+    "source_dataset": "Emperical_Research",
+    "source_id": 9,
+    "family": "empirical_research",
+    "question": "Which papers report, for each reported research question, the wording of the research question, the question type, and the wording of each associated subquestion?",
+    "gold_query": "SELECT DISTINCT\n    ?paper ?paperLabel\n    ?researchQuestion ?rqWording\n    ?rqType ?rqTypeLabel\n    ?subquestion ?subqWording\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C27001 ;\n                    orkgp:P135046 ?venue .\n\n    ?contribution orkgp:P37330 ?researchQuestion .\n    ?researchQuestion orkgp:P44139 ?rqWording .\n    ?researchQuestion orkgp:P41928 ?rqType .\n    ?rqType rdfs:label ?rqTypeLabel .\n    \n\n    ?venue rdfs:label ?venue_name .\n    ?researchQuestion orkgp:P57000 ?subquestion .\n    ?subquestion orkgp:P44139 ?subqWording .\n\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n    ?paper rdfs:label ?paperLabel .\n}\nORDER BY ?paperLabel ?rqWording ?subqWording",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0010",
+    "source_dataset": "Emperical_Research",
+    "source_id": 10,
+    "family": "empirical_research",
+    "question": "Which papers report, for each reported research question, the wording of each associated subquestion and the question type of that exact subquestion?",
+    "gold_query": "SELECT DISTINCT\n    ?paper ?paperLabel\n    ?researchQuestion ?rqw\n    ?subquestion ?subquestionWording\n    ?subquestionType ?subquestionTypeLabel\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C27001 ;\n                    orkgp:P135046 ?venue .\n\n    ?venue rdfs:label ?venue_name .\n    ?contribution orkgp:P37330 ?researchQuestion .\n    ?researchQuestion orkgp:P44139 ?rqw .\n    ?researchQuestion orkgp:P57000 ?subquestion .\n\n    ?subquestion orkgp:P44139 ?subquestionWording .\n    ?subquestion orkgp:P41928 ?subquestionType .\n\n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n    OPTIONAL { ?subquestionType rdfs:label ?subquestionTypeLabel . }\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nORDER BY ?paperLabel ?subquestionWording ?subquestionTypeLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0011",
+    "source_dataset": "Emperical_Research",
+    "source_id": 11,
+    "family": "empirical_research",
+    "question": "Which papers report, for a research question, both the question and the question type?",
+    "gold_query": "SELECT DISTINCT \n    ?paper ?paperLabel \n    ?researchQuestion ?questionWording \n    ?questionType ?questionTypeLabel\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C27001 ;\n                    orkgp:P135046 ?venue .\n    ?venue rdfs:label ?venue_name .\n\n    ?contribution orkgp:P37330 ?researchQuestion .\n    ?researchQuestion orkgp:P44139 ?questionWording .\n    ?researchQuestion orkgp:P41928 ?questionType .\n    \n    #FILTER(LCASE(STR(?questionWording)) != LCASE(\"no question\"))\n    #FILTER(LCASE(STR(?questionType)) != LCASE(\"no type\"))\n\n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n    OPTIONAL { ?questionType rdfs:label ?questionTypeLabel . }\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nORDER BY ?paperLabel ?questionWording ?questionTypeLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0012",
+    "source_dataset": "Emperical_Research",
+    "source_id": 12,
+    "family": "empirical_research",
+    "question": "Which papers report, for a research question, at least one subquestion with its question and its question type?",
+    "gold_query": "SELECT DISTINCT\n    ?paper ?paperLabel\n    ?researchQuestion\n    ?subquestion\n    ?subquestionWording\n    ?subquestionType ?subquestionTypeLabel\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C27001 ;\n                    orkgp:P135046 ?venue .\n    ?venue rdfs:label ?venue_name .\n\n    ?contribution orkgp:P37330 ?researchQuestion .\n    ?researchQuestion orkgp:P57000 ?subquestion .\n\n    ?subquestion orkgp:P44139 ?subquestionWording .\n    ?subquestion orkgp:P41928 ?subquestionType .\n\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n\n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n    OPTIONAL { ?subquestionType rdfs:label ?subquestionTypeLabel . }\n}\nORDER BY ?paperLabel ?subquestionWording ?subquestionTypeLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0013",
+    "source_dataset": "Emperical_Research",
+    "source_id": 13,
+    "family": "empirical_research",
+    "question": "Which papers report, for their research data, both a data type and at least two url?",
+    "gold_query": "SELECT ?paper ?paperLabel  ?dataType ?dataTypeLabel\n       (COUNT(DISTINCT ?url) AS ?urlCount)\n       (GROUP_CONCAT(DISTINCT STR(?url); separator=\" | \") AS ?urls)\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C27001 ;\n                    orkgp:P135046 ?venue .\n\n    ?venue rdfs:label ?venue_name .\n\n    ?contribution orkgp:P56008 ?dataCollection .\n    ?dataCollection rdfs:label ?dc_label .\n    ?dataCollection orkgp:DATA ?researchData .\n\n    ?researchData orkgp:P7055 ?dataType .\n    ?researchData orkgp:url ?url .\n\n    ?paper rdfs:label ?paperLabel .\n    ?dataType rdfs:label ?dataTypeLabel .\n\n    FILTER(?dc_label != \"no collection\"^^xsd:string)\n\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nGROUP BY ?paper ?paperLabel ?dataType ?dataTypeLabel\nHAVING (COUNT(DISTINCT ?url) >= 2)\nORDER BY ?paperLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0014",
+    "source_dataset": "Emperical_Research",
+    "source_id": 14,
+    "family": "empirical_research",
+    "question": "Which papers report, together with inferential statistics, both a Hypothesis and a Statistical Technique?",
+    "gold_query": "SELECT ?paper ?paperLabel\n      (GROUP_CONCAT(DISTINCT STR(?hypothesis); separator=\" | \") AS ?hypotheses)\n      (GROUP_CONCAT(DISTINCT ?statisticalTechniqueLabel; separator=\" | \") AS ?statisticalTechniques)\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C27001 ;\n                    orkgp:P135046 ?venue .\n\n    ?venue rdfs:label ?venue_name .\n    ?contribution orkgp:P15124 ?dataAnalysis .\n    ?dataAnalysis rdfs:label ?da_label .\n    ?dataAnalysis orkgp:P56043 ?inferentialStatistics .\n\n    ?inferentialStatistics orkgp:P30001 ?hypothesis .\n    ?inferentialStatistics orkgp:P35133 ?statisticalTechnique .\n    ?statisticalTechnique rdfs:label ?statisticalTechniqueLabel .\n    FILTER(?da_label != \"no analysis\"^^xsd:string)\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n\n    ?paper rdfs:label ?paperLabel .\n}\nGROUP BY ?paper ?paperLabel\nORDER BY ?paperLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0015",
+    "source_dataset": "Emperical_Research",
+    "source_id": 15,
+    "family": "empirical_research",
+    "question": "Which papers report, for the measures of frequency, both count and percent?",
+    "gold_query": "SELECT DISTINCT ?paper ?paperLabel\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C27001 ;\n                    orkgp:P135046 ?venue .\n\n    ?venue rdfs:label ?venue_name .\n    ?contribution orkgp:P15124 ?dataAnalysis .\n    ?dataAnalysis orkgp:P56048 ?descriptiveStatistic .\n    ?dataAnalysis rdfs:label ?da_label .\n    ?descriptiveStatistic orkgp:P56049 ?measuresOfFrequency .\n\n    ?measuresOfFrequency orkgp:P55023 ?count .\n    ?measuresOfFrequency orkgp:P56050 ?percent .\n\n    ?paper rdfs:label ?paperLabel .\n    FILTER(?da_label != \"no analysis\"^^xsd:string)\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n\n}\nORDER BY ?paperLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0016",
+    "source_dataset": "Emperical_Research",
+    "source_id": 16,
+    "family": "empirical_research",
+    "question": "Which papers report, for the measures of central tendency, mean, median, mode, minimum, and maximum?",
+    "gold_query": "SELECT DISTINCT ?paper ?paperLabel\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C27001 ;\n                    orkgp:P135046 ?venue .\n\n    ?venue rdfs:label ?venue_name .\n    ?dataAnalysis orkgp:P56048 ?descriptiveStatistic .\n    ?descriptiveStatistic orkgp:P57005 ?measuresOfCentralTendency .\n\n    ?measuresOfCentralTendency orkgp:P47000 ?mean .\n    ?measuresOfCentralTendency orkgp:P57006 ?median .\n    ?measuresOfCentralTendency orkgp:P57007 ?mode .\n    ?measuresOfCentralTendency orkgp:P44107 ?minimum .\n    ?measuresOfCentralTendency orkgp:P44108 ?maximum .\n\n    ?paper rdfs:label ?paperLabel .\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n\n}\nORDER BY ?paperLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0017",
+    "source_dataset": "Emperical_Research",
+    "source_id": 17,
+    "family": "empirical_research",
+    "question": "Are there any papers that report a research question answer with hidden in text?",
+    "gold_query": "ASK {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C27001 ;\n                    orkgp:P135046 ?venue .\n    ?venue rdfs:label ?venue_name .\n\n    ?contribution orkgp:P57004 ?researchQuestionAnswer .\n    ?researchQuestionAnswer orkgp:P55038 ?hiddenInText .\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0018",
+    "source_dataset": "Emperical_Research",
+    "source_id": 18,
+    "family": "empirical_research",
+    "question": "Are there any papers that report a research question answer with highlighted in text?",
+    "gold_query": "ASK {\n  ?paper orkgp:P31 ?contribution .\n  ?contribution a orkgc:C27001 ;\n                  orkgp:P135046 ?venue .\n  ?venue rdfs:label ?venue_name .\n\n  ?contribution orkgp:P57004 ?researchQuestionAnswer .\n  ?researchQuestionAnswer orkgp:P55039 ?highlightedInText .\n  FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0019",
+    "source_dataset": "Emperical_Research",
+    "source_id": 19,
+    "family": "empirical_research",
+    "question": "Are there any papers that report research data with both a data type and at least one url?",
+    "gold_query": "ASK {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C27001 ;\n                    orkgp:P135046 ?venue .\n    ?venue rdfs:label ?venue_name .\n\n    ?contribution orkgp:P56008 ?dataCollection .\n    ?dataCollection rdfs:label ?dc_label .\n    ?dataCollection orkgp:DATA ?researchData .\n\n    ?researchData orkgp:P7055 ?dataType .\n    ?researchData orkgp:url ?url .\n    FILTER(?dc_label != \"no collection\"^^xsd:string)\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0020",
+    "source_dataset": "Emperical_Research",
+    "source_id": 20,
+    "family": "empirical_research",
+    "question": "Are there any papers that report inferential statistics with at least two Hypothesis?",
+    "gold_query": "ASK {\n    {\n    SELECT ?paper\n    WHERE {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C27001 ;\n                    orkgp:P135046 ?venue .\n    ?venue rdfs:label ?venue_name .\n\n    ?contribution orkgp:P15124 ?dataAnalysis .\n    ?dataAnalysis rdfs:label ?da_label .\n    ?dataAnalysis orkgp:P56043 ?inferentialStatistics .\n    ?inferentialStatistics orkgp:P30001 ?hypothesis .\n    FILTER(?da_label != \"no analysis\"^^xsd:string)\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n    }\n    GROUP BY ?paper ?inferentialStatistics\n    HAVING (COUNT(DISTINCT ?hypothesis) >= 2)\n    }\n}",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0021",
+    "source_dataset": "Emperical_Research",
+    "source_id": 21,
+    "family": "empirical_research",
+    "question": "Which papers report a research question but no question type?",
+    "gold_query": "SELECT DISTINCT ?paper ?paperLabel ?researchQuestion ?questionWording\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C27001 ;\n                    orkgp:P135046 ?venue .\n    ?venue rdfs:label ?venue_name .\n    ?contribution orkgp:P37330 ?researchQuestion .\n\n    OPTIONAL { ?researchQuestion orkgp:P44139 ?questionWording . }\n    ?paper rdfs:label ?paperLabel .\n\n    FILTER NOT EXISTS {\n        ?researchQuestion orkgp:P41928 ?questionType .\n        ?questionType rdfs:label ?questionTypeLabel .\n        #FILTER(LCASE(STR(?questionTypeLabel)) != \"no type\")\n  }\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nORDER BY ?paperLabel ?questionWording",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0022",
+    "source_dataset": "Emperical_Research",
+    "source_id": 22,
+    "family": "empirical_research",
+    "question": "Which papers report at least one subquestion but no question type for that subquestion?",
+    "gold_query": "SELECT DISTINCT ?paper ?paperLabel ?researchQuestion ?subquestion ?subquestionWording\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C27001 ;\n                    orkgp:P135046 ?venue .\n    ?venue rdfs:label ?venue_name .\n\n    ?contribution orkgp:P37330 ?researchQuestion .\n    ?researchQuestion orkgp:P57000 ?subquestion .\n\n    OPTIONAL { ?subquestion orkgp:P44139 ?subquestionWording . }\n\n    ?paper rdfs:label ?paperLabel .\n\n    FILTER NOT EXISTS {\n        ?subquestion orkgp:P41928 ?subquestionType .\n        ?subquestionType rdfs:label ?subquestionTypeLabel .\n        #FILTER(LCASE(STR(?subquestionTypeLabel)) != \"no type\")\n    }\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nORDER BY ?paperLabel ?subquestionWording",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0023",
+    "source_dataset": "Emperical_Research",
+    "source_id": 23,
+    "family": "empirical_research",
+    "question": "Which papers report research data with a data type but without any url?",
+    "gold_query": "SELECT DISTINCT ?paper ?paperLabel ?researchData ?dataType ?dataTypeLabel \nWHERE {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C27001 ;\n                    orkgp:P135046 ?venue .\n    ?venue rdfs:label ?venue_name .\n\n    ?contribution orkgp:P56008 ?dataCollection .\n    ?dataCollection rdfs:label ?dc_label .\n    ?dataCollection orkgp:DATA ?researchData .\n    ?researchData orkgp:P7055 ?dataType .\n\n    ?paper rdfs:label ?paperLabel .\n    ?dataType rdfs:label ?dataTypeLabel .\n\n    FILTER NOT EXISTS {\n        ?researchData orkgp:url ?url .\n    }\n    FILTER(?dc_label != \"no collection\"^^xsd:string)\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nORDER BY ?paperLabel ?dataTypeLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0024",
+    "source_dataset": "Emperical_Research",
+    "source_id": 24,
+    "family": "empirical_research",
+    "question": "Which papers report a Hypothesis with a hypothesis statement but without a hypothesis type?",
+    "gold_query": "SELECT DISTINCT ?paper ?paperLabel ?hypothesis ?hypothesisStatement ?hypothesisTypeLabel\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C27001 ;\n                    orkgp:P135046 ?venue ;\n                    orkgp:P15124 ?dataAnalysis .\n\n    ?venue rdfs:label ?venue_name .\n    ?dataAnalysis rdfs:label ?da_label ;\n                    orkgp:P56043 ?inferentialStatistics .\n\n    ?inferentialStatistics orkgp:P30001 ?hypothesis .\n    ?hypothesis orkgp:P56046 ?hypothesisStatement .\n\n    OPTIONAL {\n        ?hypothesis orkgp:P41703 ?hypothesisType .\n        OPTIONAL { ?hypothesisType rdfs:label ?hypothesisTypeLabel . }\n    }\n\n    ?paper rdfs:label ?paperLabel .\n\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n    FILTER(?da_label != \"no analysis\"^^xsd:string)\n\n    FILTER(\n        !BOUND(?hypothesisType)\n        || !BOUND(?hypothesisTypeLabel)\n        || LCASE(STR(?hypothesisTypeLabel)) = \"no type\"\n    )\n}\nORDER BY ?paperLabel ?hypothesisStatement",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0025",
+    "source_dataset": "Emperical_Research",
+    "source_id": 25,
+    "family": "empirical_research",
+    "question": "How many reported subquestions does each paper have?",
+    "gold_query": "SELECT ?paper ?paperLabel\n       (COUNT(DISTINCT ?subquestion) AS ?subquestionCount)\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n    ?contribution a orkgc:C27001 ;\n                    orkgp:P135046 ?serie .\n\n    OPTIONAL {\n        ?serie rdfs:label ?venue_name .\n    }\n    OPTIONAL {\n        ?paper rdfs:label ?paperLabel .\n    }\n\n    OPTIONAL {\n        ?contribution orkgp:P37330 ?researchQuestion .\n        ?researchQuestion orkgp:P57000 ?subquestion .\n    }\n\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nGROUP BY ?paper ?paperLabel\nORDER BY DESC(?subquestionCount) ?paperLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0026",
+    "source_dataset": "Emperical_Research",
+    "source_id": 26,
+    "family": "empirical_research",
+    "question": "How many reported urls for research data does each paper have?",
+    "gold_query": "SELECT ?paper ?paperLabel (COUNT(DISTINCT ?url) AS ?number_of_reported_urls)\nWHERE {\n    \n    ?paper orkgp:P31 ?contribution .\n    \n    \n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n\n    \n    ?contribution a orkgc:C27001 ;\n                  orkgp:P135046 ?venue ;\n                  orkgp:P56008 ?data_collection .\n\n    \n    ?venue rdfs:label ?venue_name .\n\n    \n    ?data_collection rdfs:label ?dc_label ;\n                     orkgp:DATA ?research_data .\n\n    \n    ?research_data orkgp:url ?url .\n\n    FILTER(?dc_label != \"no collection\"^^xsd:string)\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nGROUP BY ?paper ?paperLabel\nORDER BY DESC(?number_of_reported_urls) ?paperLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0027",
+    "source_dataset": "Emperical_Research",
+    "source_id": 27,
+    "family": "empirical_research",
+    "question": "How many reported data collection methods does each paper have?",
+    "gold_query": "SELECT ?paper ?paperLabel (COUNT(DISTINCT ?dc_method) AS ?number_of_reported_data_collection_methods)\nWHERE {\n    \n    ?paper orkgp:P31 ?contribution .\n\n    \n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n\n    \n    ?contribution a orkgc:C27001 ;\n                  orkgp:P135046 ?venue ;\n                  orkgp:P56008 ?data_collection .\n\n    \n    ?venue rdfs:label ?venue_name .\n\n    \n    ?data_collection rdfs:label ?dc_label ;\n                     orkgp:P1005 ?dc_method .\n\n    FILTER(?dc_label != \"no collection\"^^xsd:string)\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nGROUP BY ?paper ?paperLabel\nORDER BY DESC(?number_of_reported_data_collection_methods) ?paperLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0028",
+    "source_dataset": "Emperical_Research",
+    "source_id": 28,
+    "family": "empirical_research",
+    "question": "How many different reported method types for data collection methods does each paper have?",
+    "gold_query": "SELECT ?paper ?paperLabel (COUNT(DISTINCT ?method_type) AS ?number_of_different_reported_method_types)\nWHERE {\n    \n    ?paper orkgp:P31 ?contribution .\n\n    \n\n    \n    ?contribution a orkgc:C27001 ;\n                  orkgp:P135046 ?venue ;\n                  orkgp:P56008 ?data_collection .\n\n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n    \n    ?venue rdfs:label ?venue_name .\n\n    \n    ?data_collection rdfs:label ?dc_label ;\n                     orkgp:P1005 ?dc_method .\n\n    ?dc_method orkgp:P94003 ?method_type .\n\n    FILTER(?dc_label != \"no collection\"^^xsd:string)\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nGROUP BY ?paper ?paperLabel\nORDER BY DESC(?number_of_different_reported_method_types) ?paperLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0029",
+    "source_dataset": "Emperical_Research",
+    "source_id": 29,
+    "family": "empirical_research",
+    "question": "How many reported Hypotheses does each paper have?",
+    "gold_query": "SELECT ?paper ?paperLabel (COUNT(DISTINCT ?hypothesis) AS ?number_of_reported_hypotheses)\nWHERE {\n    \n    ?paper orkgp:P31 ?contribution .\n\n    \n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n\n    \n    ?contribution a orkgc:C27001 ;\n                  orkgp:P135046 ?venue ;\n                  orkgp:P15124 ?data_analysis .\n\n    \n    ?venue rdfs:label ?venue_name .\n\n    \n    ?data_analysis rdfs:label ?da_label ;\n                   orkgp:P56043 ?inferential_statistics .\n\n   \n    ?inferential_statistics orkgp:P30001 ?hypothesis .\n\n    FILTER(?da_label != \"no analysis\"^^xsd:string)\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nGROUP BY ?paper ?paperLabel\nORDER BY DESC(?number_of_reported_hypotheses) ?paperLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0030",
+    "source_dataset": "Emperical_Research",
+    "source_id": 30,
+    "family": "empirical_research",
+    "question": "How often is each research paradigm reported across the corpus?",
+    "gold_query": "SELECT ?research_paradigm ?research_paradigmLabel (COUNT(DISTINCT ?paper) AS ?paper_count)\nWHERE {\n  \n    ?paper orkgp:P31 ?contribution .\n\n    \n    ?contribution a orkgc:C27001 ;\n                  orkgp:P135046 ?venue ;\n                  orkgp:P57003 ?research_paradigm .\n\n    \n    ?venue rdfs:label ?venue_name .\n    ?research_paradigm rdfs:label ?research_paradigmLabel .\n\n    \n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nGROUP BY ?research_paradigm ?research_paradigmLabel\nORDER BY DESC(?paper_count)",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0031",
+    "source_dataset": "Emperical_Research",
+    "source_id": 31,
+    "family": "empirical_research",
+    "question": "How often is each question type reported for research questions across the corpus?",
+    "gold_query": "SELECT ?question_type ?question_typeLabel (COUNT(DISTINCT ?paper) AS ?paper_count)\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n\n    ?contribution a orkgc:C27001 ;\n                  orkgp:P135046 ?venue ;\n                  orkgp:P37330 ?research_question .\n\n    ?venue rdfs:label ?venue_name .\n\n    ?research_question orkgp:P41928 ?question_type .\n  \n    OPTIONAL { ?question_type rdfs:label ?question_typeLabel . }\n    FILTER(LCASE(STR(?question_typeLabel)) != LCASE(STR(\"no type\"^^xsd:string)))\n\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nGROUP BY ?question_type ?question_typeLabel\nORDER BY DESC(?paper_count)",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0032",
+    "source_dataset": "Emperical_Research",
+    "source_id": 32,
+    "family": "empirical_research",
+    "question": "How is the reporting of each data type for research data distributed across publication years?",
+    "gold_query": "SELECT ?paper ?paperLabel ?year ?data_type ?data_typeLabel\nWHERE {\n        \n        ?paper orkgp:P31 ?contribution ;\n            orkgp:P29 ?year .\n        OPTIONAL { ?paper rdfs:label ?paperLabel . }\n\n        ?contribution a orkgc:C27001 ;\n                    orkgp:P135046 ?venue ;\n                    orkgp:P56008 ?data_collection .\n\n        ?venue rdfs:label ?venue_name .\n\n        ?data_collection rdfs:label ?dc_label ;\n                        orkgp:DATA ?research_data .\n\n        \n        ?research_data orkgp:P7055 ?data_type .\n\n        OPTIONAL { ?data_type rdfs:label ?data_typeLabel . }\n\n        FILTER(?dc_label != \"no collection\"^^xsd:string)\n        FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nORDER BY ?year ?paperLabel ?data_typeLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0033",
+    "source_dataset": "Emperical_Research",
+    "source_id": 33,
+    "family": "empirical_research",
+    "question": "How is the reporting of machine learning algorithms distributed across decades?",
+    "gold_query": "SELECT ?decade ?ml_algorithm ?ml_algorithmLabel (COUNT(DISTINCT ?paper) AS ?paper_count)\nWHERE {\n    ?paper orkgp:P31 ?contribution ;\n           orkgp:P29 ?year .\n\n    ?contribution a orkgc:C27001 ;\n                  orkgp:P135046 ?venue ;\n                  orkgp:P15124 ?data_analysis .\n\n    ?venue rdfs:label ?venue_name .\n\n    ?data_analysis rdfs:label ?da_label ;\n                   orkgp:P57016 ?machine_learning .\n\n    ?machine_learning orkgp:P2001 ?ml_algorithm .\n\n    OPTIONAL { ?ml_algorithm rdfs:label ?ml_algorithmLabel . }\n\n    BIND(xsd:integer(FLOOR(xsd:decimal(?year) / 10)) * 10 AS ?decade_start)\n    BIND(CONCAT(STR(?decade_start), \"s\") AS ?decade)\n\n    FILTER(?da_label != \"no analysis\"^^xsd:string)\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nGROUP BY ?decade ?ml_algorithm ?ml_algorithmLabel\nORDER BY ?decade DESC(?paper_count) ?ml_algorithmLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0034",
+    "source_dataset": "Emperical_Research",
+    "source_id": 34,
+    "family": "empirical_research",
+    "question": "Across publication years, how many papers report both data collection and data analysis?",
+    "gold_query": "SELECT ?year (COUNT(DISTINCT ?paper) AS ?paper_count)\nWHERE {\n    ?paper orkgp:P31 ?contribution ;\n           orkgp:P29 ?year .\n\n    ?contribution a orkgc:C27001 ;\n                  orkgp:P135046 ?venue ;\n                  orkgp:P56008 ?data_collection ;\n                  orkgp:P15124 ?data_analysis .\n\n    ?venue rdfs:label ?venue_name .\n    ?data_collection rdfs:label ?dc_label .\n    ?data_analysis rdfs:label ?da_label .\n\n    FILTER(?dc_label != \"no collection\"^^xsd:string)\n    FILTER(?da_label != \"no analysis\"^^xsd:string)\n\n    \n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nGROUP BY ?year\nORDER BY ?year",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0035",
+    "source_dataset": "Emperical_Research",
+    "source_id": 35,
+    "family": "empirical_research",
+    "question": "Across decades, how often is each research paradigm reported?",
+    "gold_query": "SELECT ?decade ?research_paradigm ?research_paradigmLabel (COUNT(DISTINCT ?paper) AS ?paper_count)\nWHERE {\n    ?paper orkgp:P31 ?contribution ;\n           orkgp:P29 ?year .\n\n    ?contribution a orkgc:C27001 ;\n                  orkgp:P135046 ?venue ;\n                  orkgp:P57003 ?research_paradigm .\n\n    ?venue rdfs:label ?venue_name .\n    OPTIONAL { ?research_paradigm rdfs:label ?research_paradigmLabel . }\n\n    BIND(xsd:integer(FLOOR(xsd:decimal(?year) / 10)) * 10 AS ?decade_start)\n    BIND(CONCAT(STR(?decade_start), \"s\") AS ?decade)\n\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nGROUP BY ?decade ?research_paradigm ?research_paradigmLabel\nORDER BY ?decade DESC(?paper_count) ?research_paradigmLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0036",
+    "source_dataset": "Emperical_Research",
+    "source_id": 36,
+    "family": "empirical_research",
+    "question": "For each publication year, how many papers report at least one research question?",
+    "gold_query": "SELECT ?year (COUNT(DISTINCT ?paper) AS ?paper_count)\nWHERE {\n    ?paper orkgp:P31 ?contribution ;\n           orkgp:P29 ?year .\n\n    ?contribution a orkgc:C27001 ;\n                  orkgp:P135046 ?venue ;\n                  orkgp:P37330 ?research_question .\n\n    ?venue rdfs:label ?venue_name .\n\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nGROUP BY ?year\nORDER BY ?year",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0037",
+    "source_dataset": "Emperical_Research",
+    "source_id": 37,
+    "family": "empirical_research",
+    "question": "Across publication years, how often is each question type of a research question reported?",
+    "gold_query": "SELECT ?year ?question_type ?question_typeLabel (COUNT(DISTINCT ?paper) AS ?paper_count)\nWHERE {\n    ?paper orkgp:P31 ?contribution ;\n           orkgp:P29 ?year .\n\n    ?contribution a orkgc:C27001 ;\n                  orkgp:P135046 ?venue ;\n                  orkgp:P37330 ?research_question .\n\n    ?venue rdfs:label ?venue_name .\n\n    ?research_question orkgp:P41928 ?question_type .\n\n    OPTIONAL { ?question_type rdfs:label ?question_typeLabel . }\n\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nGROUP BY ?year ?question_type ?question_typeLabel\nORDER BY ?year DESC(?paper_count) ?question_typeLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0038",
+    "source_dataset": "Emperical_Research",
+    "source_id": 38,
+    "family": "empirical_research",
+    "question": "Across decades, how many papers report research data with both a data type and at least one url?",
+    "gold_query": "SELECT ?decade (COUNT(DISTINCT ?paper) AS ?paper_count)\nWHERE {\n    ?paper orkgp:P31 ?contribution ;\n           orkgp:P29 ?year .\n\n    ?contribution a orkgc:C27001 ;\n                  orkgp:P135046 ?venue ;\n                  orkgp:P56008 ?data_collection .\n\n    ?venue rdfs:label ?venue_name .\n    ?data_collection rdfs:label ?dc_label ;\n                     orkgp:DATA ?research_data .\n\n    ?research_data orkgp:P7055 ?data_type ;\n                   orkgp:url ?url .\n\n    BIND(xsd:integer(FLOOR(xsd:decimal(?year) / 10)) * 10 AS ?decade_start)\n    BIND(CONCAT(STR(?decade_start), \"s\") AS ?decade)\n\n    FILTER(?dc_label != \"no collection\"^^xsd:string)\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nGROUP BY ?decade\nORDER BY ?decade",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0039",
+    "source_dataset": "Emperical_Research",
+    "source_id": 39,
+    "family": "empirical_research",
+    "question": "Across the intervals 1993–1999, 2000–2009, 2010–2019, and 2020–2025, how many papers report threats to validity with mentioned?",
+    "gold_query": "SELECT ?interval (COUNT(DISTINCT ?paper) AS ?paper_count)\nWHERE {\n    ?paper orkgp:P31 ?contribution ;\n           orkgp:P29 ?year .\n\n    ?contribution a orkgc:C27001 ;\n                  orkgp:P135046 ?venue ;\n                  orkgp:P39099 ?threats .\n\n    ?venue rdfs:label ?venue_name .\n    ?threats orkgp:P145000 ?mentioned .\n\n    BIND(xsd:integer(?year) AS ?year_int)\n\n    BIND(\n        IF(?year_int >= 1993 && ?year_int <= 1999, \"1993–1999\",\n            IF(?year_int >= 2000 && ?year_int <= 2009, \"2000–2009\",\n                IF(?year_int >= 2010 && ?year_int <= 2019, \"2010–2019\",\n                    IF(?year_int >= 2020 && ?year_int <= 2025, \"2020–2025\", \"out_of_scope\"))))\n        AS ?interval\n    )\n\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n    FILTER(?interval != \"out_of_scope\")\n}\nGROUP BY ?interval\nORDER BY ?interval",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0040",
+    "source_dataset": "Emperical_Research",
+    "source_id": 40,
+    "family": "empirical_research",
+    "question": "For each publication year, which is reported by more papers: research question or research question answer?",
+    "gold_query": "SELECT ?year ?rq_paper_count ?rqa_paper_count ?more_reported\nWHERE {\n\n    {\n      SELECT ?year (COUNT(DISTINCT ?paper) AS ?rq_paper_count)\n      WHERE {\n        ?paper orkgp:P31 ?contribution ;\n              orkgp:P29 ?year .\n\n        ?contribution a orkgc:C27001 ;\n                      orkgp:P135046 ?venue ;\n                      orkgp:P37330 ?research_question .\n\n        ?venue rdfs:label ?venue_name .\n\n        FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n      }\n      GROUP BY ?year\n    }\n\n    {\n      SELECT ?year (COUNT(DISTINCT ?paper) AS ?rqa_paper_count)\n      WHERE {\n        ?paper orkgp:P31 ?contribution ;\n              orkgp:P29 ?year .\n\n        ?contribution a orkgc:C27001 ;\n                      orkgp:P135046 ?venue ;\n                      orkgp:P57004 ?research_question_answer .\n\n        ?venue rdfs:label ?venue_name .\n\n        FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n      }\n      GROUP BY ?year\n    }\n\n    BIND(\n      IF(?rq_paper_count > ?rqa_paper_count, \"research question\",\n        IF(?rqa_paper_count > ?rq_paper_count, \"research question answer\", \"tie\")\n      ) AS ?more_reported\n    )\n}\nORDER BY ?year",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0041",
+    "source_dataset": "Emperical_Research",
+    "source_id": 41,
+    "family": "empirical_research",
+    "question": "Which combinations of research paradigm and question type are reported most frequently across papers.",
+    "gold_query": "SELECT ?research_paradigm ?research_paradigmLabel ?question_type ?question_typeLabel\n       (COUNT(DISTINCT ?paper) AS ?paper_count)\nWHERE {\n    {\n        SELECT DISTINCT ?paper ?research_paradigm ?research_paradigmLabel ?question_type ?question_typeLabel\n        WHERE {\n            ?paper orkgp:P31 ?contribution .\n\n            ?contribution a orkgc:C27001 ;\n                          orkgp:P135046 ?venue ;\n                          orkgp:P57003 ?research_paradigm ;\n                          orkgp:P37330 ?research_question .\n\n            ?venue rdfs:label ?venue_name .\n            ?research_question orkgp:P41928 ?question_type .\n\n            OPTIONAL { ?research_paradigm rdfs:label ?research_paradigmLabel . }\n            OPTIONAL { ?question_type rdfs:label ?question_typeLabel . }\n\n            FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n        }\n    }\n}\nGROUP BY ?research_paradigm ?research_paradigmLabel ?question_type ?question_typeLabel\nORDER BY DESC(?paper_count) ?research_paradigmLabel ?question_typeLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0042",
+    "source_dataset": "Emperical_Research",
+    "source_id": 42,
+    "family": "empirical_research",
+    "question": "Which combinations of data type and method type are reported most frequently across papers.",
+    "gold_query": "SELECT ?data_type ?data_typeLabel ?method_type ?method_typeLabel\n       (COUNT(DISTINCT ?paper) AS ?paper_count)\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n\n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n\n    ?contribution a orkgc:C27001 ;\n                  orkgp:P135046 ?venue ;\n                  orkgp:P56008 ?data_collection .\n\n    ?venue rdfs:label ?venue_name .\n\n    ?data_collection rdfs:label ?dc_label ;\n                     orkgp:DATA ?research_data ;\n                     orkgp:P1005 ?dc_method .\n\n    ?research_data orkgp:P7055 ?data_type .\n\n    ?dc_method orkgp:P94003 ?method_type .\n\n    OPTIONAL { ?data_type rdfs:label ?data_typeLabel . }\n    OPTIONAL { ?method_type rdfs:label ?method_typeLabel . }\n\n    FILTER(?dc_label != \"no collection\"^^xsd:string)\n\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\n\nGROUP BY ?data_type ?data_typeLabel ?method_type ?method_typeLabel\n\nORDER BY DESC(?paper_count) ?data_typeLabel ?method_typeLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0043",
+    "source_dataset": "Emperical_Research",
+    "source_id": 43,
+    "family": "empirical_research",
+    "question": "Which papers report either hidden in text or highlighted in text for a research question answer?",
+    "gold_query": "SELECT DISTINCT ?paper ?paperLabel\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n\n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n\n    ?contribution a orkgc:C27001 ;\n                  orkgp:P135046 ?venue ;\n                  orkgp:P57004 ?research_question_answer .\n\n    ?venue rdfs:label ?venue_name .\n\n    {\n        ?research_question_answer orkgp:P55038 ?hidden_in_text .\n    }\n    UNION\n    {\n        ?research_question_answer orkgp:P55039 ?highlighted_in_text .\n    }\n\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nORDER BY ?paperLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0044",
+    "source_dataset": "Emperical_Research",
+    "source_id": 44,
+    "family": "empirical_research",
+    "question": "Which papers report either a question type for a research question or a question type for a subquestion?",
+    "gold_query": "SELECT DISTINCT ?paper ?paperLabel\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n\n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n\n    ?contribution a orkgc:C27001 ;\n                  orkgp:P135046 ?venue .\n    ?venue rdfs:label ?venue_name .\n\n    {\n        ?contribution orkgp:P37330 ?research_question .\n        ?research_question orkgp:P41928 ?rq_question_type .\n    }\n    UNION\n    {\n        ?contribution orkgp:P37330 ?research_question .\n        ?research_question orkgp:P57000 ?subquestion .\n        ?subquestion orkgp:P41928 ?subquestion_type .\n    }\n    \n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nORDER BY ?paperLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0045",
+    "source_dataset": "Emperical_Research",
+    "source_id": 45,
+    "family": "empirical_research",
+    "question": "Across decades, which research paradigms are most often associated with qualitative versus quantitative data type, and which method types are reported with them?",
+    "gold_query": "SELECT ?decade ?data_type ?data_typeLabel\n       ?research_paradigm ?research_paradigmLabel\n       ?method_type ?method_typeLabel\n       ?paper_count\nWHERE {\n    {\n        SELECT ?decade ?data_type ?data_typeLabel (MAX(?paper_count) AS ?max_paper_count)\n        WHERE {\n            {\n                SELECT ?decade ?data_type ?data_typeLabel\n                       ?research_paradigm ?research_paradigmLabel\n                       ?method_type ?method_typeLabel\n                       (COUNT(DISTINCT ?paper) AS ?paper_count)\n                WHERE {\n                    ?paper orkgp:P31 ?contribution ;\n                           orkgp:P29 ?year .\n\n                    ?contribution a orkgc:C27001 ;\n                                  orkgp:P135046 ?venue ;\n                                  orkgp:P57003 ?research_paradigm ;\n                                  orkgp:P56008 ?data_collection .\n\n                    ?venue rdfs:label ?venue_name .\n\n                    ?research_paradigm rdfs:label ?research_paradigmLabel .\n\n                    ?data_collection rdfs:label ?dc_label ;\n                                     orkgp:DATA ?research_data ;\n                                     orkgp:P1005 ?dc_method .\n\n                    ?research_data orkgp:P7055 ?data_type .\n                    ?data_type rdfs:label ?data_typeLabel .\n\n                    ?dc_method orkgp:P94003 ?method_type .\n                    ?method_type rdfs:label ?method_typeLabel .\n\n                    BIND(xsd:integer(FLOOR(xsd:decimal(?year) / 10)) * 10 AS ?decade_start)\n                    BIND(CONCAT(STR(?decade_start), \"s\") AS ?decade)\n\n                    FILTER(?dc_label != \"no collection\"^^xsd:string)\n                    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n                    FILTER(\n                        ?data_typeLabel = \"qualitative\"^^xsd:string ||\n                        ?data_typeLabel = \"quantitative\"^^xsd:string\n                    )\n                }\n                GROUP BY ?decade ?data_type ?data_typeLabel\n                         ?research_paradigm ?research_paradigmLabel\n                         ?method_type ?method_typeLabel\n            }\n        }\n        GROUP BY ?decade ?data_type ?data_typeLabel\n    }\n\n    {\n        SELECT ?decade ?data_type ?data_typeLabel\n               ?research_paradigm ?research_paradigmLabel\n               ?method_type ?method_typeLabel\n               (COUNT(DISTINCT ?paper) AS ?paper_count)\n        WHERE {\n            ?paper orkgp:P31 ?contribution ;\n                   orkgp:P29 ?year .\n\n            ?contribution a orkgc:C27001 ;\n                          orkgp:P135046 ?venue ;\n                          orkgp:P57003 ?research_paradigm ;\n                          orkgp:P56008 ?data_collection .\n\n            ?venue rdfs:label ?venue_name .\n\n            ?research_paradigm rdfs:label ?research_paradigmLabel .\n\n            ?data_collection rdfs:label ?dc_label ;\n                             orkgp:DATA ?research_data ;\n                             orkgp:P1005 ?dc_method .\n\n            ?research_data orkgp:P7055 ?data_type .\n            ?data_type rdfs:label ?data_typeLabel .\n\n            ?dc_method orkgp:P94003 ?method_type .\n            ?method_type rdfs:label ?method_typeLabel .\n\n            BIND(xsd:integer(FLOOR(xsd:decimal(?year) / 10)) * 10 AS ?decade_start)\n            BIND(CONCAT(STR(?decade_start), \"s\") AS ?decade)\n\n            FILTER(?dc_label != \"no collection\"^^xsd:string)\n            FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n            FILTER(\n                ?data_typeLabel = \"qualitative\"^^xsd:string ||\n                ?data_typeLabel = \"quantitative\"^^xsd:string\n            )\n        }\n        GROUP BY ?decade ?data_type ?data_typeLabel\n                 ?research_paradigm ?research_paradigmLabel\n                 ?method_type ?method_typeLabel\n    }\n\n    FILTER(?paper_count = ?max_paper_count)\n}\nORDER BY ?decade ?data_typeLabel DESC(?paper_count) ?research_paradigmLabel ?method_typeLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0046",
+    "source_dataset": "Emperical_Research",
+    "source_id": 46,
+    "family": "empirical_research",
+    "question": "Among papers that report machine learning, which Metric values are most frequently reported with which Machine learning algorithms, and how does this differ between papers that also report inferential statistics and those that do not?",
+    "gold_query": "SELECT ?inferential_statistics_group\n       ?ml_algorithm\n       ?ml_algorithmLabel\n       ?metric_value\n       (COUNT(DISTINCT ?paper) AS ?paper_count)\nWHERE {\n    {\n        SELECT DISTINCT ?paper ?inferential_statistics_group ?ml_algorithm ?ml_algorithmLabel ?metric_value\n        WHERE {\n            ?paper orkgp:P31 ?contribution .\n\n            OPTIONAL { ?paper rdfs:label ?paperLabel . }\n\n            ?contribution a orkgc:C27001 ;\n                          orkgp:P135046 ?venue ;\n                          orkgp:P15124 ?data_analysis .\n\n            ?venue rdfs:label ?venue_name .\n\n            ?data_analysis rdfs:label ?da_label .\n\n            ?data_analysis orkgp:P57016 ?machine_learning .\n\n            ?machine_learning orkgp:P2001 ?ml_algorithm .\n\n            OPTIONAL { ?ml_algorithm rdfs:label ?ml_algorithmLabel . }\n\n            ?machine_learning orkgp:P2006 ?metric .\n\n            {\n                ?metric orkgp:P5073 ?recall .\n                BIND(\"recall\"^^xsd:string AS ?metric_value)\n            }\n            UNION\n            {\n                ?metric orkgp:P3004 ?precision .\n                BIND(\"precision\"^^xsd:string AS ?metric_value)\n            }\n            UNION\n            {\n                ?metric orkgp:P18048 ?accuracy .\n                BIND(\"accuracy\"^^xsd:string AS ?metric_value)\n            }\n            UNION\n            {\n                ?metric orkgp:P59137 ?f_score .\n                BIND(\"f-score\"^^xsd:string AS ?metric_value)\n            }\n\n            BIND(\n                IF(\n                    EXISTS {\n                        ?data_analysis orkgp:P56043 ?inferential_statistics .\n                    },\n                    \"with inferential statistics\"^^xsd:string,\n                    \"without inferential statistics\"^^xsd:string\n                ) AS ?inferential_statistics_group\n            )\n\n            FILTER(?da_label != \"no analysis\"^^xsd:string)\n\n            FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n        }\n    }\n}\n\nGROUP BY ?inferential_statistics_group ?ml_algorithm ?ml_algorithmLabel ?metric_value\nORDER BY ?inferential_statistics_group DESC(?paper_count) ?ml_algorithmLabel ?metric_value",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0047",
+    "source_dataset": "Emperical_Research",
+    "source_id": 47,
+    "family": "empirical_research",
+    "question": "Across publication years, how often do papers report both research question and research question answer as highlighted in text, and do those same papers also report research data with a url and threats to validity with mentioned?",
+    "gold_query": "SELECT ?year\n       (SUM(?has_both_highlighted) AS ?papers_with_both_highlighted)\n       (SUM(?has_both_highlighted_and_data_url_and_threats_mentioned) AS ?papers_with_both_highlighted_and_also_data_url_and_threats_mentioned)\nWHERE {\n    {\n        SELECT ?paper ?year\n               (MAX(?both_highlighted_flag) AS ?has_both_highlighted)\n               (MAX(?all_conditions_flag) AS ?has_both_highlighted_and_data_url_and_threats_mentioned)\n        WHERE {\n            ?paper orkgp:P31 ?contribution ;\n                   orkgp:P29 ?year .\n\n            ?contribution a orkgc:C27001 ;\n                          orkgp:P135046 ?venue .\n\n            ?venue rdfs:label ?venue_name .\n\n            ?contribution orkgp:P37330 ?research_question .\n            ?research_question orkgp:P55039 ?rq_highlighted .\n\n            ?contribution orkgp:P57004 ?research_question_answer .\n            ?research_question_answer orkgp:P55039 ?rqa_highlighted .\n\n            BIND(1 AS ?both_highlighted_flag)\n\n            OPTIONAL {\n                ?contribution orkgp:P56008 ?data_collection ;\n                              orkgp:P39099 ?threats .\n\n                ?data_collection rdfs:label ?dc_label ;\n                                 orkgp:DATA ?research_data .\n\n                ?research_data orkgp:url ?url .\n                ?threats orkgp:P145000 ?mentioned .\n\n                FILTER(?dc_label != \"no collection\"^^xsd:string)\n\n                BIND(1 AS ?all_conditions_flag)\n            }\n\n            FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n        }\n        GROUP BY ?paper ?year\n    }\n}\nGROUP BY ?year\nORDER BY ?year",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0048",
+    "source_dataset": "Emperical_Research",
+    "source_id": 48,
+    "family": "empirical_research",
+    "question": "For each paper, classify the reporting of a research question and a research question answer into exactly one of these cases: both reported, only research question reported, only research question answer reported, or neither reported; how many papers fall into each case per publication year?",
+    "gold_query": "SELECT ?year ?reporting_case (COUNT(DISTINCT ?paper) AS ?paper_count)\nWHERE {\n    {\n        SELECT ?paper ?year\n               (MAX(?rq_flag) AS ?has_rq)\n               (MAX(?rqa_flag) AS ?has_rqa)\n        WHERE {\n            ?paper orkgp:P31 ?contribution ;\n                   orkgp:P29 ?year .\n\n            ?contribution a orkgc:C27001 ;\n                          orkgp:P135046 ?venue .\n\n            ?venue rdfs:label ?venue_name .\n\n            OPTIONAL {\n                ?contribution orkgp:P37330 ?research_question .\n                BIND(1 AS ?rq_flag)\n            }\n\n            OPTIONAL {\n                ?contribution orkgp:P57004 ?research_question_answer .\n                BIND(1 AS ?rqa_flag)\n            }\n\n            FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n        }\n        GROUP BY ?paper ?year\n    }\n\n    BIND(\n        IF(?has_rq = 1 && ?has_rqa = 1, \"both reported\"^^xsd:string,\n            IF(?has_rq = 1 && (!BOUND(?has_rqa) || ?has_rqa != 1), \"only research question reported\"^^xsd:string,\n                IF((!BOUND(?has_rq) || ?has_rq != 1) && ?has_rqa = 1, \"only research question answer reported\"^^xsd:string,\n                    \"neither reported\"^^xsd:string\n                )\n            )\n        ) AS ?reporting_case\n    )\n}\nGROUP BY ?year ?reporting_case\nORDER BY ?year ?reporting_case",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0049",
+    "source_dataset": "Emperical_Research",
+    "source_id": 49,
+    "family": "empirical_research",
+    "question": "For each paper, classify the reporting of inferential statistics and machine learning into inferential-statistics only, machine-learning only, both, or neither; how is this distribution changing across decades?",
+    "gold_query": "SELECT ?decade ?reporting_case (COUNT(DISTINCT ?paper) AS ?paper_count)\nWHERE {\n  {\n    SELECT ?paper ?decade\n           (MAX(?is_flag) AS ?has_is)\n           (MAX(?ml_flag) AS ?has_ml)\n    WHERE {\n      ?paper orkgp:P31 ?contribution ;\n             orkgp:P29 ?year .\n\n      ?contribution a orkgc:C27001 ;\n                    orkgp:P135046 ?venue ;\n                    orkgp:P15124 ?data_analysis .\n\n      ?venue rdfs:label ?venue_name .\n      ?data_analysis rdfs:label ?da_label .\n\n      BIND(xsd:integer(FLOOR(xsd:decimal(?year) / 10)) * 10 AS ?decade_start)\n      BIND(CONCAT(STR(?decade_start), \"s\") AS ?decade)\n\n      OPTIONAL {\n        ?data_analysis orkgp:P56043 ?inferential_statistics .\n        BIND(1 AS ?is_flag)\n      }\n\n      OPTIONAL {\n        ?data_analysis orkgp:P57016 ?machine_learning .\n        BIND(1 AS ?ml_flag)\n      }\n\n      FILTER(?da_label != \"no analysis\"^^xsd:string)\n      FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n    }\n    GROUP BY ?paper ?decade\n  }\n\n  BIND(\n    IF(?has_is = 1 && ?has_ml = 1, \"both\"^^xsd:string,\n      IF(?has_is = 1 && (!BOUND(?has_ml) || ?has_ml != 1), \"inferential-statistics only\"^^xsd:string,\n        IF((!BOUND(?has_is) || ?has_is != 1) && ?has_ml = 1, \"machine-learning only\"^^xsd:string,\n          \"neither\"^^xsd:string\n        )\n      )\n    ) AS ?reporting_case\n  )\n}\nGROUP BY ?decade ?reporting_case\nORDER BY ?decade ?reporting_case",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0050",
+    "source_dataset": "Emperical_Research",
+    "source_id": 50,
+    "family": "empirical_research",
+    "question": "For each paper, derive a validity coverage score equal to the number of reported threats to validity categories; which papers have 0, 1–2, 3–4, or 5+ reported categories?",
+    "gold_query": "SELECT ?coverage_class ?paper ?paperLabel ?validity_coverage_score\nWHERE {\n  {\n    SELECT ?paper ?paperLabel (COUNT(DISTINCT ?category) AS ?validity_coverage_score)\n    WHERE {\n      ?paper orkgp:P31 ?contribution .\n      OPTIONAL { ?paper rdfs:label ?paperLabel . }\n\n      ?contribution a orkgc:C27001 ;\n                    orkgp:P135046 ?venue .\n\n      ?venue rdfs:label ?venue_name .\n\n      OPTIONAL {\n        ?contribution orkgp:P39099 ?threats .\n\n        {\n          ?threats orkgp:P55037 ?v .\n          BIND(\"construct validity\"^^xsd:string AS ?category)\n        }\n        UNION\n        {\n          ?threats orkgp:P55035 ?v .\n          BIND(\"internal validity\"^^xsd:string AS ?category)\n        }\n        UNION\n        {\n          ?threats orkgp:P55034 ?v .\n          BIND(\"external validity\"^^xsd:string AS ?category)\n        }\n        UNION\n        {\n          ?threats orkgp:P55036 ?v .\n          BIND(\"conclusion validity\"^^xsd:string AS ?category)\n        }\n        UNION\n        {\n          ?threats orkgp:P59109 ?v .\n          BIND(\"reliability\"^^xsd:string AS ?category)\n        }\n        UNION\n        {\n          ?threats orkgp:P60006 ?v .\n          BIND(\"generalizability\"^^xsd:string AS ?category)\n        }\n        UNION\n        {\n          ?threats orkgp:P97002 ?v .\n          BIND(\"repeatability\"^^xsd:string AS ?category)\n        }\n        UNION\n        {\n          ?threats orkgp:P68005 ?v .\n          BIND(\"content validity\"^^xsd:string AS ?category)\n        }\n        UNION\n        {\n          ?threats orkgp:P97000 ?v .\n          BIND(\"descriptive validity\"^^xsd:string AS ?category)\n        }\n        UNION\n        {\n          ?threats orkgp:P97001 ?v .\n          BIND(\"theoretical validity\"^^xsd:string AS ?category)\n        }\n        UNION\n        {\n          ?threats orkgp:P145000 ?v .\n          BIND(\"mentioned\"^^xsd:string AS ?category)\n        }\n      }\n\n      FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n    }\n    GROUP BY ?paper ?paperLabel\n  }\n\n  BIND(\n    IF(?validity_coverage_score = 0, \"0\"^^xsd:string,\n      IF(?validity_coverage_score >= 1 && ?validity_coverage_score <= 2, \"1–2\"^^xsd:string,\n        IF(?validity_coverage_score >= 3 && ?validity_coverage_score <= 4, \"3–4\"^^xsd:string,\n          \"5+\"^^xsd:string\n        )\n      )\n    ) AS ?coverage_class\n  )\n}\nORDER BY ?coverage_class DESC(?validity_coverage_score) ?paperLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0051",
+    "source_dataset": "Emperical_Research",
+    "source_id": 51,
+    "family": "empirical_research",
+    "question": "Across publication years, what percentage of papers with a research question also report at least one subquestion, and what percentage do not?",
+    "gold_query": "SELECT ?year\n       (COUNT(DISTINCT ?paper) AS ?papers_with_research_question)\n       (SUM(?has_subquestion) AS ?papers_with_at_least_one_subquestion)\n       ((COUNT(DISTINCT ?paper) - SUM(?has_subquestion)) AS ?papers_without_subquestion)\n       ((100.0 * SUM(?has_subquestion)) / COUNT(DISTINCT ?paper) AS ?percentage_with_subquestion)\n       ((100.0 * (COUNT(DISTINCT ?paper) - SUM(?has_subquestion))) / COUNT(DISTINCT ?paper) AS ?percentage_without_subquestion)\nWHERE {\n    {\n        SELECT ?paper ?year (MAX(?subquestion_flag) AS ?has_subquestion)\n        WHERE {\n            ?paper orkgp:P31 ?contribution ;\n                   orkgp:P29 ?year .\n\n            ?contribution a orkgc:C27001 ;\n                          orkgp:P135046 ?venue ;\n                          orkgp:P37330 ?research_question .\n\n            ?venue rdfs:label ?venue_name .\n\n            OPTIONAL {\n                ?research_question orkgp:P57000 ?subquestion .\n                BIND(1 AS ?subquestion_flag)\n            }\n\n            FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n        }\n        GROUP BY ?paper ?year\n    }\n}\nGROUP BY ?year\nORDER BY ?year",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0052",
+    "source_dataset": "Emperical_Research",
+    "source_id": 52,
+    "family": "empirical_research",
+    "question": "For each paper, classify the reporting style of the research question into hidden only, highlighted only, both hidden and highlighted, or neither flag reported; how many papers fall into each class, and how does this differ by venue serie?",
+    "gold_query": "SELECT ?venue ?venue_name ?reporting_case (COUNT(DISTINCT ?paper) AS ?paper_count)\nWHERE {\n  {\n    SELECT ?paper ?venue ?venue_name\n           (MAX(?hidden_flag) AS ?has_hidden)\n           (MAX(?highlighted_flag) AS ?has_highlighted)\n    WHERE {\n      ?paper orkgp:P31 ?contribution .\n\n      ?contribution a orkgc:C27001 ;\n                    orkgp:P135046 ?venue .\n\n      ?venue rdfs:label ?venue_name .\n\n      OPTIONAL {\n        ?contribution orkgp:P37330 ?rq_hidden .\n        ?rq_hidden orkgp:P55038 ?hidden_value .\n        BIND(1 AS ?hidden_flag)\n      }\n\n      OPTIONAL {\n        ?contribution orkgp:P37330 ?rq_highlighted .\n        ?rq_highlighted orkgp:P55039 ?highlighted_value .\n        BIND(1 AS ?highlighted_flag)\n      }\n    }\n    GROUP BY ?paper ?venue ?venue_name\n  }\n\n  BIND(\n    IF(?has_hidden = 1 && ?has_highlighted = 1, \"both hidden and highlighted\"^^xsd:string,\n      IF(?has_hidden = 1 && (!BOUND(?has_highlighted) || ?has_highlighted != 1), \"hidden only\"^^xsd:string,\n        IF((!BOUND(?has_hidden) || ?has_hidden != 1) && ?has_highlighted = 1, \"highlighted only\"^^xsd:string,\n          \"neither flag reported\"^^xsd:string\n        )\n      )\n    ) AS ?reporting_case\n  )\n}\nGROUP BY ?venue ?venue_name ?reporting_case\nORDER BY ?venue_name ?reporting_case",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0053",
+    "source_dataset": "Emperical_Research",
+    "source_id": 53,
+    "family": "empirical_research",
+    "question": "Which papers report a research question with both a question type and at least two subquestion.",
+    "gold_query": "SELECT DISTINCT ?paper ?paperLabel\nWHERE {\n    ?paper orkgp:P31 ?contribution .\n\n    OPTIONAL { ?paper rdfs:label ?paperLabel . }\n\n    ?contribution a orkgc:C27001 ;\n                  orkgp:P135046 ?venue ;\n                  orkgp:P37330 ?research_question .\n\n    ?venue rdfs:label ?venue_name .\n\n    ?research_question orkgp:P41928 ?question_type .\n\n    ?research_question orkgp:P57000 ?subquestion1 ;\n                       orkgp:P57000 ?subquestion2 .\n\n    FILTER(?subquestion1 != ?subquestion2)\n\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nORDER BY ?paperLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0054",
+    "source_dataset": "Emperical_Research",
+    "source_id": 54,
+    "family": "empirical_research",
+    "question": "How many papers per publication year report both a research paradigm and at least two threats-to-validity category?",
+    "gold_query": "SELECT ?year (COUNT(DISTINCT ?paper) AS ?paper_count)\nWHERE {\n    {\n        SELECT ?paper ?year (COUNT(DISTINCT ?category) AS ?category_count)\n        WHERE {\n            ?paper orkgp:P31 ?contribution ;\n                   orkgp:P29 ?year .\n\n            ?contribution a orkgc:C27001 ;\n                          orkgp:P135046 ?venue ;\n                          orkgp:P57003 ?research_paradigm ;\n                          orkgp:P39099 ?threats .\n\n            ?venue rdfs:label ?venue_name .\n\n            {\n                ?threats orkgp:P55037 ?v .\n                BIND(\"construct validity\"^^xsd:string AS ?category)\n            }\n            UNION\n            {\n                ?threats orkgp:P55035 ?v .\n                BIND(\"internal validity\"^^xsd:string AS ?category)\n            }\n            UNION\n            {\n                ?threats orkgp:P55034 ?v .\n                BIND(\"external validity\"^^xsd:string AS ?category)\n            }\n            UNION\n            {\n                ?threats orkgp:P55036 ?v .\n                BIND(\"conclusion validity\"^^xsd:string AS ?category)\n            }\n            UNION\n            {\n                ?threats orkgp:P59109 ?v .\n                BIND(\"reliability\"^^xsd:string AS ?category)\n            }\n            UNION\n            {\n                ?threats orkgp:P60006 ?v .\n                BIND(\"generalizability\"^^xsd:string AS ?category)\n            }\n            UNION\n            {\n                ?threats orkgp:P97002 ?v .\n                BIND(\"repeatability\"^^xsd:string AS ?category)\n            }\n            UNION\n            {\n                ?threats orkgp:P68005 ?v .\n                BIND(\"content validity\"^^xsd:string AS ?category)\n            }\n            UNION\n            {\n                ?threats orkgp:P97000 ?v .\n                BIND(\"descriptive validity\"^^xsd:string AS ?category)\n            }\n            UNION\n            {\n                ?threats orkgp:P97001 ?v .\n                BIND(\"theoretical validity\"^^xsd:string AS ?category)\n            }\n\n            FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n        }\n        GROUP BY ?paper ?year \n        HAVING(COUNT(DISTINCT ?category) >= 10)\n    }\n}\nGROUP BY ?year\nORDER BY ?year",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0055",
+    "source_dataset": "Emperical_Research",
+    "source_id": 55,
+    "family": "empirical_research",
+    "question": "Which papers report both qualitative and quantitative data type for research data, and also report more than two data collection method type?",
+    "gold_query": "SELECT DISTINCT ?paper ?paperLabel\nWHERE {\n    {\n        SELECT ?paper ?paperLabel\n        WHERE {\n            ?paper orkgp:P31 ?contribution .\n\n            OPTIONAL { ?paper rdfs:label ?paperLabel . }\n\n            ?contribution a orkgc:C27001 ;\n                          orkgp:P135046 ?venue ;\n                          orkgp:P56008 ?data_collection .\n\n            ?venue rdfs:label ?venue_name .\n\n            ?data_collection rdfs:label ?dc_label ;\n                             orkgp:DATA ?research_data ;\n                             orkgp:P1005 ?dc_method .\n\n            ?research_data orkgp:P7055 ?data_type .\n            ?data_type orkgp:P57038 ?qualitative ;\n                       orkgp:P57039 ?quantitative .\n\n            ?dc_method orkgp:P94003 ?method_type .\n\n            # Mandatory filters\n            FILTER(?dc_label != \"no collection\"^^xsd:string)\n            FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n        }\n        GROUP BY ?paper ?paperLabel\n        HAVING(COUNT(DISTINCT ?method_type) > 2)\n    }\n}\nORDER BY ?paperLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0056",
+    "source_dataset": "Emperical_Research",
+    "source_id": 56,
+    "family": "empirical_research",
+    "question": "Across decades, how often is each method type reported together with qualitative data type?",
+    "gold_query": "SELECT ?decade ?method_type ?method_typeLabel (COUNT(DISTINCT ?paper) AS ?paper_count)\nWHERE {\n    ?paper orkgp:P31 ?contribution ;\n           orkgp:P29 ?year .\n\n    ?contribution a orkgc:C27001 ;\n                  orkgp:P135046 ?venue ;\n                  orkgp:P56008 ?data_collection .\n\n    ?venue rdfs:label ?venue_name .\n\n    ?data_collection rdfs:label ?dc_label ;\n                     orkgp:DATA ?research_data ;\n                     orkgp:P1005 ?dc_method .\n\n    ?research_data orkgp:P7055 ?data_type .\n    ?data_type orkgp:P57038 ?qualitative .\n\n    ?dc_method orkgp:P94003 ?method_type .\n\n    OPTIONAL { ?method_type rdfs:label ?method_typeLabel . }\n\n    BIND(xsd:integer(FLOOR(xsd:decimal(?year) / 10)) * 10 AS ?decade_start)\n    BIND(CONCAT(STR(?decade_start), \"s\") AS ?decade)\n\n    FILTER(?dc_label != \"no collection\"^^xsd:string)\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nGROUP BY ?decade ?method_type ?method_typeLabel\nORDER BY ?decade DESC(?paper_count) ?method_typeLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0057",
+    "source_dataset": "Emperical_Research",
+    "source_id": 57,
+    "family": "empirical_research",
+    "question": "Across decades, how often is each method type reported together with quantitative data type?",
+    "gold_query": "SELECT ?decade ?method_type ?method_typeLabel (COUNT(DISTINCT ?paper) AS ?paper_count)\nWHERE {\n    ?paper orkgp:P31 ?contribution ;\n           orkgp:P29 ?year .\n\n    ?contribution a orkgc:C27001 ;\n                  orkgp:P135046 ?venue ;\n                  orkgp:P56008 ?data_collection .\n\n    ?venue rdfs:label ?venue_name .\n\n    ?data_collection rdfs:label ?dc_label ;\n                     orkgp:DATA ?research_data ;\n                     orkgp:P1005 ?dc_method .\n\n    ?research_data orkgp:P7055 ?data_type .\n    ?data_type orkgp:P57039 ?quantitative .\n\n    ?dc_method orkgp:P94003 ?method_type .\n\n    OPTIONAL { ?method_type rdfs:label ?method_typeLabel . }\n\n    BIND(xsd:integer(FLOOR(xsd:decimal(?year) / 10)) * 10 AS ?decade_start)\n    BIND(CONCAT(STR(?decade_start), \"s\") AS ?decade)\n\n    FILTER(?dc_label != \"no collection\"^^xsd:string)\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nGROUP BY ?decade ?method_type ?method_typeLabel\nORDER BY ?decade DESC(?paper_count) ?method_typeLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0058",
+    "source_dataset": "Emperical_Research",
+    "source_id": 58,
+    "family": "empirical_research",
+    "question": "For each publication year, how many papers report at least one subquestion but no research question answer?",
+    "gold_query": "SELECT ?year (COUNT(DISTINCT ?paper) AS ?paper_count)\nWHERE {\n    ?paper orkgp:P31 ?contribution ;\n           orkgp:P29 ?year .\n\n    ?contribution a orkgc:C27001 ;\n                  orkgp:P135046 ?venue ;\n                  orkgp:P37330 ?research_question .\n\n    ?venue rdfs:label ?venue_name .\n\n    ?research_question orkgp:P57000 ?subquestion .\n\n    FILTER NOT EXISTS {\n        ?contribution orkgp:P57004 ?research_question_answer .\n    }\n\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nGROUP BY ?year\nORDER BY ?year",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0059",
+    "source_dataset": "Emperical_Research",
+    "source_id": 59,
+    "family": "empirical_research",
+    "question": "For each research paradigm, what percentage of papers report a research question answer as highlighted in text?",
+    "gold_query": "SELECT ?research_paradigm ?research_paradigmLabel\n       (COUNT(DISTINCT ?paper) AS ?total_papers)\n       (SUM(?has_rqa_highlighted) AS ?papers_with_rqa_highlighted)\n       ((100.0 * SUM(?has_rqa_highlighted)) / COUNT(DISTINCT ?paper) AS ?percentage_with_rqa_highlighted)\nWHERE {\n    {\n        SELECT ?paper ?research_paradigm ?research_paradigmLabel\n               (MAX(?rqa_highlighted_flag) AS ?has_rqa_highlighted)\n        WHERE {\n            ?paper orkgp:P31 ?contribution .\n\n            ?contribution a orkgc:C27001 ;\n                          orkgp:P135046 ?venue ;\n                          orkgp:P57003 ?research_paradigm .\n\n            ?venue rdfs:label ?venue_name .\n\n            OPTIONAL { ?research_paradigm rdfs:label ?research_paradigmLabel . }\n\n            OPTIONAL {\n                ?contribution orkgp:P57004 ?research_question_answer .\n                ?research_question_answer orkgp:P55039 ?rqa_highlighted_in_text .\n                BIND(1 AS ?rqa_highlighted_flag)\n            }\n\n         \n            FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n        }\n        GROUP BY ?paper ?research_paradigm ?research_paradigmLabel\n    }\n}\nGROUP BY ?research_paradigm ?research_paradigmLabel\nORDER BY DESC(?percentage_with_rqa_highlighted) ?research_paradigmLabel",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0060",
+    "source_dataset": "Emperical_Research",
+    "source_id": 60,
+    "family": "empirical_research",
+    "question": "Across publication years, how has the combination of research paradigm, data type, and data analysis strategy changed, and which patterns become more dominant over time?",
+    "gold_query": "SELECT ?year\n       ?research_paradigm ?research_paradigmLabel\n       ?data_type ?data_typeLabel\n       ?analysis_strategy\n       (COUNT(DISTINCT ?paper) AS ?paper_count)\nWHERE {\n    ?paper orkgp:P31 ?contribution ;\n           orkgp:P29 ?year .\n\n    ?contribution a orkgc:C27001 ;\n                  orkgp:P135046 ?venue ;\n                  orkgp:P57003 ?research_paradigm ;\n                  orkgp:P56008 ?data_collection ;\n                  orkgp:P15124 ?data_analysis .\n\n    ?venue rdfs:label ?venue_name .\n    ?data_collection rdfs:label ?dc_label ;\n                     orkgp:DATA ?research_data .\n    ?data_analysis rdfs:label ?da_label .\n\n    ?research_data orkgp:P7055 ?data_type .\n\n    OPTIONAL { ?research_paradigm rdfs:label ?research_paradigmLabel . }\n    OPTIONAL { ?data_type rdfs:label ?data_typeLabel . }\n\n    {\n        ?data_analysis orkgp:P56043 ?inferential_statistics .\n        BIND(\"inferential statistics\"^^xsd:string AS ?analysis_strategy)\n    }\n    UNION\n    {\n        ?data_analysis orkgp:P56048 ?descriptive_statistic .\n        BIND(\"descriptive statistic\"^^xsd:string AS ?analysis_strategy)\n    }\n    UNION\n    {\n        ?data_analysis orkgp:P57016 ?machine_learning .\n        BIND(\"machine learning\"^^xsd:string AS ?analysis_strategy)\n    }\n\n    FILTER(?dc_label != \"no collection\"^^xsd:string)\n    FILTER(?da_label != \"no analysis\"^^xsd:string)\n    FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n}\nGROUP BY ?year ?research_paradigm ?research_paradigmLabel ?data_type ?data_typeLabel ?analysis_strategy\nORDER BY ?year DESC(?paper_count) ?research_paradigmLabel ?data_typeLabel ?analysis_strategy",
+    "contribution_class": "orkgc:C27001"
+  },
+  {
+    "uid": "empirical_research-0061",
+    "source_dataset": "Emperical_Research",
+    "source_id": 61,
+    "family": "empirical_research",
+    "question": "Which combinations of research question type and data collection method type occur most frequently across papers?",
+    "gold_query": "SELECT ?question_type ?question_typeLabel\n       ?method_type ?method_typeLabel\n       (COUNT(DISTINCT ?paper) AS ?paper_count)\nWHERE {\n    {\n        SELECT DISTINCT ?paper ?paperLabel ?question_type ?question_typeLabel ?method_type ?method_typeLabel\n        WHERE {\n            ?paper orkgp:P31 ?contribution .\n\n            OPTIONAL { ?paper rdfs:label ?paperLabel . }\n\n            ?contribution a orkgc:C27001 ;\n                          orkgp:P135046 ?venue ;\n                          orkgp:P37330 ?research_question ;\n                          orkgp:P56008 ?data_collection .\n\n            ?venue rdfs:label ?venue_name .\n\n            ?research_question orkgp:P41928 ?question_type .\n            ?data_collection rdfs:label ?dc_label ;\n                             orkgp:P1005 ?dc_method .\n            ?dc_method orkgp:P94003 ?method_type .\n\n            OPTIONAL { ?question_type rdfs:label ?question_typeLabel . }\n            OPTIONAL { ?method_type rdfs:label ?method_typeLabel . }\n\n            FILTER(?dc_label != \"no collection\"^^xsd:string)\n            FILTER(?venue_name = \"IEEE International Requirements Engineering Conference\"^^xsd:string)\n        }\n    }\n}\nGROUP BY ?question_type ?question_typeLabel ?method_type ?method_typeLabel\nORDER BY DESC(?paper_count) ?question_typeLabel ?method_typeLabel",
+    "contribution_class": "orkgc:C27001"
+  }
+]

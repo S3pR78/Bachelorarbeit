@@ -1,0 +1,5 @@
+{
+  "config": {
+    "dataset_registry": "code/config/dataset_registry.json"
+  }
+}

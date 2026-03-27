@@ -1,0 +1,12 @@
+{
+  "nlp4re": {
+    "source_dataset": "NLP4",
+    "family": "nlp4re",
+    "uid_prefix": "nlp4re"
+  },
+  "empirical_research": {
+    "source_dataset": "Emperical_Research",
+    "family": "empirical_research",
+    "uid_prefix": "empirical_research"
+  }
+}

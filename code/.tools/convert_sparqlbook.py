@@ -2,7 +2,17 @@
 """
 convert_sparqlbook.py
 
-Convert .sparqlbook files into a canonical JSON and JSONL dataset.
+Convert one .sparqlbook file into a canonical JSON and JSONL dataset.
+
+Rules:
+- The dataset metadata is resolved via --dataset and dataset_registry.json.
+- The input file path is provided via --input.
+- The output is provided as a base path via --output.
+  Example:
+      --output code/data/canonical/per_source/nlp4re
+  This creates:
+      code/data/canonical/per_source/nlp4re.json
+      code/data/canonical/per_source/nlp4re.jsonl
 
 Question extraction rules:
 - If a markdown block contains both "DE:" and "EN:", use only the English text as "question".
@@ -12,29 +22,103 @@ Question extraction rules:
 
 from __future__ import annotations
 
+import argparse
 import json
 import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 
-INPUT_FILES = [
-    {
-        "path": "data/raw/Emperical_Research/question.sparqlbook",
-        "source_dataset": "Emperical_Research",
-        "family": "empirical_research",
-        "uid_prefix": "empirical-research",
-    },
-    {
-        "path": "data/raw/NLP4RE/question.sparqlbook",
-        "source_dataset": "NLP4RE",
-        "family": "nlp4re",
-        "uid_prefix": "nlp4re",
-    },
-]
+def get_repo_root() -> Path:
+    """
+    Resolve the repository root from this file location.
 
-OUTPUT_JSON = "data/benchmark_from_sparqlbook.json"
-OUTPUT_JSONL = "data/benchmark_from_sparqlbook.jsonl"
+    Expected file location:
+        code/tools/convert_sparqlbook.py
+    """
+    return Path(__file__).resolve().parents[2]
+
+
+def load_json_file(path: Path) -> Dict[str, Any]:
+    """
+    Load a JSON file and return its parsed object.
+    """
+    with path.open("r", encoding="utf-8") as f:
+        data = json.load(f)
+
+    if not isinstance(data, dict):
+        raise ValueError(f"Expected a JSON object in {path}, got {type(data).__name__}")
+
+    return data
+
+
+def resolve_path(repo_root: Path, raw_path: str) -> Path:
+    """
+    Resolve a path relative to the repository root unless it is already absolute.
+    """
+    path = Path(raw_path)
+    if path.is_absolute():
+        return path
+    return repo_root / path
+
+
+def normalize_output_base(output_path: Path) -> Path:
+    """
+    Normalize the output base path.
+
+    If the user passes a path ending in .json or .jsonl, remove the extension,
+    because this script always writes both formats.
+    """
+    output_str = str(output_path)
+
+    if output_str.endswith(".jsonl"):
+        output_str = output_str[:-6]
+    elif output_str.endswith(".json"):
+        output_str = output_str[:-5]
+
+    return Path(output_str)
+
+
+def load_dataset_metadata(paths_config_path: Path, dataset_name: str, repo_root: Path) -> Dict[str, str]:
+    """
+    Load dataset metadata from the dataset registry referenced by paths.json.
+    """
+    paths_config = load_json_file(paths_config_path)
+
+    config_section = paths_config.get("config")
+    if not isinstance(config_section, dict):
+        raise ValueError("paths.json must contain a 'config' object.")
+
+    dataset_registry_raw = config_section.get("dataset_registry")
+    if not isinstance(dataset_registry_raw, str) or not dataset_registry_raw.strip():
+        raise ValueError("paths.json must define config.dataset_registry as a non-empty string.")
+
+    dataset_registry_path = resolve_path(repo_root, dataset_registry_raw)
+    dataset_registry = load_json_file(dataset_registry_path)
+
+    if dataset_name not in dataset_registry:
+        available = ", ".join(sorted(dataset_registry.keys()))
+        raise ValueError(
+            f"Unknown dataset '{dataset_name}'. Available datasets: {available}"
+        )
+
+    metadata = dataset_registry[dataset_name]
+    if not isinstance(metadata, dict):
+        raise ValueError(f"Dataset entry '{dataset_name}' must be a JSON object.")
+
+    required_fields = ["source_dataset", "family", "uid_prefix"]
+    for field in required_fields:
+        value = metadata.get(field)
+        if not isinstance(value, str) or not value.strip():
+            raise ValueError(
+                f"Dataset '{dataset_name}' is missing required field '{field}' in dataset_registry.json."
+            )
+
+    return {
+        "source_dataset": metadata["source_dataset"],
+        "family": metadata["family"],
+        "uid_prefix": metadata["uid_prefix"],
+    }
 
 
 def strip_prefixes(query: str) -> str:
@@ -165,8 +249,8 @@ def convert_file(
     source_dataset: str,
     family: str,
     uid_prefix: str,
-    start_index: int,
-) -> Tuple[List[Dict[str, Any]], int]:
+    start_index: int = 1,
+) -> List[Dict[str, Any]]:
     """
     Convert one .sparqlbook file into canonical entries.
 
@@ -201,46 +285,97 @@ def convert_file(
         else:
             i += 1
 
-    return results, running_index
+    return results
+
+
+def write_outputs(entries: List[Dict[str, Any]], output_base: Path) -> Tuple[Path, Path]:
+    """
+    Write both JSON and JSONL outputs using the given base path.
+    """
+    output_json = output_base.with_suffix(".json")
+    output_jsonl = output_base.with_suffix(".jsonl")
+
+    output_json.parent.mkdir(parents=True, exist_ok=True)
+
+    with output_json.open("w", encoding="utf-8") as f:
+        json.dump(entries, f, ensure_ascii=False, indent=2)
+
+    with output_jsonl.open("w", encoding="utf-8") as f:
+        for entry in entries:
+            f.write(json.dumps(entry, ensure_ascii=False) + "\n")
+
+    return output_json, output_jsonl
+
+
+def parse_args() -> argparse.Namespace:
+    """
+    Parse CLI arguments.
+    """
+    repo_root = get_repo_root()
+    default_paths_config = repo_root / "code/config/paths.json"
+
+    parser = argparse.ArgumentParser(
+        description="Convert one .sparqlbook file into canonical JSON and JSONL outputs."
+    )
+    parser.add_argument(
+        "--dataset",
+        required=True,
+        help="Dataset key from dataset_registry.json, e.g. 'nlp4re' or 'empirical_research'.",
+    )
+    parser.add_argument(
+        "--input",
+        required=True,
+        help="Path to the input .sparqlbook file.",
+    )
+    parser.add_argument(
+        "--output",
+        required=True,
+        help="Base output path without extension. The script will create both .json and .jsonl.",
+    )
+    parser.add_argument(
+        "--paths-config",
+        default=str(default_paths_config),
+        help="Path to paths.json. Defaults to code/config/paths.json.",
+    )
+
+    return parser.parse_args()
 
 
 def main() -> None:
     """
-    Convert all configured .sparqlbook files and write JSON + JSONL outputs.
+    Resolve dataset metadata, convert the input file, and write JSON + JSONL outputs.
     """
-    all_entries: List[Dict[str, Any]] = []
-    next_index = 1
+    args = parse_args()
+    repo_root = get_repo_root()
 
-    for cfg in INPUT_FILES:
-        path = Path(cfg["path"])
+    paths_config_path = resolve_path(repo_root, args.paths_config)
+    input_path = resolve_path(repo_root, args.input)
+    output_base = normalize_output_base(resolve_path(repo_root, args.output))
 
-        if not path.exists():
-            print(f"Skipped missing file: {path}")
-            continue
+    if not input_path.exists():
+        raise FileNotFoundError(f"Input file not found: {input_path}")
 
-        entries, next_index = convert_file(
-            path=path,
-            source_dataset=cfg["source_dataset"],
-            family=cfg["family"],
-            uid_prefix=cfg["uid_prefix"],
-            start_index=next_index,
-        )
-        all_entries.extend(entries)
+    metadata = load_dataset_metadata(
+        paths_config_path=paths_config_path,
+        dataset_name=args.dataset,
+        repo_root=repo_root,
+    )
 
-    output_json = Path(OUTPUT_JSON)
-    output_json.parent.mkdir(parents=True, exist_ok=True)
+    entries = convert_file(
+        path=input_path,
+        source_dataset=metadata["source_dataset"],
+        family=metadata["family"],
+        uid_prefix=metadata["uid_prefix"],
+        start_index=1,
+    )
 
-    with output_json.open("w", encoding="utf-8") as f:
-        json.dump(all_entries, f, ensure_ascii=False, indent=2)
+    output_json, output_jsonl = write_outputs(entries, output_base)
 
-    output_jsonl = Path(OUTPUT_JSONL)
-    with output_jsonl.open("w", encoding="utf-8") as f:
-        for entry in all_entries:
-            f.write(json.dumps(entry, ensure_ascii=False) + "\n")
-
-    print(f"Done: wrote {len(all_entries)} entries.")
-    print(f"JSON:  {output_json}")
-    print(f"JSONL: {output_jsonl}")
+    print(f"Done: wrote {len(entries)} entries.")
+    print(f"Dataset: {args.dataset}")
+    print(f"Input:   {input_path}")
+    print(f"JSON:    {output_json}")
+    print(f"JSONL:   {output_jsonl}")
 
 
 if __name__ == "__main__":
