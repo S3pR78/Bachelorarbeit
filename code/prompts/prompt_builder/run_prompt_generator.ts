@@ -44,7 +44,7 @@ const PROMPT_CONFIGS: PromptConfig[] = [
     targetClassId: "C121001",
     mappingPath: path.join(
       ROOT_DIR,
-      "code/src/templates/nlp4re-template.json"
+      "code/data/templates/nlp4re-template.json"
     ),
   },
   {
@@ -54,7 +54,7 @@ const PROMPT_CONFIGS: PromptConfig[] = [
     targetClassId: "C27001",
     mappingPath: path.join(
       ROOT_DIR,
-      "code/src/templates/empirical_research_practice.json"
+      "code/data/templates/empirical_research_practice.json"
     ),
   },
 ];
