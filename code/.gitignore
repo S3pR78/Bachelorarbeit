@@ -24,7 +24,7 @@ Thumbs.db
 
 
 .vscode/
-.tools/
+#.tools/
 
 node_modules/
 dist/
