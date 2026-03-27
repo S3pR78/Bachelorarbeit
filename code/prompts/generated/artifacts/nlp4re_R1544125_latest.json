@@ -1,0 +1,1076 @@
+{
+  "prompt_profile": "nlp4re_R1544125_v1",
+  "template_id": "R1544125",
+  "template_label": "NLP for Requirements Engineering",
+  "contribution_class": "orkgc:C121001",
+  "target_class_id": "C121001",
+  "query_language": "sparql",
+  "prefix_profile": "orkg_default",
+  "prompt_version": "v1",
+  "source_mapping_path": "/home/s3pr/UNI/BA/code/src/templates/nlp4re-template.json",
+  "generated_at": "2026-03-27T00:01:26.924Z",
+  "template_mapping": {
+    "P181002": {
+      "label": "RE task",
+      "cardinality": "one to one",
+      "description": "What requirements engineering task is your study addressing?",
+      "predicate_label": "RE task",
+      "class_label": "RE task"
+    },
+    "P181003": {
+      "label": "NLP task",
+      "cardinality": "one to one",
+      "description": "What natural language processing task is your study tackling?",
+      "predicate_label": "NLP task",
+      "class_label": "NLP task",
+      "subtemplate_id": "R1544138",
+      "subtemplate_label": "NLP task",
+      "class_id": "C121004",
+      "subtemplate_properties": {
+        "P181004": {
+          "label": "NLP task type",
+          "cardinality": "one to many",
+          "description": "What type of natural language processing task is your study tackling?",
+          "predicate_label": "NLP task type",
+          "class_label": "NLP task type"
+        },
+        "P181005": {
+          "label": "NLP task input",
+          "cardinality": "one to many",
+          "description": "What is the input of your natural language processing task?",
+          "predicate_label": "NLP task input",
+          "class_label": "NLP task input"
+        },
+        "P181006": {
+          "label": "NLP task output",
+          "cardinality": "one to one",
+          "description": "What is the output of your natural language processing task?",
+          "predicate_label": "NLP task output",
+          "class_label": "NLP task output",
+          "subtemplate_id": "R1544158",
+          "subtemplate_label": "NLP task output",
+          "class_id": "C121007",
+          "subtemplate_properties": {
+            "P181007": {
+              "label": "NLP task output type",
+              "cardinality": "one to many",
+              "description": "What is the output type of your natural language processing task?",
+              "predicate_label": "NLP task output type",
+              "class_label": "NLP task output type"
+            },
+            "P181008": {
+              "label": "NLP task output classification label",
+              "cardinality": "one to one",
+              "description": "What is the output label that can be assigned in your natural language processing classification task?",
+              "predicate_label": "NLP task output classification label"
+            },
+            "P181009": {
+              "label": "NLP task output extracted element",
+              "cardinality": "one to one",
+              "description": "What is the type of the element extracted in your natural language processing information extraction task?",
+              "predicate_label": "NLP task output extracted element"
+            },
+            "P181010": {
+              "label": "NLP task translation mapping cardinality",
+              "cardinality": "one to many",
+              "description": "What is the translation mapping cardinality between the initial input and final output in your natural language processing translation task?",
+              "predicate_label": "NLP task output translation mapping cardinality",
+              "class_label": "NLP task translation mapping cardinality"
+            }
+          }
+        }
+      }
+    },
+    "P181011": {
+      "label": "NLP dataset",
+      "cardinality": "one to one",
+      "description": "What natural language processing dataset is your study using?",
+      "predicate_label": "NLP dataset",
+      "class_label": "NLP dataset",
+      "subtemplate_id": "R1544216",
+      "subtemplate_label": "NLP dataset",
+      "class_id": "C121010",
+      "subtemplate_properties": {
+        "P181015": {
+          "label": "NLP data item",
+          "cardinality": "one to one",
+          "description": "How many data items do you process? Please report the numerical information and details about all the data that is used in your evaluation.",
+          "predicate_label": "NLP data item"
+        },
+        "P181016": {
+          "label": "NLP data production time",
+          "cardinality": "one to one",
+          "description": "In which year or interval of year were the data produced?",
+          "predicate_label": "NLP data production time"
+        },
+        "P181017": {
+          "label": "NLP data source",
+          "cardinality": "one to one",
+          "description": "What is the source of the data?",
+          "predicate_label": "NLP data source",
+          "class_label": "NLP data source",
+          "subtemplate_id": "R1544223",
+          "subtemplate_label": "NLP data source",
+          "class_id": "C121011",
+          "subtemplate_properties": {
+            "P181018": {
+              "label": "NLP data source type",
+              "cardinality": "one to many",
+              "description": "What is the source type of the data?",
+              "predicate_label": "NLP data source type",
+              "class_label": "NLP data source type"
+            },
+            "P181019": {
+              "label": "Number of data sources",
+              "cardinality": "one to one",
+              "description": "From how many different sources your data comes from?",
+              "predicate_label": "Number of data sources"
+            },
+            "P181020": {
+              "label": "Data source domain",
+              "cardinality": "one to many",
+              "description": "Please list which domains your data belongs to (e.g., automotive, satellite,\nentertainment, information systems).",
+              "predicate_label": "NLP data source domain",
+              "class_label": "Data source domain"
+            }
+          }
+        },
+        "P181021": {
+          "label": "NLP data abstraction level",
+          "cardinality": "one to many",
+          "description": "What is the level of abstraction of the data (not limited to requirements)?",
+          "predicate_label": "NLP data abstraction level",
+          "class_label": "NLP data abstraction level"
+        },
+        "P181022": {
+          "label": "NLP data type",
+          "cardinality": "one to one",
+          "description": "What is the type of the data?",
+          "predicate_label": "NLP data type",
+          "class_label": "NLP data type",
+          "subtemplate_id": "R1544245",
+          "subtemplate_label": "NLP data type",
+          "class_id": "C121015",
+          "subtemplate_properties": {
+            "P181023": {
+              "label": "NLP data format",
+              "cardinality": "one to many",
+              "description": "What is the format of the data?",
+              "predicate_label": "NLP data format",
+              "class_label": "NLP data format"
+            },
+            "P181024": {
+              "label": "Rigor of data format",
+              "cardinality": "one to many",
+              "description": "How rigorous is the format of the data?",
+              "predicate_label": "Rigor of data format",
+              "class_label": "Rigor of data format"
+            },
+            "P181025": {
+              "label": "Natural language",
+              "cardinality": "one to one",
+              "description": "What is the natural language of\nthe data (if applicable) ?",
+              "predicate_label": "Natural language"
+            }
+          }
+        },
+        "license": {
+          "label": "License",
+          "cardinality": "one to one",
+          "description": "What license has been used?",
+          "predicate_label": "License",
+          "class_label": "License",
+          "subtemplate_id": "R1544265",
+          "subtemplate_label": "License",
+          "class_id": "C121018",
+          "subtemplate_properties": {
+            "P181026": {
+              "label": "Public availability",
+              "cardinality": "one to one",
+              "description": "Is the dataset publicly available?",
+              "predicate_label": "Public availability",
+              "class_label": "Public availability"
+            },
+            "P181027": {
+              "label": "License type",
+              "cardinality": "one to one",
+              "description": "What license has been used?",
+              "predicate_label": "License type",
+              "class_label": "License type"
+            }
+          }
+        },
+        "P181028": {
+          "label": "NLP dataset location",
+          "cardinality": "one to one",
+          "description": "Where is the dataset stored?",
+          "predicate_label": "Dataset location",
+          "class_label": "NLP dataset location",
+          "subtemplate_id": "R1544278",
+          "subtemplate_label": "NLP dataset location",
+          "class_id": "C121022",
+          "subtemplate_properties": {
+            "P181030": {
+              "label": "Location type",
+              "cardinality": "one to many",
+              "description": "Where is the dataset stored?",
+              "predicate_label": "Location type",
+              "class_label": "Location type"
+            },
+            "P1003": {
+              "label": "url",
+              "cardinality": "one to many",
+              "description": "Provide a URL to the dataset, if available, or to the original paper that proposed the dataset",
+              "predicate_label": "url"
+            }
+          }
+        }
+      }
+    },
+    "P181031": {
+      "label": "Annotation process",
+      "cardinality": "one to one",
+      "description": "What annotation process did you use for your dataset?",
+      "predicate_label": "Annotation process",
+      "class_label": "Annotation process",
+      "subtemplate_id": "R1544287",
+      "subtemplate_label": "Annotation process",
+      "class_id": "C121025",
+      "subtemplate_properties": {
+        "P181032": {
+          "label": "Annotator",
+          "cardinality": "one to one",
+          "description": "Who are the annotators of your dataset?",
+          "predicate_label": "Annotator",
+          "class_label": "Annotator",
+          "subtemplate_id": "R1544290",
+          "subtemplate_label": "Annotator",
+          "class_id": "C121026",
+          "subtemplate_properties": {
+            "P59120": {
+              "label": "Number of annotators",
+              "cardinality": "one to one",
+              "description": "How many annotators have been involved in your annotation process?",
+              "predicate_label": "Number of annotators"
+            },
+            "P181033": {
+              "label": "Annotator assignment",
+              "cardinality": "one to many",
+              "description": "How are the entries annotated assigned to the annotators?",
+              "predicate_label": "Annotator assignment",
+              "class_label": "Annotator assignment"
+            },
+            "P181034": {
+              "label": "Level of application domain experience",
+              "cardinality": "one to many",
+              "description": "What is the average level of application domain experience of the annotators?",
+              "predicate_label": "Level of application domain experience",
+              "class_label": "Level of application domain experience"
+            },
+            "P181035": {
+              "label": "Annotator Identity",
+              "cardinality": "one to many",
+              "description": "Who are the annotators?",
+              "predicate_label": "Annotator identity",
+              "class_label": "Annotator Identity"
+            }
+          }
+        },
+        "P181036": {
+          "label": "Annotation Scheme",
+          "cardinality": "one to many",
+          "description": "What is the annotation scheme used for your dataset?",
+          "predicate_label": "Annotation scheme",
+          "class_label": "Annotation Scheme",
+          "subtemplate_id": "R1544307",
+          "subtemplate_label": "Annotation scheme",
+          "class_id": "C121030",
+          "subtemplate_properties": {
+            "P181037": {
+              "label": "Scheme establishement",
+              "cardinality": "one to many",
+              "description": "How was the annotation scheme established among the annotators?",
+              "predicate_label": "Scheme establishement",
+              "class_label": "Scheme establishement"
+            },
+            "P181038": {
+              "label": "Guideline availability",
+              "cardinality": "one to many",
+              "description": "Did you make the written guidelines public?",
+              "predicate_label": "Guideline availability",
+              "class_label": "Guideline availability"
+            }
+          }
+        },
+        "P181039": {
+          "label": "Shared material",
+          "cardinality": "one to many",
+          "description": "Did you share other information that could support the annotators other\nthan the elements to annotate?",
+          "predicate_label": "Shared material",
+          "class_label": "Shared material"
+        },
+        "P181040": {
+          "label": "Fatigue mitigation technique",
+          "cardinality": "one to one",
+          "description": "Did you employ techniques to mitigate fatigue effects during the\nannotation sessions?",
+          "predicate_label": "Fatigue mitigation technique",
+          "class_label": "Fatigue mitigation technique"
+        },
+        "P181041": {
+          "label": "Annotator agreement",
+          "cardinality": "one to one",
+          "description": "What annotator agreement did you apply for your dataset?",
+          "predicate_label": "Annotator agreement",
+          "class_label": "Annotator agreement",
+          "subtemplate_id": "R1544326",
+          "subtemplate_label": "Annotator agreement",
+          "class_id": "C121035",
+          "subtemplate_properties": {
+            "P181042": {
+              "label": "Intercoder reliability metric",
+              "cardinality": "one to many",
+              "description": "What are the metrics used to measure intercoder reliability?",
+              "predicate_label": "Intercoder reliability metric",
+              "class_label": "Intercoder reliability metric"
+            },
+            "P181044": {
+              "label": "Conflict resolution",
+              "cardinality": "one to many",
+              "description": "How were conflicts resolved?",
+              "predicate_label": "Conflict resolution",
+              "class_label": "Conflict resolution"
+            },
+            "P181045": {
+              "label": "Measured agreement",
+              "cardinality": "one to one",
+              "description": "What is the measured agreement?",
+              "predicate_label": "Measured agreement"
+            }
+          }
+        }
+      }
+    },
+    "P181046": {
+      "label": "Implemented approach",
+      "cardinality": "one to one",
+      "description": "What approach did you implement for your study?",
+      "predicate_label": "Implemented approach",
+      "class_label": "Implemented approach",
+      "subtemplate_id": "R1544363",
+      "subtemplate_label": "Implemented approach",
+      "class_id": "C121038",
+      "subtemplate_properties": {
+        "P5043": {
+          "label": "Approach type",
+          "cardinality": "one to many",
+          "description": "What is the type of the implemented approach?",
+          "predicate_label": "Approach type",
+          "class_label": "Approach type"
+        },
+        "P58069": {
+          "label": "Algorithm",
+          "cardinality": "one to many",
+          "description": "What algorithms are used in the implemented approach?",
+          "predicate_label": "Algorithm used",
+          "class_label": "Algorithm"
+        },
+        "P181047": {
+          "label": "Running requirement",
+          "cardinality": "one to many",
+          "description": "What needs to be done for running the implemented approach?",
+          "predicate_label": "Running requirement",
+          "class_label": "Running requirement"
+        },
+        "P41835": {
+          "label": "Documentation type",
+          "cardinality": "one to many",
+          "description": "What type of documentation has been provided alongside the implemented approach?",
+          "predicate_label": "Documentation",
+          "class_label": "Documentation type"
+        },
+        "P181048": {
+          "label": "Dependency",
+          "cardinality": "one to many",
+          "description": "What type of dependencies does the implemented approach have?",
+          "predicate_label": "Dependency",
+          "class_label": "Dependency"
+        },
+        "P181027": {
+          "label": "License type",
+          "cardinality": "one to one",
+          "description": "What license has been used?",
+          "predicate_label": "License type",
+          "class_label": "License type"
+        },
+        "release": {
+          "label": "Release",
+          "cardinality": "one to one",
+          "description": "How was the implemented approach released?",
+          "predicate_label": "Release",
+          "class_label": "Release",
+          "subtemplate_id": "R1544401",
+          "subtemplate_label": "Release",
+          "class_id": "C121044",
+          "subtemplate_properties": {
+            "P181049": {
+              "label": "Release format",
+              "cardinality": "one to many",
+              "description": "What has been released?",
+              "predicate_label": "Release format",
+              "class_label": "Release format"
+            },
+            "P181029": {
+              "label": "Location type",
+              "cardinality": "one to many",
+              "description": "How is the tool released?",
+              "predicate_label": "Location type",
+              "class_label": "Location type"
+            },
+            "P1003": {
+              "label": "url",
+              "cardinality": "one to many",
+              "description": "Where is the tool released?",
+              "predicate_label": "url"
+            }
+          }
+        }
+      }
+    },
+    "HAS_EVALUATION": {
+      "label": "Evaluation",
+      "cardinality": "one to one",
+      "description": "What evaluation did you apply for your study?",
+      "predicate_label": "Evaluation",
+      "class_label": "Evaluation",
+      "subtemplate_id": "R1544421",
+      "subtemplate_label": "Evaluation",
+      "class_id": "C121047",
+      "subtemplate_properties": {
+        "P110006": {
+          "label": "Metric",
+          "cardinality": "one to many",
+          "description": "What metrics are used to evaluate the implemented approach(?",
+          "predicate_label": "Evaluation metric",
+          "class_label": "Metric"
+        },
+        "P181050": {
+          "label": "Validation procedure",
+          "cardinality": "one to many",
+          "description": "What is the validation procedure?",
+          "predicate_label": "Validation procedure",
+          "class_label": "Validation procedure"
+        },
+        "P181051": {
+          "label": "Baseline comparison",
+          "cardinality": "one to one",
+          "description": "What is the baseline comparison applied in the evaluation of an implemented approach?",
+          "predicate_label": "Baseline comparison",
+          "class_label": "Baseline comparison",
+          "subtemplate_id": "R1544450",
+          "subtemplate_label": "Baseline comparison",
+          "class_id": "C121050",
+          "subtemplate_properties": {
+            "P181052": {
+              "label": "Baseline comparison  type",
+              "cardinality": "one to many",
+              "description": "What baseline do you compare against?",
+              "predicate_label": "Baseline comparison type",
+              "class_label": "Baseline comparison  type"
+            },
+            "P181053": {
+              "label": "Baseline comparison detail",
+              "cardinality": "one to one",
+              "description": "Please provide more details about the baseline you compare against, if any.",
+              "predicate_label": "Baseline comparison detail"
+            }
+          }
+        }
+      }
+    },
+    "P181004": {
+      "label": "NLP task type",
+      "cardinality": "one to many",
+      "description": "What type of natural language processing task is your study tackling?",
+      "predicate_label": "NLP task type",
+      "class_label": "NLP task type"
+    },
+    "P181005": {
+      "label": "NLP task input",
+      "cardinality": "one to many",
+      "description": "What is the input of your natural language processing task?",
+      "predicate_label": "NLP task input",
+      "class_label": "NLP task input"
+    },
+    "P181006": {
+      "label": "NLP task output",
+      "cardinality": "one to one",
+      "description": "What is the output of your natural language processing task?",
+      "predicate_label": "NLP task output",
+      "class_label": "NLP task output",
+      "subtemplate_id": "R1544158",
+      "subtemplate_label": "NLP task output",
+      "class_id": "C121007",
+      "subtemplate_properties": {
+        "P181007": {
+          "label": "NLP task output type",
+          "cardinality": "one to many",
+          "description": "What is the output type of your natural language processing task?",
+          "predicate_label": "NLP task output type",
+          "class_label": "NLP task output type"
+        },
+        "P181008": {
+          "label": "NLP task output classification label",
+          "cardinality": "one to one",
+          "description": "What is the output label that can be assigned in your natural language processing classification task?",
+          "predicate_label": "NLP task output classification label"
+        },
+        "P181009": {
+          "label": "NLP task output extracted element",
+          "cardinality": "one to one",
+          "description": "What is the type of the element extracted in your natural language processing information extraction task?",
+          "predicate_label": "NLP task output extracted element"
+        },
+        "P181010": {
+          "label": "NLP task translation mapping cardinality",
+          "cardinality": "one to many",
+          "description": "What is the translation mapping cardinality between the initial input and final output in your natural language processing translation task?",
+          "predicate_label": "NLP task output translation mapping cardinality",
+          "class_label": "NLP task translation mapping cardinality"
+        }
+      }
+    },
+    "P181007": {
+      "label": "NLP task output type",
+      "cardinality": "one to many",
+      "description": "What is the output type of your natural language processing task?",
+      "predicate_label": "NLP task output type",
+      "class_label": "NLP task output type"
+    },
+    "P181008": {
+      "label": "NLP task output classification label",
+      "cardinality": "one to one",
+      "description": "What is the output label that can be assigned in your natural language processing classification task?",
+      "predicate_label": "NLP task output classification label"
+    },
+    "P181009": {
+      "label": "NLP task output extracted element",
+      "cardinality": "one to one",
+      "description": "What is the type of the element extracted in your natural language processing information extraction task?",
+      "predicate_label": "NLP task output extracted element"
+    },
+    "P181010": {
+      "label": "NLP task translation mapping cardinality",
+      "cardinality": "one to many",
+      "description": "What is the translation mapping cardinality between the initial input and final output in your natural language processing translation task?",
+      "predicate_label": "NLP task output translation mapping cardinality",
+      "class_label": "NLP task translation mapping cardinality"
+    },
+    "P181015": {
+      "label": "NLP data item",
+      "cardinality": "one to one",
+      "description": "How many data items do you process? Please report the numerical information and details about all the data that is used in your evaluation.",
+      "predicate_label": "NLP data item"
+    },
+    "P181016": {
+      "label": "NLP data production time",
+      "cardinality": "one to one",
+      "description": "In which year or interval of year were the data produced?",
+      "predicate_label": "NLP data production time"
+    },
+    "P181017": {
+      "label": "NLP data source",
+      "cardinality": "one to one",
+      "description": "What is the source of the data?",
+      "predicate_label": "NLP data source",
+      "class_label": "NLP data source",
+      "subtemplate_id": "R1544223",
+      "subtemplate_label": "NLP data source",
+      "class_id": "C121011",
+      "subtemplate_properties": {
+        "P181018": {
+          "label": "NLP data source type",
+          "cardinality": "one to many",
+          "description": "What is the source type of the data?",
+          "predicate_label": "NLP data source type",
+          "class_label": "NLP data source type"
+        },
+        "P181019": {
+          "label": "Number of data sources",
+          "cardinality": "one to one",
+          "description": "From how many different sources your data comes from?",
+          "predicate_label": "Number of data sources"
+        },
+        "P181020": {
+          "label": "Data source domain",
+          "cardinality": "one to many",
+          "description": "Please list which domains your data belongs to (e.g., automotive, satellite,\nentertainment, information systems).",
+          "predicate_label": "NLP data source domain",
+          "class_label": "Data source domain"
+        }
+      }
+    },
+    "P181021": {
+      "label": "NLP data abstraction level",
+      "cardinality": "one to many",
+      "description": "What is the level of abstraction of the data (not limited to requirements)?",
+      "predicate_label": "NLP data abstraction level",
+      "class_label": "NLP data abstraction level"
+    },
+    "P181022": {
+      "label": "NLP data type",
+      "cardinality": "one to one",
+      "description": "What is the type of the data?",
+      "predicate_label": "NLP data type",
+      "class_label": "NLP data type",
+      "subtemplate_id": "R1544245",
+      "subtemplate_label": "NLP data type",
+      "class_id": "C121015",
+      "subtemplate_properties": {
+        "P181023": {
+          "label": "NLP data format",
+          "cardinality": "one to many",
+          "description": "What is the format of the data?",
+          "predicate_label": "NLP data format",
+          "class_label": "NLP data format"
+        },
+        "P181024": {
+          "label": "Rigor of data format",
+          "cardinality": "one to many",
+          "description": "How rigorous is the format of the data?",
+          "predicate_label": "Rigor of data format",
+          "class_label": "Rigor of data format"
+        },
+        "P181025": {
+          "label": "Natural language",
+          "cardinality": "one to one",
+          "description": "What is the natural language of\nthe data (if applicable) ?",
+          "predicate_label": "Natural language"
+        }
+      }
+    },
+    "license": {
+      "label": "License",
+      "cardinality": "one to one",
+      "description": "What license has been used?",
+      "predicate_label": "License",
+      "class_label": "License",
+      "subtemplate_id": "R1544265",
+      "subtemplate_label": "License",
+      "class_id": "C121018",
+      "subtemplate_properties": {
+        "P181026": {
+          "label": "Public availability",
+          "cardinality": "one to one",
+          "description": "Is the dataset publicly available?",
+          "predicate_label": "Public availability",
+          "class_label": "Public availability"
+        },
+        "P181027": {
+          "label": "License type",
+          "cardinality": "one to one",
+          "description": "What license has been used?",
+          "predicate_label": "License type",
+          "class_label": "License type"
+        }
+      }
+    },
+    "P181028": {
+      "label": "NLP dataset location",
+      "cardinality": "one to one",
+      "description": "Where is the dataset stored?",
+      "predicate_label": "Dataset location",
+      "class_label": "NLP dataset location",
+      "subtemplate_id": "R1544278",
+      "subtemplate_label": "NLP dataset location",
+      "class_id": "C121022",
+      "subtemplate_properties": {
+        "P181030": {
+          "label": "Location type",
+          "cardinality": "one to many",
+          "description": "Where is the dataset stored?",
+          "predicate_label": "Location type",
+          "class_label": "Location type"
+        },
+        "P1003": {
+          "label": "url",
+          "cardinality": "one to many",
+          "description": "Provide a URL to the dataset, if available, or to the original paper that proposed the dataset",
+          "predicate_label": "url"
+        }
+      }
+    },
+    "P181018": {
+      "label": "NLP data source type",
+      "cardinality": "one to many",
+      "description": "What is the source type of the data?",
+      "predicate_label": "NLP data source type",
+      "class_label": "NLP data source type"
+    },
+    "P181019": {
+      "label": "Number of data sources",
+      "cardinality": "one to one",
+      "description": "From how many different sources your data comes from?",
+      "predicate_label": "Number of data sources"
+    },
+    "P181020": {
+      "label": "Data source domain",
+      "cardinality": "one to many",
+      "description": "Please list which domains your data belongs to (e.g., automotive, satellite,\nentertainment, information systems).",
+      "predicate_label": "NLP data source domain",
+      "class_label": "Data source domain"
+    },
+    "P181023": {
+      "label": "NLP data format",
+      "cardinality": "one to many",
+      "description": "What is the format of the data?",
+      "predicate_label": "NLP data format",
+      "class_label": "NLP data format"
+    },
+    "P181024": {
+      "label": "Rigor of data format",
+      "cardinality": "one to many",
+      "description": "How rigorous is the format of the data?",
+      "predicate_label": "Rigor of data format",
+      "class_label": "Rigor of data format"
+    },
+    "P181025": {
+      "label": "Natural language",
+      "cardinality": "one to one",
+      "description": "What is the natural language of\nthe data (if applicable) ?",
+      "predicate_label": "Natural language"
+    },
+    "P181026": {
+      "label": "Public availability",
+      "cardinality": "one to one",
+      "description": "Is the dataset publicly available?",
+      "predicate_label": "Public availability",
+      "class_label": "Public availability"
+    },
+    "P181027": {
+      "label": "License type",
+      "cardinality": "one to one",
+      "description": "What license has been used?",
+      "predicate_label": "License type",
+      "class_label": "License type"
+    },
+    "P181030": {
+      "label": "Location type",
+      "cardinality": "one to many",
+      "description": "Where is the dataset stored?",
+      "predicate_label": "Location type",
+      "class_label": "Location type"
+    },
+    "P1003": {
+      "label": "url",
+      "cardinality": "one to many",
+      "description": "Where is the tool released?",
+      "predicate_label": "url"
+    },
+    "P181032": {
+      "label": "Annotator",
+      "cardinality": "one to one",
+      "description": "Who are the annotators of your dataset?",
+      "predicate_label": "Annotator",
+      "class_label": "Annotator",
+      "subtemplate_id": "R1544290",
+      "subtemplate_label": "Annotator",
+      "class_id": "C121026",
+      "subtemplate_properties": {
+        "P59120": {
+          "label": "Number of annotators",
+          "cardinality": "one to one",
+          "description": "How many annotators have been involved in your annotation process?",
+          "predicate_label": "Number of annotators"
+        },
+        "P181033": {
+          "label": "Annotator assignment",
+          "cardinality": "one to many",
+          "description": "How are the entries annotated assigned to the annotators?",
+          "predicate_label": "Annotator assignment",
+          "class_label": "Annotator assignment"
+        },
+        "P181034": {
+          "label": "Level of application domain experience",
+          "cardinality": "one to many",
+          "description": "What is the average level of application domain experience of the annotators?",
+          "predicate_label": "Level of application domain experience",
+          "class_label": "Level of application domain experience"
+        },
+        "P181035": {
+          "label": "Annotator Identity",
+          "cardinality": "one to many",
+          "description": "Who are the annotators?",
+          "predicate_label": "Annotator identity",
+          "class_label": "Annotator Identity"
+        }
+      }
+    },
+    "P181036": {
+      "label": "Annotation Scheme",
+      "cardinality": "one to many",
+      "description": "What is the annotation scheme used for your dataset?",
+      "predicate_label": "Annotation scheme",
+      "class_label": "Annotation Scheme",
+      "subtemplate_id": "R1544307",
+      "subtemplate_label": "Annotation scheme",
+      "class_id": "C121030",
+      "subtemplate_properties": {
+        "P181037": {
+          "label": "Scheme establishement",
+          "cardinality": "one to many",
+          "description": "How was the annotation scheme established among the annotators?",
+          "predicate_label": "Scheme establishement",
+          "class_label": "Scheme establishement"
+        },
+        "P181038": {
+          "label": "Guideline availability",
+          "cardinality": "one to many",
+          "description": "Did you make the written guidelines public?",
+          "predicate_label": "Guideline availability",
+          "class_label": "Guideline availability"
+        }
+      }
+    },
+    "P181039": {
+      "label": "Shared material",
+      "cardinality": "one to many",
+      "description": "Did you share other information that could support the annotators other\nthan the elements to annotate?",
+      "predicate_label": "Shared material",
+      "class_label": "Shared material"
+    },
+    "P181040": {
+      "label": "Fatigue mitigation technique",
+      "cardinality": "one to one",
+      "description": "Did you employ techniques to mitigate fatigue effects during the\nannotation sessions?",
+      "predicate_label": "Fatigue mitigation technique",
+      "class_label": "Fatigue mitigation technique"
+    },
+    "P181041": {
+      "label": "Annotator agreement",
+      "cardinality": "one to one",
+      "description": "What annotator agreement did you apply for your dataset?",
+      "predicate_label": "Annotator agreement",
+      "class_label": "Annotator agreement",
+      "subtemplate_id": "R1544326",
+      "subtemplate_label": "Annotator agreement",
+      "class_id": "C121035",
+      "subtemplate_properties": {
+        "P181042": {
+          "label": "Intercoder reliability metric",
+          "cardinality": "one to many",
+          "description": "What are the metrics used to measure intercoder reliability?",
+          "predicate_label": "Intercoder reliability metric",
+          "class_label": "Intercoder reliability metric"
+        },
+        "P181044": {
+          "label": "Conflict resolution",
+          "cardinality": "one to many",
+          "description": "How were conflicts resolved?",
+          "predicate_label": "Conflict resolution",
+          "class_label": "Conflict resolution"
+        },
+        "P181045": {
+          "label": "Measured agreement",
+          "cardinality": "one to one",
+          "description": "What is the measured agreement?",
+          "predicate_label": "Measured agreement"
+        }
+      }
+    },
+    "P59120": {
+      "label": "Number of annotators",
+      "cardinality": "one to one",
+      "description": "How many annotators have been involved in your annotation process?",
+      "predicate_label": "Number of annotators"
+    },
+    "P181033": {
+      "label": "Annotator assignment",
+      "cardinality": "one to many",
+      "description": "How are the entries annotated assigned to the annotators?",
+      "predicate_label": "Annotator assignment",
+      "class_label": "Annotator assignment"
+    },
+    "P181034": {
+      "label": "Level of application domain experience",
+      "cardinality": "one to many",
+      "description": "What is the average level of application domain experience of the annotators?",
+      "predicate_label": "Level of application domain experience",
+      "class_label": "Level of application domain experience"
+    },
+    "P181035": {
+      "label": "Annotator Identity",
+      "cardinality": "one to many",
+      "description": "Who are the annotators?",
+      "predicate_label": "Annotator identity",
+      "class_label": "Annotator Identity"
+    },
+    "P181037": {
+      "label": "Scheme establishement",
+      "cardinality": "one to many",
+      "description": "How was the annotation scheme established among the annotators?",
+      "predicate_label": "Scheme establishement",
+      "class_label": "Scheme establishement"
+    },
+    "P181038": {
+      "label": "Guideline availability",
+      "cardinality": "one to many",
+      "description": "Did you make the written guidelines public?",
+      "predicate_label": "Guideline availability",
+      "class_label": "Guideline availability"
+    },
+    "P181042": {
+      "label": "Intercoder reliability metric",
+      "cardinality": "one to many",
+      "description": "What are the metrics used to measure intercoder reliability?",
+      "predicate_label": "Intercoder reliability metric",
+      "class_label": "Intercoder reliability metric"
+    },
+    "P181044": {
+      "label": "Conflict resolution",
+      "cardinality": "one to many",
+      "description": "How were conflicts resolved?",
+      "predicate_label": "Conflict resolution",
+      "class_label": "Conflict resolution"
+    },
+    "P181045": {
+      "label": "Measured agreement",
+      "cardinality": "one to one",
+      "description": "What is the measured agreement?",
+      "predicate_label": "Measured agreement"
+    },
+    "P5043": {
+      "label": "Approach type",
+      "cardinality": "one to many",
+      "description": "What is the type of the implemented approach?",
+      "predicate_label": "Approach type",
+      "class_label": "Approach type"
+    },
+    "P58069": {
+      "label": "Algorithm",
+      "cardinality": "one to many",
+      "description": "What algorithms are used in the implemented approach?",
+      "predicate_label": "Algorithm used",
+      "class_label": "Algorithm"
+    },
+    "P181047": {
+      "label": "Running requirement",
+      "cardinality": "one to many",
+      "description": "What needs to be done for running the implemented approach?",
+      "predicate_label": "Running requirement",
+      "class_label": "Running requirement"
+    },
+    "P41835": {
+      "label": "Documentation type",
+      "cardinality": "one to many",
+      "description": "What type of documentation has been provided alongside the implemented approach?",
+      "predicate_label": "Documentation",
+      "class_label": "Documentation type"
+    },
+    "P181048": {
+      "label": "Dependency",
+      "cardinality": "one to many",
+      "description": "What type of dependencies does the implemented approach have?",
+      "predicate_label": "Dependency",
+      "class_label": "Dependency"
+    },
+    "release": {
+      "label": "Release",
+      "cardinality": "one to one",
+      "description": "How was the implemented approach released?",
+      "predicate_label": "Release",
+      "class_label": "Release",
+      "subtemplate_id": "R1544401",
+      "subtemplate_label": "Release",
+      "class_id": "C121044",
+      "subtemplate_properties": {
+        "P181049": {
+          "label": "Release format",
+          "cardinality": "one to many",
+          "description": "What has been released?",
+          "predicate_label": "Release format",
+          "class_label": "Release format"
+        },
+        "P181029": {
+          "label": "Location type",
+          "cardinality": "one to many",
+          "description": "How is the tool released?",
+          "predicate_label": "Location type",
+          "class_label": "Location type"
+        },
+        "P1003": {
+          "label": "url",
+          "cardinality": "one to many",
+          "description": "Where is the tool released?",
+          "predicate_label": "url"
+        }
+      }
+    },
+    "P181049": {
+      "label": "Release format",
+      "cardinality": "one to many",
+      "description": "What has been released?",
+      "predicate_label": "Release format",
+      "class_label": "Release format"
+    },
+    "P181029": {
+      "label": "Location type",
+      "cardinality": "one to many",
+      "description": "How is the tool released?",
+      "predicate_label": "Location type",
+      "class_label": "Location type"
+    },
+    "P110006": {
+      "label": "Metric",
+      "cardinality": "one to many",
+      "description": "What metrics are used to evaluate the implemented approach(?",
+      "predicate_label": "Evaluation metric",
+      "class_label": "Metric"
+    },
+    "P181050": {
+      "label": "Validation procedure",
+      "cardinality": "one to many",
+      "description": "What is the validation procedure?",
+      "predicate_label": "Validation procedure",
+      "class_label": "Validation procedure"
+    },
+    "P181051": {
+      "label": "Baseline comparison",
+      "cardinality": "one to one",
+      "description": "What is the baseline comparison applied in the evaluation of an implemented approach?",
+      "predicate_label": "Baseline comparison",
+      "class_label": "Baseline comparison",
+      "subtemplate_id": "R1544450",
+      "subtemplate_label": "Baseline comparison",
+      "class_id": "C121050",
+      "subtemplate_properties": {
+        "P181052": {
+          "label": "Baseline comparison  type",
+          "cardinality": "one to many",
+          "description": "What baseline do you compare against?",
+          "predicate_label": "Baseline comparison type",
+          "class_label": "Baseline comparison  type"
+        },
+        "P181053": {
+          "label": "Baseline comparison detail",
+          "cardinality": "one to one",
+          "description": "Please provide more details about the baseline you compare against, if any.",
+          "predicate_label": "Baseline comparison detail"
+        }
+      }
+    },
+    "P181052": {
+      "label": "Baseline comparison  type",
+      "cardinality": "one to many",
+      "description": "What baseline do you compare against?",
+      "predicate_label": "Baseline comparison type",
+      "class_label": "Baseline comparison  type"
+    },
+    "P181053": {
+      "label": "Baseline comparison detail",
+      "cardinality": "one to one",
+      "description": "Please provide more details about the baseline you compare against, if any.",
+      "predicate_label": "Baseline comparison detail"
+    }
+  },
+  "prompt_text": "# ORKG SPARQL Generator\n\nGenerate precise, executable SPARQL for the Open Research Knowledge Graph. Template: \"NLP for Requirements Engineering\" (ID: R1544125).\n\n## Prefixes (required in every query)\n```sparql\nPREFIX orkgr: <http://orkg.org/orkg/resource/>\nPREFIX orkgc: <http://orkg.org/orkg/class/>\nPREFIX orkgp: <http://orkg.org/orkg/predicate/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n```\n\n## Core\n| Entity | Term | Usage |\n|--------|------|--------|\n| Paper | - | publication resource |\n| Contribution | `orkgp:P31`, `orkgc:C121001` | `?paper orkgp:P31 ?contribution` ; `?contribution a orkgc:C121001 .` |\n| Year (if time/trends) | `orkgp:P29` | `?paper orkgp:P29 ?year` (never on contribution) |\n| Venue (if asked) | `orkgp:P135046` | `?contribution orkgp:P135046 ?venue . ?venue rdfs:label ?venue_name` |\n\n#### Template Properties\n\n| Concept | ORKG Term | Type | Description & Usage |\n|---------|-----------|------|---------------------|\n| RE task | `orkgp:P181002` | Predicate | What requirements engineering task is your study addressing?. Usage: `?variable orkgp:P181002 ?target` |\n| NLP task | `orkgp:P181003` | Predicate | What natural language processing task is your study tackling?. Usage: `?variable orkgp:P181003 ?target` |\n| └─ NLP task type | `orkgp:P181004` | Predicate (multiple) | What type of natural language processing task is your study tackling?. Usage: `?contribution orkgp:P181003 ?subtemplate . ?subtemplate orkgp:P181004 ?subtarget` |\n| └─ NLP task input | `orkgp:P181005` | Predicate (multiple) | What is the input of your natural language processing task?. Usage: `?contribution orkgp:P181003 ?subtemplate . ?subtemplate orkgp:P181005 ?subtarget` |\n| └─ NLP task output | `orkgp:P181006` | Predicate | What is the output of your natural language processing task?. Usage: `?contribution orkgp:P181003 ?subtemplate . ?subtemplate orkgp:P181006 ?subtarget` |\n| &nbsp;&nbsp;&nbsp;&nbsp;└─ NLP task output type | `orkgp:P181007` | Predicate (multiple) | What is the output type of your natural language processing task?. Usage: `?contribution orkgp:P181003 ?subtemplate . ?subtemplate orkgp:P181006 ?nestedtemplate . ?nestedtemplate orkgp:P181007 ?nestedtarget` |\n| &nbsp;&nbsp;&nbsp;&nbsp;└─ NLP task output classification label | `orkgp:P181008` | Predicate | What is the output label that can be assigned in your natural language processing classification task?. Usage: `?contribution orkgp:P181003 ?subtemplate . ?subtemplate orkgp:P181006 ?nestedtemplate . ?nestedtemplate orkgp:P181008 ?nestedtarget` |\n| &nbsp;&nbsp;&nbsp;&nbsp;└─ NLP task output extracted element | `orkgp:P181009` | Predicate | What is the type of the element extracted in your natural language processing information extraction task?. Usage: `?contribution orkgp:P181003 ?subtemplate . ?subtemplate orkgp:P181006 ?nestedtemplate . ?nestedtemplate orkgp:P181009 ?nestedtarget` |\n| &nbsp;&nbsp;&nbsp;&nbsp;└─ NLP task translation mapping cardinality | `orkgp:P181010` | Predicate (multiple) | What is the translation mapping cardinality between the initial input and final output in your natural language processing translation task?. Usage: `?contribution orkgp:P181003 ?subtemplate . ?subtemplate orkgp:P181006 ?nestedtemplate . ?nestedtemplate orkgp:P181010 ?nestedtarget` |\n| NLP dataset | `orkgp:P181011` | Predicate | What natural language processing dataset is your study using?. Usage: `?variable orkgp:P181011 ?target` |\n| └─ NLP data item | `orkgp:P181015` | Predicate | How many data items do you process? Please report the numerical information and details about all the data that is used in your evaluation.. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:P181015 ?subtarget` |\n| └─ NLP data production time | `orkgp:P181016` | Predicate | In which year or interval of year were the data produced?. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:P181016 ?subtarget` |\n| └─ NLP data source | `orkgp:P181017` | Predicate | What is the source of the data?. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:P181017 ?subtarget` |\n| &nbsp;&nbsp;&nbsp;&nbsp;└─ NLP data source type | `orkgp:P181018` | Predicate (multiple) | What is the source type of the data?. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:P181017 ?nestedtemplate . ?nestedtemplate orkgp:P181018 ?nestedtarget` |\n| &nbsp;&nbsp;&nbsp;&nbsp;└─ Number of data sources | `orkgp:P181019` | Predicate | From how many different sources your data comes from?. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:P181017 ?nestedtemplate . ?nestedtemplate orkgp:P181019 ?nestedtarget` |\n| &nbsp;&nbsp;&nbsp;&nbsp;└─ Data source domain | `orkgp:P181020` | Predicate (multiple) | Please list which domains your data belongs to (e.g., automotive, satellite,\nentertainment, information systems).. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:P181017 ?nestedtemplate . ?nestedtemplate orkgp:P181020 ?nestedtarget` |\n| └─ NLP data abstraction level | `orkgp:P181021` | Predicate (multiple) | What is the level of abstraction of the data (not limited to requirements)?. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:P181021 ?subtarget` |\n| └─ NLP data type | `orkgp:P181022` | Predicate | What is the type of the data?. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:P181022 ?subtarget` |\n| &nbsp;&nbsp;&nbsp;&nbsp;└─ NLP data format | `orkgp:P181023` | Predicate (multiple) | What is the format of the data?. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:P181022 ?nestedtemplate . ?nestedtemplate orkgp:P181023 ?nestedtarget` |\n| &nbsp;&nbsp;&nbsp;&nbsp;└─ Rigor of data format | `orkgp:P181024` | Predicate (multiple) | How rigorous is the format of the data?. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:P181022 ?nestedtemplate . ?nestedtemplate orkgp:P181024 ?nestedtarget` |\n| &nbsp;&nbsp;&nbsp;&nbsp;└─ Natural language | `orkgp:P181025` | Predicate | What is the natural language of\nthe data (if applicable) ?. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:P181022 ?nestedtemplate . ?nestedtemplate orkgp:P181025 ?nestedtarget` |\n| └─ License | `orkgp:license` | Predicate | What license has been used?. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:license ?subtarget` |\n| &nbsp;&nbsp;&nbsp;&nbsp;└─ Public availability | `orkgp:P181026` | Predicate | Is the dataset publicly available?. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:license ?nestedtemplate . ?nestedtemplate orkgp:P181026 ?nestedtarget` |\n| &nbsp;&nbsp;&nbsp;&nbsp;└─ License type | `orkgp:P181027` | Predicate | What license has been used?. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:license ?nestedtemplate . ?nestedtemplate orkgp:P181027 ?nestedtarget` |\n| └─ NLP dataset location | `orkgp:P181028` | Predicate | Where is the dataset stored?. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:P181028 ?subtarget` |\n| &nbsp;&nbsp;&nbsp;&nbsp;└─ Location type | `orkgp:P181030` | Predicate (multiple) | Where is the dataset stored?. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:P181028 ?nestedtemplate . ?nestedtemplate orkgp:P181030 ?nestedtarget` |\n| &nbsp;&nbsp;&nbsp;&nbsp;└─ url | `orkgp:P1003` | Predicate (multiple) | Provide a URL to the dataset, if available, or to the original paper that proposed the dataset. Usage: `?contribution orkgp:P181011 ?subtemplate . ?subtemplate orkgp:P181028 ?nestedtemplate . ?nestedtemplate orkgp:P1003 ?nestedtarget` |\n| Annotation process | `orkgp:P181031` | Predicate | What annotation process did you use for your dataset?. Usage: `?variable orkgp:P181031 ?target` |\n| └─ Annotator | `orkgp:P181032` | Predicate | Who are the annotators of your dataset?. Usage: `?contribution orkgp:P181031 ?subtemplate . ?subtemplate orkgp:P181032 ?subtarget` |\n| &nbsp;&nbsp;&nbsp;&nbsp;└─ Number of annotators | `orkgp:P59120` | Predicate | How many annotators have been involved in your annotation process?. Usage: `?contribution orkgp:P181031 ?subtemplate . ?subtemplate orkgp:P181032 ?nestedtemplate . ?nestedtemplate orkgp:P59120 ?nestedtarget` |\n| &nbsp;&nbsp;&nbsp;&nbsp;└─ Annotator assignment | `orkgp:P181033` | Predicate (multiple) | How are the entries annotated assigned to the annotators?. Usage: `?contribution orkgp:P181031 ?subtemplate . ?subtemplate orkgp:P181032 ?nestedtemplate . ?nestedtemplate orkgp:P181033 ?nestedtarget` |\n| &nbsp;&nbsp;&nbsp;&nbsp;└─ Level of application domain experience | `orkgp:P181034` | Predicate (multiple) | What is the average level of application domain experience of the annotators?. Usage: `?contribution orkgp:P181031 ?subtemplate . ?subtemplate orkgp:P181032 ?nestedtemplate . ?nestedtemplate orkgp:P181034 ?nestedtarget` |\n| &nbsp;&nbsp;&nbsp;&nbsp;└─ Annotator Identity | `orkgp:P181035` | Predicate (multiple) | Who are the annotators?. Usage: `?contribution orkgp:P181031 ?subtemplate . ?subtemplate orkgp:P181032 ?nestedtemplate . ?nestedtemplate orkgp:P181035 ?nestedtarget` |\n| └─ Annotation Scheme | `orkgp:P181036` | Predicate (multiple) | What is the annotation scheme used for your dataset?. Usage: `?contribution orkgp:P181031 ?subtemplate . ?subtemplate orkgp:P181036 ?subtarget` |\n| &nbsp;&nbsp;&nbsp;&nbsp;└─ Scheme establishement | `orkgp:P181037` | Predicate (multiple) | How was the annotation scheme established among the annotators?. Usage: `?contribution orkgp:P181031 ?subtemplate . ?subtemplate orkgp:P181036 ?nestedtemplate . ?nestedtemplate orkgp:P181037 ?nestedtarget` |\n| &nbsp;&nbsp;&nbsp;&nbsp;└─ Guideline availability | `orkgp:P181038` | Predicate (multiple) | Did you make the written guidelines public?. Usage: `?contribution orkgp:P181031 ?subtemplate . ?subtemplate orkgp:P181036 ?nestedtemplate . ?nestedtemplate orkgp:P181038 ?nestedtarget` |\n| └─ Shared material | `orkgp:P181039` | Predicate (multiple) | Did you share other information that could support the annotators other\nthan the elements to annotate?. Usage: `?contribution orkgp:P181031 ?subtemplate . ?subtemplate orkgp:P181039 ?subtarget` |\n| └─ Fatigue mitigation technique | `orkgp:P181040` | Predicate | Did you employ techniques to mitigate fatigue effects during the\nannotation sessions?. Usage: `?contribution orkgp:P181031 ?subtemplate . ?subtemplate orkgp:P181040 ?subtarget` |\n| └─ Annotator agreement | `orkgp:P181041` | Predicate | What annotator agreement did you apply for your dataset?. Usage: `?contribution orkgp:P181031 ?subtemplate . ?subtemplate orkgp:P181041 ?subtarget` |\n| &nbsp;&nbsp;&nbsp;&nbsp;└─ Intercoder reliability metric | `orkgp:P181042` | Predicate (multiple) | What are the metrics used to measure intercoder reliability?. Usage: `?contribution orkgp:P181031 ?subtemplate . ?subtemplate orkgp:P181041 ?nestedtemplate . ?nestedtemplate orkgp:P181042 ?nestedtarget` |\n| &nbsp;&nbsp;&nbsp;&nbsp;└─ Conflict resolution | `orkgp:P181044` | Predicate (multiple) | How were conflicts resolved?. Usage: `?contribution orkgp:P181031 ?subtemplate . ?subtemplate orkgp:P181041 ?nestedtemplate . ?nestedtemplate orkgp:P181044 ?nestedtarget` |\n| &nbsp;&nbsp;&nbsp;&nbsp;└─ Measured agreement | `orkgp:P181045` | Predicate | What is the measured agreement?. Usage: `?contribution orkgp:P181031 ?subtemplate . ?subtemplate orkgp:P181041 ?nestedtemplate . ?nestedtemplate orkgp:P181045 ?nestedtarget` |\n| Implemented approach | `orkgp:P181046` | Predicate | What approach did you implement for your study?. Usage: `?variable orkgp:P181046 ?target` |\n| └─ Approach type | `orkgp:P5043` | Predicate (multiple) | What is the type of the implemented approach?. Usage: `?contribution orkgp:P181046 ?subtemplate . ?subtemplate orkgp:P5043 ?subtarget` |\n| └─ Algorithm | `orkgp:P58069` | Predicate (multiple) | What algorithms are used in the implemented approach?. Usage: `?contribution orkgp:P181046 ?subtemplate . ?subtemplate orkgp:P58069 ?subtarget` |\n| └─ Running requirement | `orkgp:P181047` | Predicate (multiple) | What needs to be done for running the implemented approach?. Usage: `?contribution orkgp:P181046 ?subtemplate . ?subtemplate orkgp:P181047 ?subtarget` |\n| └─ Documentation type | `orkgp:P41835` | Predicate (multiple) | What type of documentation has been provided alongside the implemented approach?. Usage: `?contribution orkgp:P181046 ?subtemplate . ?subtemplate orkgp:P41835 ?subtarget` |\n| └─ Dependency | `orkgp:P181048` | Predicate (multiple) | What type of dependencies does the implemented approach have?. Usage: `?contribution orkgp:P181046 ?subtemplate . ?subtemplate orkgp:P181048 ?subtarget` |\n| └─ License type | `orkgp:P181027` | Predicate | What license has been used?. Usage: `?contribution orkgp:P181046 ?subtemplate . ?subtemplate orkgp:P181027 ?subtarget` |\n| └─ Release | `orkgp:release` | Predicate | How was the implemented approach released?. Usage: `?contribution orkgp:P181046 ?subtemplate . ?subtemplate orkgp:release ?subtarget` |\n| &nbsp;&nbsp;&nbsp;&nbsp;└─ Release format | `orkgp:P181049` | Predicate (multiple) | What has been released?. Usage: `?contribution orkgp:P181046 ?subtemplate . ?subtemplate orkgp:release ?nestedtemplate . ?nestedtemplate orkgp:P181049 ?nestedtarget` |\n| &nbsp;&nbsp;&nbsp;&nbsp;└─ Location type | `orkgp:P181029` | Predicate (multiple) | How is the tool released?. Usage: `?contribution orkgp:P181046 ?subtemplate . ?subtemplate orkgp:release ?nestedtemplate . ?nestedtemplate orkgp:P181029 ?nestedtarget` |\n| &nbsp;&nbsp;&nbsp;&nbsp;└─ url | `orkgp:P1003` | Predicate (multiple) | Where is the tool released?. Usage: `?contribution orkgp:P181046 ?subtemplate . ?subtemplate orkgp:release ?nestedtemplate . ?nestedtemplate orkgp:P1003 ?nestedtarget` |\n| Evaluation | `orkgp:HAS_EVALUATION` | Predicate | What evaluation did you apply for your study?. Usage: `?variable orkgp:HAS_EVALUATION ?target` |\n| └─ Metric | `orkgp:P110006` | Predicate (multiple) | What metrics are used to evaluate the implemented approach(?. Usage: `?contribution orkgp:HAS_EVALUATION ?subtemplate . ?subtemplate orkgp:P110006 ?subtarget` |\n| └─ Validation procedure | `orkgp:P181050` | Predicate (multiple) | What is the validation procedure?. Usage: `?contribution orkgp:HAS_EVALUATION ?subtemplate . ?subtemplate orkgp:P181050 ?subtarget` |\n| └─ Baseline comparison | `orkgp:P181051` | Predicate | What is the baseline comparison applied in the evaluation of an implemented approach?. Usage: `?contribution orkgp:HAS_EVALUATION ?subtemplate . ?subtemplate orkgp:P181051 ?subtarget` |\n| &nbsp;&nbsp;&nbsp;&nbsp;└─ Baseline comparison  type | `orkgp:P181052` | Predicate (multiple) | What baseline do you compare against?. Usage: `?contribution orkgp:HAS_EVALUATION ?subtemplate . ?subtemplate orkgp:P181051 ?nestedtemplate . ?nestedtemplate orkgp:P181052 ?nestedtarget` |\n| &nbsp;&nbsp;&nbsp;&nbsp;└─ Baseline comparison detail | `orkgp:P181053` | Predicate | Please provide more details about the baseline you compare against, if any.. Usage: `?contribution orkgp:HAS_EVALUATION ?subtemplate . ?subtemplate orkgp:P181051 ?nestedtemplate . ?nestedtemplate orkgp:P181053 ?nestedtarget` |\n| NLP task type | `orkgp:P181004` | Predicate (multiple) | What type of natural language processing task is your study tackling?. Usage: `?variable orkgp:P181004 ?target` |\n| NLP task input | `orkgp:P181005` | Predicate (multiple) | What is the input of your natural language processing task?. Usage: `?variable orkgp:P181005 ?target` |\n| NLP task output | `orkgp:P181006` | Predicate | What is the output of your natural language processing task?. Usage: `?variable orkgp:P181006 ?target` |\n| └─ NLP task output type | `orkgp:P181007` | Predicate (multiple) | What is the output type of your natural language processing task?. Usage: `?contribution orkgp:P181006 ?subtemplate . ?subtemplate orkgp:P181007 ?subtarget` |\n| └─ NLP task output classification label | `orkgp:P181008` | Predicate | What is the output label that can be assigned in your natural language processing classification task?. Usage: `?contribution orkgp:P181006 ?subtemplate . ?subtemplate orkgp:P181008 ?subtarget` |\n| └─ NLP task output extracted element | `orkgp:P181009` | Predicate | What is the type of the element extracted in your natural language processing information extraction task?. Usage: `?contribution orkgp:P181006 ?subtemplate . ?subtemplate orkgp:P181009 ?subtarget` |\n| └─ NLP task translation mapping cardinality | `orkgp:P181010` | Predicate (multiple) | What is the translation mapping cardinality between the initial input and final output in your natural language processing translation task?. Usage: `?contribution orkgp:P181006 ?subtemplate . ?subtemplate orkgp:P181010 ?subtarget` |\n| NLP task output type | `orkgp:P181007` | Predicate (multiple) | What is the output type of your natural language processing task?. Usage: `?variable orkgp:P181007 ?target` |\n| NLP task output classification label | `orkgp:P181008` | Predicate | What is the output label that can be assigned in your natural language processing classification task?. Usage: `?variable orkgp:P181008 ?target` |\n| NLP task output extracted element | `orkgp:P181009` | Predicate | What is the type of the element extracted in your natural language processing information extraction task?. Usage: `?variable orkgp:P181009 ?target` |\n| NLP task translation mapping cardinality | `orkgp:P181010` | Predicate (multiple) | What is the translation mapping cardinality between the initial input and final output in your natural language processing translation task?. Usage: `?variable orkgp:P181010 ?target` |\n| NLP data item | `orkgp:P181015` | Predicate | How many data items do you process? Please report the numerical information and details about all the data that is used in your evaluation.. Usage: `?variable orkgp:P181015 ?target` |\n| NLP data production time | `orkgp:P181016` | Predicate | In which year or interval of year were the data produced?. Usage: `?variable orkgp:P181016 ?target` |\n| NLP data source | `orkgp:P181017` | Predicate | What is the source of the data?. Usage: `?variable orkgp:P181017 ?target` |\n| └─ NLP data source type | `orkgp:P181018` | Predicate (multiple) | What is the source type of the data?. Usage: `?contribution orkgp:P181017 ?subtemplate . ?subtemplate orkgp:P181018 ?subtarget` |\n| └─ Number of data sources | `orkgp:P181019` | Predicate | From how many different sources your data comes from?. Usage: `?contribution orkgp:P181017 ?subtemplate . ?subtemplate orkgp:P181019 ?subtarget` |\n| └─ Data source domain | `orkgp:P181020` | Predicate (multiple) | Please list which domains your data belongs to (e.g., automotive, satellite,\nentertainment, information systems).. Usage: `?contribution orkgp:P181017 ?subtemplate . ?subtemplate orkgp:P181020 ?subtarget` |\n| NLP data abstraction level | `orkgp:P181021` | Predicate (multiple) | What is the level of abstraction of the data (not limited to requirements)?. Usage: `?variable orkgp:P181021 ?target` |\n| NLP data type | `orkgp:P181022` | Predicate | What is the type of the data?. Usage: `?variable orkgp:P181022 ?target` |\n| └─ NLP data format | `orkgp:P181023` | Predicate (multiple) | What is the format of the data?. Usage: `?contribution orkgp:P181022 ?subtemplate . ?subtemplate orkgp:P181023 ?subtarget` |\n| └─ Rigor of data format | `orkgp:P181024` | Predicate (multiple) | How rigorous is the format of the data?. Usage: `?contribution orkgp:P181022 ?subtemplate . ?subtemplate orkgp:P181024 ?subtarget` |\n| └─ Natural language | `orkgp:P181025` | Predicate | What is the natural language of\nthe data (if applicable) ?. Usage: `?contribution orkgp:P181022 ?subtemplate . ?subtemplate orkgp:P181025 ?subtarget` |\n| License | `orkgp:license` | Predicate | What license has been used?. Usage: `?variable orkgp:license ?target` |\n| └─ Public availability | `orkgp:P181026` | Predicate | Is the dataset publicly available?. Usage: `?contribution orkgp:license ?subtemplate . ?subtemplate orkgp:P181026 ?subtarget` |\n| └─ License type | `orkgp:P181027` | Predicate | What license has been used?. Usage: `?contribution orkgp:license ?subtemplate . ?subtemplate orkgp:P181027 ?subtarget` |\n| NLP dataset location | `orkgp:P181028` | Predicate | Where is the dataset stored?. Usage: `?variable orkgp:P181028 ?target` |\n| └─ Location type | `orkgp:P181030` | Predicate (multiple) | Where is the dataset stored?. Usage: `?contribution orkgp:P181028 ?subtemplate . ?subtemplate orkgp:P181030 ?subtarget` |\n| └─ url | `orkgp:P1003` | Predicate (multiple) | Provide a URL to the dataset, if available, or to the original paper that proposed the dataset. Usage: `?contribution orkgp:P181028 ?subtemplate . ?subtemplate orkgp:P1003 ?subtarget` |\n| NLP data source type | `orkgp:P181018` | Predicate (multiple) | What is the source type of the data?. Usage: `?variable orkgp:P181018 ?target` |\n| Number of data sources | `orkgp:P181019` | Predicate | From how many different sources your data comes from?. Usage: `?variable orkgp:P181019 ?target` |\n| Data source domain | `orkgp:P181020` | Predicate (multiple) | Please list which domains your data belongs to (e.g., automotive, satellite,\nentertainment, information systems).. Usage: `?variable orkgp:P181020 ?target` |\n| NLP data format | `orkgp:P181023` | Predicate (multiple) | What is the format of the data?. Usage: `?variable orkgp:P181023 ?target` |\n| Rigor of data format | `orkgp:P181024` | Predicate (multiple) | How rigorous is the format of the data?. Usage: `?variable orkgp:P181024 ?target` |\n| Natural language | `orkgp:P181025` | Predicate | What is the natural language of\nthe data (if applicable) ?. Usage: `?variable orkgp:P181025 ?target` |\n| Public availability | `orkgp:P181026` | Predicate | Is the dataset publicly available?. Usage: `?variable orkgp:P181026 ?target` |\n| License type | `orkgp:P181027` | Predicate | What license has been used?. Usage: `?variable orkgp:P181027 ?target` |\n| Location type | `orkgp:P181030` | Predicate (multiple) | Where is the dataset stored?. Usage: `?variable orkgp:P181030 ?target` |\n| url | `orkgp:P1003` | Predicate (multiple) | Where is the tool released?. Usage: `?variable orkgp:P1003 ?target` |\n| Annotator | `orkgp:P181032` | Predicate | Who are the annotators of your dataset?. Usage: `?variable orkgp:P181032 ?target` |\n| └─ Number of annotators | `orkgp:P59120` | Predicate | How many annotators have been involved in your annotation process?. Usage: `?contribution orkgp:P181032 ?subtemplate . ?subtemplate orkgp:P59120 ?subtarget` |\n| └─ Annotator assignment | `orkgp:P181033` | Predicate (multiple) | How are the entries annotated assigned to the annotators?. Usage: `?contribution orkgp:P181032 ?subtemplate . ?subtemplate orkgp:P181033 ?subtarget` |\n| └─ Level of application domain experience | `orkgp:P181034` | Predicate (multiple) | What is the average level of application domain experience of the annotators?. Usage: `?contribution orkgp:P181032 ?subtemplate . ?subtemplate orkgp:P181034 ?subtarget` |\n| └─ Annotator Identity | `orkgp:P181035` | Predicate (multiple) | Who are the annotators?. Usage: `?contribution orkgp:P181032 ?subtemplate . ?subtemplate orkgp:P181035 ?subtarget` |\n| Annotation Scheme | `orkgp:P181036` | Predicate (multiple) | What is the annotation scheme used for your dataset?. Usage: `?variable orkgp:P181036 ?target` |\n| └─ Scheme establishement | `orkgp:P181037` | Predicate (multiple) | How was the annotation scheme established among the annotators?. Usage: `?contribution orkgp:P181036 ?subtemplate . ?subtemplate orkgp:P181037 ?subtarget` |\n| └─ Guideline availability | `orkgp:P181038` | Predicate (multiple) | Did you make the written guidelines public?. Usage: `?contribution orkgp:P181036 ?subtemplate . ?subtemplate orkgp:P181038 ?subtarget` |\n| Shared material | `orkgp:P181039` | Predicate (multiple) | Did you share other information that could support the annotators other\nthan the elements to annotate?. Usage: `?variable orkgp:P181039 ?target` |\n| Fatigue mitigation technique | `orkgp:P181040` | Predicate | Did you employ techniques to mitigate fatigue effects during the\nannotation sessions?. Usage: `?variable orkgp:P181040 ?target` |\n| Annotator agreement | `orkgp:P181041` | Predicate | What annotator agreement did you apply for your dataset?. Usage: `?variable orkgp:P181041 ?target` |\n| └─ Intercoder reliability metric | `orkgp:P181042` | Predicate (multiple) | What are the metrics used to measure intercoder reliability?. Usage: `?contribution orkgp:P181041 ?subtemplate . ?subtemplate orkgp:P181042 ?subtarget` |\n| └─ Conflict resolution | `orkgp:P181044` | Predicate (multiple) | How were conflicts resolved?. Usage: `?contribution orkgp:P181041 ?subtemplate . ?subtemplate orkgp:P181044 ?subtarget` |\n| └─ Measured agreement | `orkgp:P181045` | Predicate | What is the measured agreement?. Usage: `?contribution orkgp:P181041 ?subtemplate . ?subtemplate orkgp:P181045 ?subtarget` |\n| Number of annotators | `orkgp:P59120` | Predicate | How many annotators have been involved in your annotation process?. Usage: `?variable orkgp:P59120 ?target` |\n| Annotator assignment | `orkgp:P181033` | Predicate (multiple) | How are the entries annotated assigned to the annotators?. Usage: `?variable orkgp:P181033 ?target` |\n| Level of application domain experience | `orkgp:P181034` | Predicate (multiple) | What is the average level of application domain experience of the annotators?. Usage: `?variable orkgp:P181034 ?target` |\n| Annotator Identity | `orkgp:P181035` | Predicate (multiple) | Who are the annotators?. Usage: `?variable orkgp:P181035 ?target` |\n| Scheme establishement | `orkgp:P181037` | Predicate (multiple) | How was the annotation scheme established among the annotators?. Usage: `?variable orkgp:P181037 ?target` |\n| Guideline availability | `orkgp:P181038` | Predicate (multiple) | Did you make the written guidelines public?. Usage: `?variable orkgp:P181038 ?target` |\n| Intercoder reliability metric | `orkgp:P181042` | Predicate (multiple) | What are the metrics used to measure intercoder reliability?. Usage: `?variable orkgp:P181042 ?target` |\n| Conflict resolution | `orkgp:P181044` | Predicate (multiple) | How were conflicts resolved?. Usage: `?variable orkgp:P181044 ?target` |\n| Measured agreement | `orkgp:P181045` | Predicate | What is the measured agreement?. Usage: `?variable orkgp:P181045 ?target` |\n| Approach type | `orkgp:P5043` | Predicate (multiple) | What is the type of the implemented approach?. Usage: `?variable orkgp:P5043 ?target` |\n| Algorithm | `orkgp:P58069` | Predicate (multiple) | What algorithms are used in the implemented approach?. Usage: `?variable orkgp:P58069 ?target` |\n| Running requirement | `orkgp:P181047` | Predicate (multiple) | What needs to be done for running the implemented approach?. Usage: `?variable orkgp:P181047 ?target` |\n| Documentation type | `orkgp:P41835` | Predicate (multiple) | What type of documentation has been provided alongside the implemented approach?. Usage: `?variable orkgp:P41835 ?target` |\n| Dependency | `orkgp:P181048` | Predicate (multiple) | What type of dependencies does the implemented approach have?. Usage: `?variable orkgp:P181048 ?target` |\n| Release | `orkgp:release` | Predicate | How was the implemented approach released?. Usage: `?variable orkgp:release ?target` |\n| └─ Release format | `orkgp:P181049` | Predicate (multiple) | What has been released?. Usage: `?contribution orkgp:release ?subtemplate . ?subtemplate orkgp:P181049 ?subtarget` |\n| └─ Location type | `orkgp:P181029` | Predicate (multiple) | How is the tool released?. Usage: `?contribution orkgp:release ?subtemplate . ?subtemplate orkgp:P181029 ?subtarget` |\n| └─ url | `orkgp:P1003` | Predicate (multiple) | Where is the tool released?. Usage: `?contribution orkgp:release ?subtemplate . ?subtemplate orkgp:P1003 ?subtarget` |\n| Release format | `orkgp:P181049` | Predicate (multiple) | What has been released?. Usage: `?variable orkgp:P181049 ?target` |\n| Location type | `orkgp:P181029` | Predicate (multiple) | How is the tool released?. Usage: `?variable orkgp:P181029 ?target` |\n| Metric | `orkgp:P110006` | Predicate (multiple) | What metrics are used to evaluate the implemented approach(?. Usage: `?variable orkgp:P110006 ?target` |\n| Validation procedure | `orkgp:P181050` | Predicate (multiple) | What is the validation procedure?. Usage: `?variable orkgp:P181050 ?target` |\n| Baseline comparison | `orkgp:P181051` | Predicate | What is the baseline comparison applied in the evaluation of an implemented approach?. Usage: `?variable orkgp:P181051 ?target` |\n| └─ Baseline comparison  type | `orkgp:P181052` | Predicate (multiple) | What baseline do you compare against?. Usage: `?contribution orkgp:P181051 ?subtemplate . ?subtemplate orkgp:P181052 ?subtarget` |\n| └─ Baseline comparison detail | `orkgp:P181053` | Predicate | Please provide more details about the baseline you compare against, if any.. Usage: `?contribution orkgp:P181051 ?subtemplate . ?subtemplate orkgp:P181053 ?subtarget` |\n| Baseline comparison  type | `orkgp:P181052` | Predicate (multiple) | What baseline do you compare against?. Usage: `?variable orkgp:P181052 ?target` |\n| Baseline comparison detail | `orkgp:P181053` | Predicate | Please provide more details about the baseline you compare against, if any.. Usage: `?variable orkgp:P181053 ?target` |\n\n\n#### Template Hierarchy Structure\n\nTraverse via parent → child:\n\n**RE task** (`orkgp:P181002`)\n\n**NLP task** (`orkgp:P181003`)\n  └─ **NLP task type** (`orkgp:P181004`)\n  └─ **NLP task input** (`orkgp:P181005`)\n  └─ **NLP task output** (`orkgp:P181006`)\n    └─ **NLP task output type** (`orkgp:P181007`)\n    └─ **NLP task output classification label** (`orkgp:P181008`)\n    └─ **NLP task output extracted element** (`orkgp:P181009`)\n    └─ **NLP task translation mapping cardinality** (`orkgp:P181010`)\n\n**NLP dataset** (`orkgp:P181011`)\n  └─ **NLP data item** (`orkgp:P181015`)\n  └─ **NLP data production time** (`orkgp:P181016`)\n  └─ **NLP data source** (`orkgp:P181017`)\n    └─ **NLP data source type** (`orkgp:P181018`)\n    └─ **Number of data sources** (`orkgp:P181019`)\n    └─ **Data source domain** (`orkgp:P181020`)\n  └─ **NLP data abstraction level** (`orkgp:P181021`)\n  └─ **NLP data type** (`orkgp:P181022`)\n    └─ **NLP data format** (`orkgp:P181023`)\n    └─ **Rigor of data format** (`orkgp:P181024`)\n    └─ **Natural language** (`orkgp:P181025`)\n  └─ **License** (`orkgp:license`)\n    └─ **Public availability** (`orkgp:P181026`)\n    └─ **License type** (`orkgp:P181027`)\n  └─ **NLP dataset location** (`orkgp:P181028`)\n    └─ **Location type** (`orkgp:P181030`)\n    └─ **url** (`orkgp:P1003`)\n\n**Annotation process** (`orkgp:P181031`)\n  └─ **Annotator** (`orkgp:P181032`)\n    └─ **Number of annotators** (`orkgp:P59120`)\n    └─ **Annotator assignment** (`orkgp:P181033`)\n    └─ **Level of application domain experience** (`orkgp:P181034`)\n    └─ **Annotator Identity** (`orkgp:P181035`)\n  └─ **Annotation Scheme** (`orkgp:P181036`)\n    └─ **Scheme establishement** (`orkgp:P181037`)\n    └─ **Guideline availability** (`orkgp:P181038`)\n  └─ **Shared material** (`orkgp:P181039`)\n  └─ **Fatigue mitigation technique** (`orkgp:P181040`)\n  └─ **Annotator agreement** (`orkgp:P181041`)\n    └─ **Intercoder reliability metric** (`orkgp:P181042`)\n    └─ **Conflict resolution** (`orkgp:P181044`)\n    └─ **Measured agreement** (`orkgp:P181045`)\n\n**Implemented approach** (`orkgp:P181046`)\n  └─ **Approach type** (`orkgp:P5043`)\n  └─ **Algorithm** (`orkgp:P58069`)\n  └─ **Running requirement** (`orkgp:P181047`)\n  └─ **Documentation type** (`orkgp:P41835`)\n  └─ **Dependency** (`orkgp:P181048`)\n  └─ **License type** (`orkgp:P181027`)\n  └─ **Release** (`orkgp:release`)\n    └─ **Release format** (`orkgp:P181049`)\n    └─ **Location type** (`orkgp:P181029`)\n    └─ **url** (`orkgp:P1003`)\n\n**Evaluation** (`orkgp:HAS_EVALUATION`)\n  └─ **Metric** (`orkgp:P110006`)\n  └─ **Validation procedure** (`orkgp:P181050`)\n  └─ **Baseline comparison** (`orkgp:P181051`)\n    └─ **Baseline comparison  type** (`orkgp:P181052`)\n    └─ **Baseline comparison detail** (`orkgp:P181053`)\n\n**NLP task type** (`orkgp:P181004`)\n\n**NLP task input** (`orkgp:P181005`)\n\n**NLP task output** (`orkgp:P181006`)\n  └─ **NLP task output type** (`orkgp:P181007`)\n  └─ **NLP task output classification label** (`orkgp:P181008`)\n  └─ **NLP task output extracted element** (`orkgp:P181009`)\n  └─ **NLP task translation mapping cardinality** (`orkgp:P181010`)\n\n**NLP task output type** (`orkgp:P181007`)\n\n**NLP task output classification label** (`orkgp:P181008`)\n\n**NLP task output extracted element** (`orkgp:P181009`)\n\n**NLP task translation mapping cardinality** (`orkgp:P181010`)\n\n**NLP data item** (`orkgp:P181015`)\n\n**NLP data production time** (`orkgp:P181016`)\n\n**NLP data source** (`orkgp:P181017`)\n  └─ **NLP data source type** (`orkgp:P181018`)\n  └─ **Number of data sources** (`orkgp:P181019`)\n  └─ **Data source domain** (`orkgp:P181020`)\n\n**NLP data abstraction level** (`orkgp:P181021`)\n\n**NLP data type** (`orkgp:P181022`)\n  └─ **NLP data format** (`orkgp:P181023`)\n  └─ **Rigor of data format** (`orkgp:P181024`)\n  └─ **Natural language** (`orkgp:P181025`)\n\n**License** (`orkgp:license`)\n  └─ **Public availability** (`orkgp:P181026`)\n  └─ **License type** (`orkgp:P181027`)\n\n**NLP dataset location** (`orkgp:P181028`)\n  └─ **Location type** (`orkgp:P181030`)\n  └─ **url** (`orkgp:P1003`)\n\n**NLP data source type** (`orkgp:P181018`)\n\n**Number of data sources** (`orkgp:P181019`)\n\n**Data source domain** (`orkgp:P181020`)\n\n**NLP data format** (`orkgp:P181023`)\n\n**Rigor of data format** (`orkgp:P181024`)\n\n**Natural language** (`orkgp:P181025`)\n\n**Public availability** (`orkgp:P181026`)\n\n**License type** (`orkgp:P181027`)\n\n**Location type** (`orkgp:P181030`)\n\n**url** (`orkgp:P1003`)\n\n**Annotator** (`orkgp:P181032`)\n  └─ **Number of annotators** (`orkgp:P59120`)\n  └─ **Annotator assignment** (`orkgp:P181033`)\n  └─ **Level of application domain experience** (`orkgp:P181034`)\n  └─ **Annotator Identity** (`orkgp:P181035`)\n\n**Annotation Scheme** (`orkgp:P181036`)\n  └─ **Scheme establishement** (`orkgp:P181037`)\n  └─ **Guideline availability** (`orkgp:P181038`)\n\n**Shared material** (`orkgp:P181039`)\n\n**Fatigue mitigation technique** (`orkgp:P181040`)\n\n**Annotator agreement** (`orkgp:P181041`)\n  └─ **Intercoder reliability metric** (`orkgp:P181042`)\n  └─ **Conflict resolution** (`orkgp:P181044`)\n  └─ **Measured agreement** (`orkgp:P181045`)\n\n**Number of annotators** (`orkgp:P59120`)\n\n**Annotator assignment** (`orkgp:P181033`)\n\n**Level of application domain experience** (`orkgp:P181034`)\n\n**Annotator Identity** (`orkgp:P181035`)\n\n**Scheme establishement** (`orkgp:P181037`)\n\n**Guideline availability** (`orkgp:P181038`)\n\n**Intercoder reliability metric** (`orkgp:P181042`)\n\n**Conflict resolution** (`orkgp:P181044`)\n\n**Measured agreement** (`orkgp:P181045`)\n\n**Approach type** (`orkgp:P5043`)\n\n**Algorithm** (`orkgp:P58069`)\n\n**Running requirement** (`orkgp:P181047`)\n\n**Documentation type** (`orkgp:P41835`)\n\n**Dependency** (`orkgp:P181048`)\n\n**Release** (`orkgp:release`)\n  └─ **Release format** (`orkgp:P181049`)\n  └─ **Location type** (`orkgp:P181029`)\n  └─ **url** (`orkgp:P1003`)\n\n**Release format** (`orkgp:P181049`)\n\n**Location type** (`orkgp:P181029`)\n\n**Metric** (`orkgp:P110006`)\n\n**Validation procedure** (`orkgp:P181050`)\n\n**Baseline comparison** (`orkgp:P181051`)\n  └─ **Baseline comparison  type** (`orkgp:P181052`)\n  └─ **Baseline comparison detail** (`orkgp:P181053`)\n\n**Baseline comparison  type** (`orkgp:P181052`)\n\n**Baseline comparison detail** (`orkgp:P181053`)\n\n└─ = child of above; traverse parent first.\n\n\n\n## Template-Specific Guidance\n\nNLP4RE: NLP/RE tasks, evaluation metrics, datasets, annotation, baselines. Use `?contribution a orkgc:C121001`. Evaluation: HAS_EVALUATION → P110006 (metrics). NLP tasks: P181003 → P181004. RE tasks: P181002. Datasets: P181011 → P181022 → P181023. Annotation: P181031 → P181036 → P181038.\n\n\n\nClass: `?contribution a orkgc:C121001`. Use SELECT DISTINCT. OPTIONAL for labels. Top N: include ?paper and ?paperLabel, no LIMIT, ORDER BY ?paperLabel. Traverse full chains (e.g. dataset→datatype→dataformat; HAS_EVALUATION→evaluation→P110006).\n\n\n\nDISTINCT; OPTIONAL for labels; full property chains; for \"top N\" return ?paper ?paperLabel + field, no LIMIT.\n\n\n\nDuplicates → SELECT DISTINCT. Missing labels → OPTIONAL { rdfs:label }. Empty nested → traverse full chain. Metrics → HAS_EVALUATION then P110006.\n\n\n## Rules\n1. **Class**: Always `?contribution a orkgc:C121001 .`\n2. **Year**: Only if question asks time/trends; use `?paper orkgp:P29 ?year` (never `?contribution orkgp:P29`).\n3. **Top N / frequency**: Include `?paper` and `?paperLabel` in SELECT; no LIMIT; ORDER BY paper.\n4. **One query per code block**: Each ```sparql block has one SELECT; use `# id: name`.\n5. **URIs vs labels**: Properties return URIs. Get label first: `?resource rdfs:label ?label`. Compare only the label to strings.\n6. **Label comparison**: Always use `LCASE(STR(?label)) = LCASE(\"value\")` (case-insensitive).\n7. **BIND**: Only in WHERE; variables in BIND must be defined before it. No IF() in SELECT—use BIND(IF(...)) in WHERE.\n8. **Proportions**: Use subqueries; cast `xsd:decimal` for division.\n9. **Nested props**: Follow schema hierarchy (contribution → parent → child); use `└─` in Template Properties.\n\n**Output**: Only SPARQL in ```sparql blocks. No explanations. One query per block.\n\n## Input\n**Research Question:** [Research Question]"
+}
