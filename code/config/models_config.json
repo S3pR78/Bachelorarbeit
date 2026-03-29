@@ -2,10 +2,14 @@
   "api_url_base": "https://api-inference.huggingface.co/models/",
   "models_to_test": [
     {
-      "name": "Test-Tiny",
-      "id": "sshleifer/tiny-gpt2",
-      "params": { "max_new_tokens": 10 },
-      "provider": "huggingface"
+      "name": "Qwen3-0.6B",
+      "id": "Qwen/Qwen3-0.6B",
+      "provider": "huggingface",
+      "params": {
+        "max_new_tokens": 400,
+        "temperature": 0.0,
+        "do_sample": false
+      }
     },
     {
       "name": "Qwen-2.5-7B",
