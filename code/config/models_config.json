@@ -7,7 +7,6 @@
       "provider": "huggingface",
       "params": {
         "max_new_tokens": 400,
-        "temperature": 0.0,
         "do_sample": false
       }
     },

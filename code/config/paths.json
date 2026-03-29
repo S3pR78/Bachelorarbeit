@@ -16,6 +16,6 @@
     "validation_dir": "code/data/canonical/validation/reports"
   },
   "models": {
-  "base_dir": "code/models"
+  "base_dir": "models"
   }
 }

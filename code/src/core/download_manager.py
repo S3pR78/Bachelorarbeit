@@ -17,8 +17,7 @@ def ensure_model_downloaded(model_id: str, base_dir: str = get_path("models.base
         os.makedirs(local_path, exist_ok=True)
         snapshot_download(
             repo_id=model_id,
-            local_dir=local_path,
-            local_dir_use_symlinks=False
+            local_dir=local_path
         )
         print("Download complete.")
         

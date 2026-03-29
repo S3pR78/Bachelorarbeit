@@ -24,39 +24,46 @@ class InferenceEngine:
 
     def generate_response(self, prompt: str) -> str:
         """Generates text based on the provided prompt and model parameters."""
-        
-        if self.provider == "openai":
 
+        if self.provider == "openai":
             response = self.client.chat.completions.create(
                 model=self.model_id,
                 messages=[
-                    {"role": "system", "content": "You are a SPARQL expert. Return ONLY valid SPARQL queries, no explanations."},
+                    {
+                        "role": "system",
+                        "content": "You are a SPARQL expert. Return ONLY valid SPARQL queries, no explanations."
+                    },
                     {"role": "user", "content": prompt}
                 ],
-
                 temperature=self.params.get("temperature", 0.0),
                 max_tokens=self.params.get("max_new_tokens", 512)
             )
-            generated_text = response.choices[0].message.content
-            
-        else:
+            generated_text = response.choices[0].message.content or ""
 
+        else:
             gen_kwargs = self.params.copy()
-            
-            # Avoid pipeline warnings about passing max_length and max_new_tokens together
+
             if "max_new_tokens" not in gen_kwargs:
                 gen_kwargs["max_new_tokens"] = 512
-                
-            outputs = self.pipeline(prompt, **gen_kwargs, return_full_text=False)
-            
-            # Extract generated text safely
-            generated_text = outputs[0]["generated_text"]
-            
-            # Strip the prompt from the response if the pipeline included it
+
+            if gen_kwargs.get("do_sample") is False:
+                gen_kwargs.pop("temperature", None)
+                gen_kwargs.pop("top_p", None)
+                gen_kwargs.pop("top_k", None)
+
+            outputs = self.pipeline(
+                prompt,
+                **gen_kwargs,
+                return_full_text=False
+            )
+
+            generated_text = outputs[0].get("generated_text", "")
+
             if generated_text.startswith(prompt):
                 generated_text = generated_text[len(prompt):].strip()
-                
-        # Always clean the response, regardless of its source
+
+        generated_text = generated_text.strip()
+
         return generated_text
     
     
