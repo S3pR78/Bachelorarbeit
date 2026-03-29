@@ -1,7 +1,8 @@
 {
   "config": {
     "dataset_registry": "code/config/dataset_registry.json",
-    "prompt_profiles": "code/config/prompt_profiles.json"
+    "prompt_profiles": "code/config/prompt_profiles.json",
+    "models_config": "code/config/models_config.json"
   },
   "prompts": {
     "rendered_dir": "code/prompts/generated/rendered",
@@ -13,5 +14,8 @@
   },
   "reports": {
     "validation_dir": "code/data/canonical/validation/reports"
+  },
+  "models": {
+  "base_dir": "code/models"
   }
 }

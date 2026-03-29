@@ -1,7 +1,8 @@
 import os
 from huggingface_hub import snapshot_download
+from src.utils.path_manager import get_path
 
-def ensure_model_downloaded(model_id: str, base_dir: str = "models") -> str:
+def ensure_model_downloaded(model_id: str, base_dir: str = get_path("models.base_dir")) -> str:
     """
     Checks if a model exists locally. If not, downloads it.
     Returns the local path to the model.

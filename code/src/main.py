@@ -5,10 +5,11 @@ from core.model_loader import load_inference_pipeline
 from core.inference_engine import InferenceEngine
 from benchmark.benchmark_runner import run_benchmark
 from training.trainer import train_model
+from src.utils.path_manager import get_path
 import sys
 sys.dont_write_bytecode = True
 
-CONFIG_PATH = "config/models_config.json"
+CONFIG_PATH = get_path("config.models_config")
 
 def parse_args():
     parser = argparse.ArgumentParser(description="LLM Benchmark and Training Framework")
