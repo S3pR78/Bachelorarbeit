@@ -123,7 +123,8 @@ def load_dataset_metadata(paths_config_path: Path, dataset_name: str, repo_root:
 
 def strip_prefixes(query: str) -> str:
     """
-    Remove PREFIX lines from the beginning of a SPARQL query.
+    Remove PREFIX lines at the beginning of a SPARQL query
+    and remove full-line comments starting with '#'.
     """
     lines = query.splitlines()
     kept_lines: List[str] = []
@@ -132,10 +133,16 @@ def strip_prefixes(query: str) -> str:
     for line in lines:
         stripped = line.strip()
 
+        # Remove PREFIX block at the beginning
         if in_prefix_block and (stripped == "" or stripped.upper().startswith("PREFIX ")):
             continue
 
         in_prefix_block = False
+
+        # Remove full-line comments anywhere in the query
+        if stripped.startswith("#"):
+            continue
+
         kept_lines.append(line)
 
     cleaned = "\n".join(kept_lines).strip()
@@ -171,30 +178,37 @@ def parse_question_block(markdown_text: str) -> Tuple[str, Optional[int]]:
     Parse the markdown question block.
 
     Rules:
-    - If DE/EN structure exists, use only EN as the final question.
-    - Otherwise, use the plain cleaned text as the final question.
+    - If EN exists explicitly, use only EN.
+    - Else if DE exists and there is text before DE, use only the text before DE.
+    - Otherwise, use the plain cleaned text.
     """
     source_id = extract_source_id(markdown_text)
-    cleaned_text = remove_leading_index(markdown_text)
+    cleaned_text = remove_leading_index(markdown_text).strip()
+
+    en_match = re.search(
+        r"(?im)^\s*EN:\s*(.+?)(?=^\s*DE:|\Z)",
+        cleaned_text,
+        flags=re.DOTALL,
+    )
 
     de_match = re.search(
-        r"(?im)^\s*DE:\s*(.+?)(?=^\s*EN:|\Z)",
-        cleaned_text,
-        flags=re.DOTALL,
-    )
-    en_match = re.search(
-        r"(?im)^\s*EN:\s*(.+?)(?=\Z)",
+        r"(?im)^\s*DE:\s*(.+?)(?=\Z)",
         cleaned_text,
         flags=re.DOTALL,
     )
 
-    if de_match or en_match:
-        if en_match:
-            question = en_match.group(1).strip()
+    if en_match:
+        question = en_match.group(1).strip()
+    elif de_match:
+        de_start = de_match.start()
+        text_before_de = cleaned_text[:de_start].strip()
+
+        if text_before_de:
+            question = text_before_de
         else:
-            question = cleaned_text.strip()
+            question = cleaned_text
     else:
-        question = cleaned_text.strip()
+        question = cleaned_text
 
     question = re.sub(r"\n{2,}", "\n", question).strip()
     return question, source_id
