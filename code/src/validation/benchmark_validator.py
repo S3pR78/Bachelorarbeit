@@ -1,11 +1,12 @@
 from __future__ import annotations
+import re
 
 import argparse
 import json
-import re
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List
+from rdflib.plugins.sparql.parser import parseQuery
 
 
 VALID_QUERY_STARTS = ("SELECT", "ASK", "CONSTRUCT", "DESCRIBE")
@@ -57,6 +58,7 @@ def ends_suspiciously(query: str) -> bool:
         return False
 
     stripped = query.rstrip()
+    lower = stripped.lower()
 
     suspicious_endings = (
         "?",
@@ -71,13 +73,48 @@ def ends_suspiciously(query: str) -> bool:
         ";",
     )
 
-    lower = stripped.lower()
+    return any(lower.endswith(ending) for ending in suspicious_endings)
 
-    for ending in suspicious_endings:
-        if lower.endswith(ending):
-            return True
+def build_parse_error_hint(error_message: str) -> str:
+    lower = error_message.lower()
 
-    return False
+    if "empty query" in lower:
+        return "No SPARQL query could be extracted from the model output."
+
+    if "found '?'" in error_message:
+        return (
+            "Likely missing whitespace before a variable or malformed triple pattern, "
+            "e.g. use 'SELECT ?x' instead of 'SELECT?x' and 'orkgc:P29 ?year' instead of 'orkgc:P29?year'."
+        )
+
+    return "SPARQL parser could not parse the extracted query."
+
+
+def parse_error_details(error_message: str | None) -> Dict[str, Any]:
+    if not error_message:
+        return {
+            "parse_error_line": None,
+            "parse_error_column": None,
+            "parse_error_char": None,
+            "parse_error_hint": None,
+        }
+
+    line_match = re.search(r"line:(\d+)", error_message)
+    col_match = re.search(r"col:(\d+)", error_message)
+    char_match = re.search(r"char (\d+)", error_message)
+
+    line = int(line_match.group(1)) if line_match else None
+    column = int(col_match.group(1)) if col_match else None
+    char = int(char_match.group(1)) if char_match else None
+
+    hint = build_parse_error_hint(error_message)
+
+    return {
+        "parse_error_line": line,
+        "parse_error_column": column,
+        "parse_error_char": char,
+        "parse_error_hint": hint,
+    }
 
 
 def looks_truncated(query: str) -> bool:
@@ -93,16 +130,31 @@ def looks_truncated(query: str) -> bool:
     return False
 
 
+def validate_sparql_syntax(query: str) -> tuple[bool, str | None]:
+    if not has_extracted_query(query):
+        return False, "Empty query"
+
+    try:
+        parseQuery(query)
+        return True, None
+    except Exception as exc:
+        return False, str(exc)
+
+
 def determine_validation_status(
     extracted_query: str,
     valid_start: bool,
     truncated: bool,
+    parse_ok: bool,
 ) -> str:
     if not has_extracted_query(extracted_query):
         return "empty"
 
     if not valid_start:
         return "invalid_start"
+
+    if not parse_ok:
+        return "syntax_error"
 
     if truncated:
         return "needs_review"
@@ -117,6 +169,9 @@ def validate_result_entry(entry: Dict[str, Any]) -> Dict[str, Any]:
 
     valid_start = has_valid_query_start(extracted_query)
     truncated = looks_truncated(extracted_query)
+    parse_ok, parse_error = validate_sparql_syntax(extracted_query)
+
+    error_details = parse_error_details(parse_error)
 
     return {
         "benchmark_entry_id": entry.get("benchmark_entry_id"),
@@ -130,12 +185,20 @@ def validate_result_entry(entry: Dict[str, Any]) -> Dict[str, Any]:
         "is_empty_query": not has_extracted_query(extracted_query),
         "has_valid_query_start": valid_start,
         "looks_truncated": truncated,
+        "parse_ok": parse_ok,
+        "parse_error_raw": parse_error,
+        "parse_error_line": error_details["parse_error_line"],
+        "parse_error_column": error_details["parse_error_column"],
+        "parse_error_char": error_details["parse_error_char"],
+        "parse_error_hint": error_details["parse_error_hint"],
         "validation_status": determine_validation_status(
             extracted_query=extracted_query,
             valid_start=valid_start,
             truncated=truncated,
+            parse_ok=parse_ok,
         ),
     }
+
 
 
 def build_validation_output_path(raw_benchmark_path: Path) -> Path:
@@ -172,6 +235,8 @@ def validate_benchmark_run(raw_benchmark_path: str) -> Path:
             "empty_query_items": sum(1 for item in validated_results if item["is_empty_query"]),
             "valid_query_start_items": sum(1 for item in validated_results if item["has_valid_query_start"]),
             "truncated_items": sum(1 for item in validated_results if item["looks_truncated"]),
+            "parse_ok_items": sum(1 for item in validated_results if item["parse_ok"]),
+            "syntax_error_items": sum(1 for item in validated_results if not item["parse_ok"]),
         },
         "results": validated_results,
     }
