@@ -108,8 +108,8 @@ def run_benchmark(
             print(f"[{index}/{total_items}] Question {index} completed")
             print(f"Family   : {family}")
             print(f"Time     : {elapsed_time:.4f}s")
-            print("Response :")
-            print(model_response)
+            #print("Response :")
+            #print(model_response)
 
         except Exception as exc:
             error_result = {

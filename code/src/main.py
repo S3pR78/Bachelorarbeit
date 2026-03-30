@@ -127,6 +127,15 @@ def run_single_mode(engine: InferenceEngine, family: str, question: str, show_pr
     print(response)
     print("=" * 80)
 
+def format_duration(seconds: float) -> str:
+    total_seconds = int(round(seconds))
+
+    hours = total_seconds // 3600
+    minutes = (total_seconds % 3600) // 60
+    secs = total_seconds % 60
+
+    return f"{hours:02d}:{minutes:02d}:{secs:02d}"
+
 
 def main():
     args = parse_args()
@@ -157,7 +166,7 @@ def main():
         print("\n" + "=" * 80)
         print("TOTAL BENCHMARK TIME")
         print("=" * 80)
-        print(f"Total time: {total_seconds:.4f}s")
+        print(f"Total time: {format_duration(total_seconds)}")
 
         return
 
