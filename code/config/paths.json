@@ -16,6 +16,9 @@
     "validation_dir": "code/data/canonical/validation/reports"
   },
   "models": {
-  "base_dir": "models"
+    "base_dir": "models"
+  },
+  "benchmark": {
+    "runs_dir": "code/data/benchmark_runs"
   }
 }

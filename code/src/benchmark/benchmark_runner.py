@@ -9,11 +9,12 @@ from typing import Any, Dict, List
 from benchmark.benchmark_loader import load_benchmark
 from core.inference_engine import InferenceEngine
 from prompting.prompt_loader import build_prompt_for_entry
+from utils.path_manager import get_path
 from utils.timer import measure_time
 
 
-def _safe_model_name(model_name: str) -> str:
-    return re.sub(r"[^a-zA-Z0-9._-]+", "_", model_name).strip("._-") or "model"
+def _safe_name(value: str) -> str:
+    return re.sub(r"[^a-zA-Z0-9._-]+", "_", value).strip("._-") or "value"
 
 
 def _format_duration(seconds: float) -> str:
@@ -39,12 +40,19 @@ def _get_gold_query(entry: Dict[str, Any]) -> str:
     return ""
 
 
-def _build_output_path(benchmark_path: str, model_name: str) -> Path:
+def _build_run_directory(benchmark_path: str, model_name: str) -> Path:
     benchmark_file = Path(benchmark_path).resolve()
+    runs_base_dir = Path(get_path("benchmark.runs_dir")).resolve()
+
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    safe_model = _safe_model_name(model_name)
-    filename = f"{benchmark_file.stem}__{safe_model}__results_{timestamp}.json"
-    return benchmark_file.parent / filename
+    safe_model_name = _safe_name(model_name)
+    safe_benchmark_name = _safe_name(benchmark_file.stem)
+
+    run_dir_name = f"{timestamp}__{safe_model_name}__{safe_benchmark_name}"
+    run_dir = runs_base_dir / run_dir_name
+    run_dir.mkdir(parents=True, exist_ok=True)
+
+    return run_dir
 
 
 def _save_json(data: Dict[str, Any], output_path: Path) -> None:
@@ -59,6 +67,7 @@ def run_benchmark(
     model_name: str,
 ) -> None:
     started_at = datetime.now(timezone.utc)
+    run_dir = _build_run_directory(benchmark_path, model_name)
 
     with measure_time() as get_total_runtime:
         dataset: List[Dict[str, Any]] = load_benchmark(benchmark_path)
@@ -74,6 +83,7 @@ def run_benchmark(
         print("=" * 80)
         print(f"Model           : {model_name}")
         print(f"Benchmark file  : {Path(benchmark_path).resolve()}")
+        print(f"Run directory   : {run_dir}")
         print(f"Total questions : {total_items}")
         print(f"Started at UTC  : {started_at.isoformat()}")
         print("=" * 80)
@@ -142,10 +152,11 @@ def run_benchmark(
     total_runtime_seconds = get_total_runtime()
     finished_at = datetime.now(timezone.utc)
 
-    output_path = _build_output_path(benchmark_path, model_name)
+    raw_output_path = run_dir / "benchmark_raw.json"
 
     payload = {
         "run_metadata": {
+            "run_dir": str(run_dir),
             "started_at_utc": started_at.isoformat(),
             "finished_at_utc": finished_at.isoformat(),
             "model_name": model_name,
@@ -158,7 +169,7 @@ def run_benchmark(
         "results": results,
     }
 
-    _save_json(payload, output_path)
+    _save_json(payload, raw_output_path)
 
     print("\n" + "=" * 80)
     print("BENCHMARK COMPLETE")
@@ -166,4 +177,4 @@ def run_benchmark(
     print(f"Successful items : {payload['run_metadata']['successful_items']}")
     print(f"Failed items     : {payload['run_metadata']['failed_items']}")
     print(f"Total runtime    : {_format_duration(total_runtime_seconds)}")
-    print(f"Saved results to : {output_path}")
+    print(f"Saved raw output : {raw_output_path}")
