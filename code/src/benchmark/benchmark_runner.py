@@ -16,6 +16,13 @@ def _safe_model_name(model_name: str) -> str:
     return re.sub(r"[^a-zA-Z0-9._-]+", "_", model_name).strip("._-") or "model"
 
 
+def _format_duration(seconds: float) -> str:
+    hours = int(seconds // 3600)
+    minutes = int((seconds % 3600) // 60)
+    secs = seconds % 60
+    return f"{hours:02d}:{minutes:02d}:{secs:06.3f}"
+
+
 def _get_entry_id(entry: Dict[str, Any], index: int) -> str:
     for key in ("uid", "id", "source_id"):
         value = entry.get(key)
@@ -51,94 +58,102 @@ def run_benchmark(
     benchmark_path: str,
     model_name: str,
 ) -> None:
-    dataset: List[Dict[str, Any]] = load_benchmark(benchmark_path)
+    started_at = datetime.now(timezone.utc)
 
-    if not isinstance(dataset, list):
-        raise ValueError("Benchmark dataset must be a JSON list.")
+    with measure_time() as get_total_runtime:
+        dataset: List[Dict[str, Any]] = load_benchmark(benchmark_path)
 
-    total_items = len(dataset)
-    results: List[Dict[str, Any]] = []
+        if not isinstance(dataset, list):
+            raise ValueError("Benchmark dataset must be a JSON list.")
 
-    print("\n" + "=" * 80)
-    print("BENCHMARK MODE")
-    print("=" * 80)
-    print(f"Model           : {model_name}")
-    print(f"Benchmark file  : {Path(benchmark_path).resolve()}")
-    print(f"Total questions : {total_items}")
-    print("=" * 80)
+        total_items = len(dataset)
+        results: List[Dict[str, Any]] = []
 
-    for index, entry in enumerate(dataset, start=1):
-        entry_id = _get_entry_id(entry, index)
+        print("\n" + "=" * 80)
+        print("BENCHMARK MODE")
+        print("=" * 80)
+        print(f"Model           : {model_name}")
+        print(f"Benchmark file  : {Path(benchmark_path).resolve()}")
+        print(f"Total questions : {total_items}")
+        print(f"Started at UTC  : {started_at.isoformat()}")
+        print("=" * 80)
 
-        print(f"\n[{index}/{total_items}] Question {index} started")
-        print(f"Benchmark Entry ID : {entry_id}")
+        for index, entry in enumerate(dataset, start=1):
+            entry_id = _get_entry_id(entry, index)
 
-        try:
-            family = entry.get("family")
-            question = entry.get("question")
+            try:
+                family = entry.get("family")
+                question = entry.get("question")
 
-            if not isinstance(family, str) or not family.strip():
-                raise ValueError(f"Entry {entry_id} has no valid 'family'.")
+                if not isinstance(family, str) or not family.strip():
+                    raise ValueError(f"Entry {entry_id} has no valid 'family'.")
 
-            if not isinstance(question, str) or not question.strip():
-                raise ValueError(f"Entry {entry_id} has no valid 'question'.")
+                if not isinstance(question, str) or not question.strip():
+                    raise ValueError(f"Entry {entry_id} has no valid 'question'.")
 
-            final_prompt = build_prompt_for_entry(entry)
+                print(f"[{index}/{total_items}] START id={entry_id} family={family}")
 
-            with measure_time() as get_time:
-                model_response = engine.generate_response(final_prompt)
+                final_prompt = build_prompt_for_entry(entry)
 
-            elapsed_time = get_time()
+                with measure_time() as get_item_runtime:
+                    raw_model_output = engine.generate_raw_response(final_prompt)
+                    extracted_query = engine.extract_sparql_query(raw_model_output)
 
-            result = {
-                "status": "ok",
-                "benchmark_entry_id": entry_id,
-                "uid": entry.get("uid"),
-                "source_id": entry.get("source_id"),
-                "source_dataset": entry.get("source_dataset"),
-                "family": family,
-                "question": question,
-                "gold_query": _get_gold_query(entry),
-                "model_response": model_response,
-                "response_time_seconds": round(elapsed_time, 4),
-            }
+                elapsed_time = get_item_runtime()
 
-            results.append(result)
+                result = {
+                    "status": "ok",
+                    "benchmark_entry_id": entry_id,
+                    "uid": entry.get("uid"),
+                    "source_id": entry.get("source_id"),
+                    "source_dataset": entry.get("source_dataset"),
+                    "family": family,
+                    "question": question,
+                    "gold_query": _get_gold_query(entry),
+                    "raw_model_output": raw_model_output,
+                    "extracted_query": extracted_query,
+                    "response_time_seconds": round(elapsed_time, 4),
+                }
 
-            print(f"[{index}/{total_items}] Question {index} completed")
-            print(f"Family   : {family}")
-            print(f"Time     : {elapsed_time:.4f}s")
-            #print("Response :")
-            #print(model_response)
+                results.append(result)
 
-        except Exception as exc:
-            error_result = {
-                "status": "error",
-                "benchmark_entry_id": entry_id,
-                "uid": entry.get("uid"),
-                "source_id": entry.get("source_id"),
-                "source_dataset": entry.get("source_dataset"),
-                "family": entry.get("family"),
-                "question": entry.get("question"),
-                "gold_query": _get_gold_query(entry),
-                "error": str(exc),
-            }
+                print(
+                    f"[{index}/{total_items}] DONE  "
+                    f"id={entry_id} time={_format_duration(elapsed_time)}"
+                )
 
-            results.append(error_result)
+            except Exception as exc:
+                error_result = {
+                    "status": "error",
+                    "benchmark_entry_id": entry_id,
+                    "uid": entry.get("uid"),
+                    "source_id": entry.get("source_id"),
+                    "source_dataset": entry.get("source_dataset"),
+                    "family": entry.get("family"),
+                    "question": entry.get("question"),
+                    "gold_query": _get_gold_query(entry),
+                    "error": str(exc),
+                }
 
-            print(f"[{index}/{total_items}] Question {index} failed")
-            print(f"Error: {exc}")
+                results.append(error_result)
+
+                print(f"[{index}/{total_items}] FAIL  id={entry_id} error={exc}")
+
+    total_runtime_seconds = get_total_runtime()
+    finished_at = datetime.now(timezone.utc)
 
     output_path = _build_output_path(benchmark_path, model_name)
 
     payload = {
         "run_metadata": {
-            "created_at_utc": datetime.now(timezone.utc).isoformat(),
+            "started_at_utc": started_at.isoformat(),
+            "finished_at_utc": finished_at.isoformat(),
             "model_name": model_name,
             "benchmark_path": str(Path(benchmark_path).resolve()),
             "total_items": total_items,
             "successful_items": sum(1 for r in results if r["status"] == "ok"),
             "failed_items": sum(1 for r in results if r["status"] == "error"),
+            "total_runtime_seconds": round(total_runtime_seconds, 4),
         },
         "results": results,
     }
@@ -148,4 +163,7 @@ def run_benchmark(
     print("\n" + "=" * 80)
     print("BENCHMARK COMPLETE")
     print("=" * 80)
-    print(f"Saved results to: {output_path}")
+    print(f"Successful items : {payload['run_metadata']['successful_items']}")
+    print(f"Failed items     : {payload['run_metadata']['failed_items']}")
+    print(f"Total runtime    : {_format_duration(total_runtime_seconds)}")
+    print(f"Saved results to : {output_path}")
