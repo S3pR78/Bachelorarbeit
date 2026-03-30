@@ -1,6 +1,8 @@
 import argparse
 import sys
 
+sys.dont_write_bytecode = True
+
 from benchmark.benchmark_runner import run_benchmark
 from utils.path_manager import get_path
 from core.download_manager import ensure_model_downloaded
@@ -9,9 +11,6 @@ from core.model_loader import load_inference_pipeline
 from core.model_manager import ModelManager
 from prompting.prompt_loader import build_prompt_for_entry, get_prompt_metadata_for_family
 from training.trainer import train_model
-import time
-
-sys.dont_write_bytecode = True
 
 
 def parse_args():
@@ -21,7 +20,7 @@ def parse_args():
         "--model",
         type=str,
         required=True,
-        help="Model ID, Name, or Index from config."
+        help="Model ID, name, or index from config."
     )
 
     parser.add_argument(
@@ -97,7 +96,12 @@ def build_engine(selected_model_config: dict) -> InferenceEngine:
     )
 
 
-def run_single_mode(engine: InferenceEngine, family: str, question: str, show_prompt: bool) -> None:
+def run_single_mode(
+    engine: InferenceEngine,
+    family: str,
+    question: str,
+    show_prompt: bool,
+) -> None:
     entry = {
         "family": family,
         "question": question,
@@ -127,15 +131,6 @@ def run_single_mode(engine: InferenceEngine, family: str, question: str, show_pr
     print(response)
     print("=" * 80)
 
-def format_duration(seconds: float) -> str:
-    total_seconds = int(round(seconds))
-
-    hours = total_seconds // 3600
-    minutes = (total_seconds % 3600) // 60
-    secs = total_seconds % 60
-
-    return f"{hours:02d}:{minutes:02d}:{secs:02d}"
-
 
 def main():
     args = parse_args()
@@ -156,18 +151,7 @@ def main():
     engine = build_engine(selected_model_config)
 
     if args.mode == "benchmark":
-        benchmark_start = time.perf_counter()
-
         run_benchmark(engine, args.benchmark, model_name)
-
-        benchmark_end = time.perf_counter()
-        total_seconds = benchmark_end - benchmark_start
-
-        print("\n" + "=" * 80)
-        print("TOTAL BENCHMARK TIME")
-        print("=" * 80)
-        print(f"Total time: {format_duration(total_seconds)}")
-
         return
 
     if args.mode == "single":
