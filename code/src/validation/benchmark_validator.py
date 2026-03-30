@@ -161,6 +161,29 @@ def determine_validation_status(
 
     return "looks_ok"
 
+def determine_repair_candidate(
+    extracted_query: str,
+    valid_start: bool,
+    truncated: bool,
+    parse_ok: bool,
+) -> tuple[bool, str]:
+    if not has_extracted_query(extracted_query):
+        return False, "empty_query"
+
+    if not valid_start:
+        return False, "invalid_query_start"
+
+    if parse_ok:
+        return False, "query_already_parseable"
+
+    if truncated:
+        return True, "non_empty_query_with_valid_start_but_truncated"
+
+    return True, "non_empty_query_with_valid_start_but_syntax_error"
+
+
+
+
 
 def validate_result_entry(entry: Dict[str, Any]) -> Dict[str, Any]:
     extracted_query = entry.get("extracted_query", "")
@@ -172,6 +195,14 @@ def validate_result_entry(entry: Dict[str, Any]) -> Dict[str, Any]:
     parse_ok, parse_error = validate_sparql_syntax(extracted_query)
 
     error_details = parse_error_details(parse_error)
+
+    repair_candidate, repair_candidate_reason = determine_repair_candidate(
+        extracted_query=extracted_query,
+        valid_start=valid_start,
+        truncated=truncated,
+        parse_ok=parse_ok,
+    )
+
 
     return {
         "benchmark_entry_id": entry.get("benchmark_entry_id"),
@@ -191,6 +222,8 @@ def validate_result_entry(entry: Dict[str, Any]) -> Dict[str, Any]:
         "parse_error_column": error_details["parse_error_column"],
         "parse_error_char": error_details["parse_error_char"],
         "parse_error_hint": error_details["parse_error_hint"],
+        "is_repair_candidate": repair_candidate,
+        "repair_candidate_reason": repair_candidate_reason,
         "validation_status": determine_validation_status(
             extracted_query=extracted_query,
             valid_start=valid_start,
@@ -237,6 +270,8 @@ def validate_benchmark_run(raw_benchmark_path: str) -> Path:
             "truncated_items": sum(1 for item in validated_results if item["looks_truncated"]),
             "parse_ok_items": sum(1 for item in validated_results if item["parse_ok"]),
             "syntax_error_items": sum(1 for item in validated_results if not item["parse_ok"]),
+            "repair_candidate_items": sum(1 for item in validated_results if item["is_repair_candidate"]),
+            "non_repair_candidate_items": sum(1 for item in validated_results if not item["is_repair_candidate"]),
         },
         "results": validated_results,
     }
