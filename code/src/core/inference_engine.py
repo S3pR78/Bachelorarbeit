@@ -7,9 +7,10 @@ import re
 # Load environment variables from the .env file
 load_dotenv()
 
+
 class InferenceEngine:
     """Handles generating responses using either a local HF pipeline or the OpenAI API."""
-    
+
     def __init__(self, pipeline: Any, params: dict, provider: str = "huggingface", model_id: str = ""):
         self.provider = provider
         self.model_id = model_id
@@ -23,9 +24,8 @@ class InferenceEngine:
                 raise ValueError("ERROR: OPENAI_API_KEY was not found in the .env file!")
             self.client = OpenAI(api_key=api_key)
 
-    def generate_response(self, prompt: str) -> str:
-        """Generates text based on the provided prompt and model parameters."""
-
+    def generate_raw_response(self, prompt: str) -> str:
+        """Generate raw model output without SPARQL cleaning."""
         if self.provider == "openai":
             response = self.client.chat.completions.create(
                 model=self.model_id,
@@ -63,11 +63,27 @@ class InferenceEngine:
             if generated_text.startswith(prompt):
                 generated_text = generated_text[len(prompt):].strip()
 
-        generated_text = generated_text.strip()
+        return generated_text.strip()
 
-        return self._clean_sparql_output(generated_text)
-    
-    
+    def extract_sparql_query(self, text: str) -> str:
+        """Extract only the SPARQL query from raw model output. Return empty string if none is found."""
+        text = text.strip()
+        text = self._strip_thinking_and_labels(text)
+        text = self._extract_code_block(text)
+        text = self._extract_query_region(text)
+        text = self._remove_comments(text)
+        text = self._remove_prefixes(text)
+        text = re.sub(r"\n{3,}", "\n\n", text)
+        return text.strip()
+
+    def generate_response(self, prompt: str) -> str:
+        """
+        Backward-compatible helper:
+        generate raw output and return extracted SPARQL query.
+        """
+        raw_text = self.generate_raw_response(prompt)
+        return self.extract_sparql_query(raw_text)
+
     def _extract_code_block(self, text: str) -> str:
         """Extract the first fenced code block, preferably ```sparql ... ```."""
         sparql_match = re.search(r"```sparql\s*(.*?)```", text, flags=re.IGNORECASE | re.DOTALL)
@@ -80,7 +96,6 @@ class InferenceEngine:
 
         return text.strip()
 
-
     def _strip_thinking_and_labels(self, text: str) -> str:
         """Remove reasoning blocks and common wrapper labels."""
         text = re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL | re.IGNORECASE)
@@ -89,11 +104,11 @@ class InferenceEngine:
         text = re.sub(r"^Output\s*:?\s*$", "", text, flags=re.MULTILINE | re.IGNORECASE)
         return text.strip()
 
-
     def _extract_query_region(self, text: str) -> str:
         """
-        Try to keep only the SPARQL query region.
+        Keep only the SPARQL query region.
         Starts at the first PREFIX or SPARQL query keyword.
+        If no such start is found, return an empty string.
         """
         lines = text.splitlines()
 
@@ -104,43 +119,20 @@ class InferenceEngine:
 
             if (
                 upper.startswith("PREFIX ")
-                or upper.startswith("SELECT ")
-                or upper.startswith("ASK ")
-                or upper.startswith("CONSTRUCT ")
-                or upper.startswith("DESCRIBE ")
+                or upper.startswith("SELECT")
+                or upper.startswith("ASK")
+                or upper.startswith("CONSTRUCT")
+                or upper.startswith("DESCRIBE")
             ):
                 start_idx = i
                 break
 
         if start_idx is None:
-            return text.strip()
+            return ""
 
         candidate = "\n".join(lines[start_idx:]).strip()
-
-        # stop at a second fenced block marker if one somehow survived
         candidate = candidate.split("```")[0].strip()
-
         return candidate
-
-
-    def _trim_after_query_end(self, text: str) -> str:
-        """
-        Trim trailing explanation after the query by balancing braces.
-        Works for typical SELECT/ASK/CONSTRUCT queries with WHERE { ... }.
-        """
-        brace_count = 0
-        seen_open = False
-
-        for i, ch in enumerate(text):
-            if ch == "{":
-                brace_count += 1
-                seen_open = True
-            elif ch == "}":
-                brace_count -= 1
-                if seen_open and brace_count == 0:
-                    return text[: i + 1].strip()
-
-        return text.strip()
 
     def _remove_comments(self, text: str) -> str:
         """
@@ -164,7 +156,6 @@ class InferenceEngine:
 
         return "\n".join(cleaned_lines).strip()
 
-
     def _remove_prefixes(self, text: str) -> str:
         """
         Remove PREFIX declarations from the query.
@@ -177,16 +168,3 @@ class InferenceEngine:
             lines.append(line)
 
         return "\n".join(lines).strip()
-
-
-
-    def _clean_sparql_output(self, text: str) -> str:
-        text = text.strip()
-        text = self._strip_thinking_and_labels(text)
-        text = self._extract_code_block(text)
-        text = self._extract_query_region(text)
-        text = self._trim_after_query_end(text)
-        text = self._remove_comments(text)
-        text = self._remove_prefixes(text)
-        text = re.sub(r"\n{3,}", "\n\n", text)
-        return text.strip()
