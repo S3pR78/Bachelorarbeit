@@ -9,6 +9,7 @@ from core.model_loader import load_inference_pipeline
 from core.model_manager import ModelManager
 from prompting.prompt_loader import build_prompt_for_entry, get_prompt_metadata_for_family
 from training.trainer import train_model
+import time
 
 sys.dont_write_bytecode = True
 
@@ -146,7 +147,18 @@ def main():
     engine = build_engine(selected_model_config)
 
     if args.mode == "benchmark":
+        benchmark_start = time.perf_counter()
+
         run_benchmark(engine, args.benchmark, model_name)
+
+        benchmark_end = time.perf_counter()
+        total_seconds = benchmark_end - benchmark_start
+
+        print("\n" + "=" * 80)
+        print("TOTAL BENCHMARK TIME")
+        print("=" * 80)
+        print(f"Total time: {total_seconds:.4f}s")
+
         return
 
     if args.mode == "single":
