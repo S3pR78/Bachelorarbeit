@@ -1,7 +1,7 @@
 {
   "run_metadata": {
-    "validation_started_at_utc": "2026-03-30T19:57:28.988464+00:00",
-    "validation_finished_at_utc": "2026-03-30T19:57:29.060592+00:00",
+    "validation_started_at_utc": "2026-03-30T20:26:38.262113+00:00",
+    "validation_finished_at_utc": "2026-03-30T20:26:38.331705+00:00",
     "raw_benchmark_path": "/home/s3pr/UNI/BA/code/data/benchmark_runs/20260330_190730__Qwen3-0.6B__benchmark_dataset_V1/benchmark_raw.json",
     "total_items": 26,
     "items_with_query": 22,
@@ -9,7 +9,9 @@
     "valid_query_start_items": 22,
     "truncated_items": 18,
     "parse_ok_items": 0,
-    "syntax_error_items": 26
+    "syntax_error_items": 26,
+    "repair_candidate_items": 22,
+    "non_repair_candidate_items": 4
   },
   "results": [
     {
@@ -30,6 +32,8 @@
       "parse_error_column": 2,
       "parse_error_char": 57,
       "parse_error_hint": "Likely missing whitespace before a variable or malformed triple pattern, e.g. use 'SELECT ?x' instead of 'SELECT?x' and 'orkgc:P29 ?year' instead of 'orkgc:P29?year'.",
+      "is_repair_candidate": true,
+      "repair_candidate_reason": "non_empty_query_with_valid_start_but_truncated",
       "validation_status": "syntax_error"
     },
     {
@@ -50,6 +54,8 @@
       "parse_error_column": null,
       "parse_error_char": null,
       "parse_error_hint": "No SPARQL query could be extracted from the model output.",
+      "is_repair_candidate": false,
+      "repair_candidate_reason": "empty_query",
       "validation_status": "empty"
     },
     {
@@ -70,6 +76,8 @@
       "parse_error_column": 2,
       "parse_error_char": 57,
       "parse_error_hint": "Likely missing whitespace before a variable or malformed triple pattern, e.g. use 'SELECT ?x' instead of 'SELECT?x' and 'orkgc:P29 ?year' instead of 'orkgc:P29?year'.",
+      "is_repair_candidate": true,
+      "repair_candidate_reason": "non_empty_query_with_valid_start_but_truncated",
       "validation_status": "syntax_error"
     },
     {
@@ -90,6 +98,8 @@
       "parse_error_column": 2,
       "parse_error_char": 141,
       "parse_error_hint": "Likely missing whitespace before a variable or malformed triple pattern, e.g. use 'SELECT ?x' instead of 'SELECT?x' and 'orkgc:P29 ?year' instead of 'orkgc:P29?year'.",
+      "is_repair_candidate": true,
+      "repair_candidate_reason": "non_empty_query_with_valid_start_but_truncated",
       "validation_status": "syntax_error"
     },
     {
@@ -110,6 +120,8 @@
       "parse_error_column": 2,
       "parse_error_char": 57,
       "parse_error_hint": "Likely missing whitespace before a variable or malformed triple pattern, e.g. use 'SELECT ?x' instead of 'SELECT?x' and 'orkgc:P29 ?year' instead of 'orkgc:P29?year'.",
+      "is_repair_candidate": true,
+      "repair_candidate_reason": "non_empty_query_with_valid_start_but_truncated",
       "validation_status": "syntax_error"
     },
     {
@@ -130,6 +142,8 @@
       "parse_error_column": 2,
       "parse_error_char": 55,
       "parse_error_hint": "Likely missing whitespace before a variable or malformed triple pattern, e.g. use 'SELECT ?x' instead of 'SELECT?x' and 'orkgc:P29 ?year' instead of 'orkgc:P29?year'.",
+      "is_repair_candidate": true,
+      "repair_candidate_reason": "non_empty_query_with_valid_start_but_truncated",
       "validation_status": "syntax_error"
     },
     {
@@ -150,6 +164,8 @@
       "parse_error_column": 2,
       "parse_error_char": 57,
       "parse_error_hint": "Likely missing whitespace before a variable or malformed triple pattern, e.g. use 'SELECT ?x' instead of 'SELECT?x' and 'orkgc:P29 ?year' instead of 'orkgc:P29?year'.",
+      "is_repair_candidate": true,
+      "repair_candidate_reason": "non_empty_query_with_valid_start_but_truncated",
       "validation_status": "syntax_error"
     },
     {
@@ -170,6 +186,8 @@
       "parse_error_column": 2,
       "parse_error_char": 59,
       "parse_error_hint": "Likely missing whitespace before a variable or malformed triple pattern, e.g. use 'SELECT ?x' instead of 'SELECT?x' and 'orkgc:P29 ?year' instead of 'orkgc:P29?year'.",
+      "is_repair_candidate": true,
+      "repair_candidate_reason": "non_empty_query_with_valid_start_but_truncated",
       "validation_status": "syntax_error"
     },
     {
@@ -190,6 +208,8 @@
       "parse_error_column": null,
       "parse_error_char": null,
       "parse_error_hint": "No SPARQL query could be extracted from the model output.",
+      "is_repair_candidate": false,
+      "repair_candidate_reason": "empty_query",
       "validation_status": "empty"
     },
     {
@@ -210,6 +230,8 @@
       "parse_error_column": 2,
       "parse_error_char": 57,
       "parse_error_hint": "Likely missing whitespace before a variable or malformed triple pattern, e.g. use 'SELECT ?x' instead of 'SELECT?x' and 'orkgc:P29 ?year' instead of 'orkgc:P29?year'.",
+      "is_repair_candidate": true,
+      "repair_candidate_reason": "non_empty_query_with_valid_start_but_truncated",
       "validation_status": "syntax_error"
     },
     {
@@ -230,6 +252,8 @@
       "parse_error_column": 2,
       "parse_error_char": 57,
       "parse_error_hint": "Likely missing whitespace before a variable or malformed triple pattern, e.g. use 'SELECT ?x' instead of 'SELECT?x' and 'orkgc:P29 ?year' instead of 'orkgc:P29?year'.",
+      "is_repair_candidate": true,
+      "repair_candidate_reason": "non_empty_query_with_valid_start_but_truncated",
       "validation_status": "syntax_error"
     },
     {
@@ -250,6 +274,8 @@
       "parse_error_column": 2,
       "parse_error_char": 93,
       "parse_error_hint": "Likely missing whitespace before a variable or malformed triple pattern, e.g. use 'SELECT ?x' instead of 'SELECT?x' and 'orkgc:P29 ?year' instead of 'orkgc:P29?year'.",
+      "is_repair_candidate": true,
+      "repair_candidate_reason": "non_empty_query_with_valid_start_but_truncated",
       "validation_status": "syntax_error"
     },
     {
@@ -270,6 +296,8 @@
       "parse_error_column": 2,
       "parse_error_char": 59,
       "parse_error_hint": "Likely missing whitespace before a variable or malformed triple pattern, e.g. use 'SELECT ?x' instead of 'SELECT?x' and 'orkgc:P29 ?year' instead of 'orkgc:P29?year'.",
+      "is_repair_candidate": true,
+      "repair_candidate_reason": "non_empty_query_with_valid_start_but_truncated",
       "validation_status": "syntax_error"
     },
     {
@@ -290,6 +318,8 @@
       "parse_error_column": 2,
       "parse_error_char": 57,
       "parse_error_hint": "Likely missing whitespace before a variable or malformed triple pattern, e.g. use 'SELECT ?x' instead of 'SELECT?x' and 'orkgc:P29 ?year' instead of 'orkgc:P29?year'.",
+      "is_repair_candidate": true,
+      "repair_candidate_reason": "non_empty_query_with_valid_start_but_truncated",
       "validation_status": "syntax_error"
     },
     {
@@ -310,6 +340,8 @@
       "parse_error_column": 2,
       "parse_error_char": 57,
       "parse_error_hint": "Likely missing whitespace before a variable or malformed triple pattern, e.g. use 'SELECT ?x' instead of 'SELECT?x' and 'orkgc:P29 ?year' instead of 'orkgc:P29?year'.",
+      "is_repair_candidate": true,
+      "repair_candidate_reason": "non_empty_query_with_valid_start_but_truncated",
       "validation_status": "syntax_error"
     },
     {
@@ -330,6 +362,8 @@
       "parse_error_column": 2,
       "parse_error_char": 62,
       "parse_error_hint": "Likely missing whitespace before a variable or malformed triple pattern, e.g. use 'SELECT ?x' instead of 'SELECT?x' and 'orkgc:P29 ?year' instead of 'orkgc:P29?year'.",
+      "is_repair_candidate": true,
+      "repair_candidate_reason": "non_empty_query_with_valid_start_but_truncated",
       "validation_status": "syntax_error"
     },
     {
@@ -350,6 +384,8 @@
       "parse_error_column": 2,
       "parse_error_char": 73,
       "parse_error_hint": "Likely missing whitespace before a variable or malformed triple pattern, e.g. use 'SELECT ?x' instead of 'SELECT?x' and 'orkgc:P29 ?year' instead of 'orkgc:P29?year'.",
+      "is_repair_candidate": true,
+      "repair_candidate_reason": "non_empty_query_with_valid_start_but_truncated",
       "validation_status": "syntax_error"
     },
     {
@@ -370,6 +406,8 @@
       "parse_error_column": 2,
       "parse_error_char": 64,
       "parse_error_hint": "Likely missing whitespace before a variable or malformed triple pattern, e.g. use 'SELECT ?x' instead of 'SELECT?x' and 'orkgc:P29 ?year' instead of 'orkgc:P29?year'.",
+      "is_repair_candidate": true,
+      "repair_candidate_reason": "non_empty_query_with_valid_start_but_truncated",
       "validation_status": "syntax_error"
     },
     {
@@ -390,6 +428,8 @@
       "parse_error_column": 2,
       "parse_error_char": 56,
       "parse_error_hint": "Likely missing whitespace before a variable or malformed triple pattern, e.g. use 'SELECT ?x' instead of 'SELECT?x' and 'orkgc:P29 ?year' instead of 'orkgc:P29?year'.",
+      "is_repair_candidate": true,
+      "repair_candidate_reason": "non_empty_query_with_valid_start_but_truncated",
       "validation_status": "syntax_error"
     },
     {
@@ -410,6 +450,8 @@
       "parse_error_column": 2,
       "parse_error_char": 56,
       "parse_error_hint": "Likely missing whitespace before a variable or malformed triple pattern, e.g. use 'SELECT ?x' instead of 'SELECT?x' and 'orkgc:P29 ?year' instead of 'orkgc:P29?year'.",
+      "is_repair_candidate": true,
+      "repair_candidate_reason": "non_empty_query_with_valid_start_but_syntax_error",
       "validation_status": "syntax_error"
     },
     {
@@ -430,6 +472,8 @@
       "parse_error_column": 2,
       "parse_error_char": 57,
       "parse_error_hint": "Likely missing whitespace before a variable or malformed triple pattern, e.g. use 'SELECT ?x' instead of 'SELECT?x' and 'orkgc:P29 ?year' instead of 'orkgc:P29?year'.",
+      "is_repair_candidate": true,
+      "repair_candidate_reason": "non_empty_query_with_valid_start_but_syntax_error",
       "validation_status": "syntax_error"
     },
     {
@@ -450,6 +494,8 @@
       "parse_error_column": 2,
       "parse_error_char": 64,
       "parse_error_hint": "Likely missing whitespace before a variable or malformed triple pattern, e.g. use 'SELECT ?x' instead of 'SELECT?x' and 'orkgc:P29 ?year' instead of 'orkgc:P29?year'.",
+      "is_repair_candidate": true,
+      "repair_candidate_reason": "non_empty_query_with_valid_start_but_truncated",
       "validation_status": "syntax_error"
     },
     {
@@ -470,6 +516,8 @@
       "parse_error_column": null,
       "parse_error_char": null,
       "parse_error_hint": "No SPARQL query could be extracted from the model output.",
+      "is_repair_candidate": false,
+      "repair_candidate_reason": "empty_query",
       "validation_status": "empty"
     },
     {
@@ -490,6 +538,8 @@
       "parse_error_column": 8,
       "parse_error_char": 1030,
       "parse_error_hint": "SPARQL parser could not parse the extracted query.",
+      "is_repair_candidate": true,
+      "repair_candidate_reason": "non_empty_query_with_valid_start_but_syntax_error",
       "validation_status": "syntax_error"
     },
     {
@@ -510,6 +560,8 @@
       "parse_error_column": null,
       "parse_error_char": null,
       "parse_error_hint": "No SPARQL query could be extracted from the model output.",
+      "is_repair_candidate": false,
+      "repair_candidate_reason": "empty_query",
       "validation_status": "empty"
     },
     {
@@ -530,6 +582,8 @@
       "parse_error_column": 8,
       "parse_error_char": 876,
       "parse_error_hint": "SPARQL parser could not parse the extracted query.",
+      "is_repair_candidate": true,
+      "repair_candidate_reason": "non_empty_query_with_valid_start_but_syntax_error",
       "validation_status": "syntax_error"
     }
   ]

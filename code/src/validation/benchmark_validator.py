@@ -212,6 +212,7 @@ def validate_result_entry(entry: Dict[str, Any]) -> Dict[str, Any]:
         "family": entry.get("family"),
         "question": entry.get("question"),
         "extracted_query": extracted_query,
+        "gold_query": entry.get("gold_query"),
         "has_extracted_query": has_extracted_query(extracted_query),
         "is_empty_query": not has_extracted_query(extracted_query),
         "has_valid_query_start": valid_start,
