@@ -5,6 +5,7 @@
       "name": "Qwen3-0.6B",
       "id": "Qwen/Qwen3-0.6B",
       "provider": "huggingface",
+      "adapter_subdir": "finetuned/Qwen_Qwen3-0.6B__TrainDataset_V1",
       "params": {
         "max_new_tokens": 400,
         "do_sample": false

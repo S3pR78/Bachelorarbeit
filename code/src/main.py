@@ -11,6 +11,7 @@ from core.model_loader import load_inference_pipeline
 from core.model_manager import ModelManager
 from prompting.prompt_loader import build_prompt_for_entry, get_prompt_metadata_for_family
 from training.trainer import train_model
+from pathlib import Path
 
 
 def parse_args():
@@ -86,14 +87,39 @@ def build_engine(selected_model_config: dict) -> InferenceEngine:
     print(f"Model base directory: {model_base_dir}")
 
     local_model_path = ensure_model_downloaded(model_id, model_base_dir)
-    pipeline = load_inference_pipeline(local_model_path, model_params)
+    adapter_path = resolve_adapter_path(selected_model_config)
+
+    if adapter_path:
+        print(f"Using adapter: {adapter_path}")
+    else:
+        print("No adapter configured. Using base model only.")
+
+    pipeline_obj = load_inference_pipeline(
+        local_model_path,
+        model_params,
+        adapter_path=adapter_path,
+    )
 
     return InferenceEngine(
-        pipeline=pipeline,
+        pipeline=pipeline_obj,
         params=model_params,
         provider="huggingface",
         model_id=model_id,
     )
+
+def resolve_adapter_path(selected_model_config: dict) -> str | None:
+    adapter_subdir = selected_model_config.get("adapter_subdir")
+
+    if not isinstance(adapter_subdir, str) or not adapter_subdir.strip():
+        return None
+
+    model_base_dir = Path(get_path("models.base_dir")).resolve()
+    adapter_path = (model_base_dir / adapter_subdir).resolve()
+
+    if not adapter_path.exists():
+        raise FileNotFoundError(f"Adapter path not found: {adapter_path}")
+
+    return str(adapter_path)
 
 
 def run_single_mode(
