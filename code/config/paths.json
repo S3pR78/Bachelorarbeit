@@ -20,5 +20,9 @@
   },
   "benchmark": {
     "runs_dir": "code/data/benchmark_runs"
+  },
+  "finetuning": {
+    "gold_dir": "code/data/finetuning/gold",
+    "repair_dir": "code/data/finetuning/repair"
   }
 }

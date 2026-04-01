@@ -1,0 +1,14 @@
+{
+  "input_path": "/home/s3pr/UNI/BA/code/data/canonical/merged/TrainingDataset/TrainDataset_V1.json",
+  "output_dir": "/home/s3pr/UNI/BA/code/data/finetuning/gold/TrainDataset_V1",
+  "export_format": "prompt_completion",
+  "total_examples": 101,
+  "split_enabled": true,
+  "seed": 42,
+  "train_ratio": 0.8,
+  "dev_ratio": 0.1,
+  "test_ratio": 0.1,
+  "train_examples": 80,
+  "dev_examples": 10,
+  "test_examples": 11
+}
